@@ -9,11 +9,9 @@ const DashboardLayout = () => {
       <Sidebar />
       <div className="main-content">
         <TopNav />
-        <div style={{ display: 'flex', flex: 1, overflow: 'hidden' }}>
-          <main className="content-scroll">
-            <Outlet />
-          </main>
-        </div>
+        <main className="content-scroll">
+          <Outlet />
+        </main>
       </div>
     </div>
   );

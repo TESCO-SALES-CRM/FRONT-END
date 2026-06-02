@@ -1,22 +1,14 @@
-import React, { useState } from 'react';
-import { Search, Bell, Settings, Plus, User } from 'lucide-react';
+import React from 'react';
+import { Bell, Settings, User } from 'lucide-react';
 import { useToast } from './Toast';
 import { useLocation } from 'react-router-dom';
 
 const TopNav = () => {
   const location = useLocation();
   const addToast = useToast();
-  const [searchValue, setSearchValue] = useState('');
   
   const path = location.pathname.substring(1).replace('-', ' ');
   const title = path.charAt(0).toUpperCase() + path.slice(1);
-
-  const handleSearch = (e) => {
-    if (e.key === 'Enter' && searchValue.trim() !== '') {
-      addToast(`Searching global records for "${searchValue}"...`, 'success');
-      setSearchValue('');
-    }
-  };
 
   return (
     <div className="glass-panel" style={{
@@ -36,38 +28,8 @@ const TopNav = () => {
         <h1 style={{ fontSize: '1.25rem', fontWeight: '700', margin: 0 }}>{title}</h1>
       </div>
 
-      {/* Center Section */}
-      <div style={{ flex: 1, maxWidth: '400px', margin: '0 2rem' }}>
-        <div style={{
-          position: 'relative',
-          display: 'flex',
-          alignItems: 'center'
-        }}>
-          <Search size={18} style={{ position: 'absolute', left: '12px', color: 'var(--text-muted)' }} />
-          <input 
-            type="text" 
-            placeholder="Search leads, projects, invoices..." 
-            value={searchValue}
-            onChange={(e) => setSearchValue(e.target.value)}
-            onKeyDown={handleSearch}
-            style={{
-              width: '100%',
-              padding: '0.5rem 1rem 0.5rem 2.5rem',
-              borderRadius: '9999px',
-              border: '1px solid var(--border-color)',
-              backgroundColor: 'var(--background-light)',
-              outline: 'none',
-              fontSize: '0.875rem'
-            }}
-          />
-        </div>
-      </div>
-
       {/* Right Section */}
       <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-        <button className="btn btn-primary" style={{ display: 'flex', gap: '0.5rem', padding: '0.5rem 1rem', borderRadius: '9999px' }} onClick={() => addToast('Quick Add modal opening...')}>
-          <Plus size={16} /> Quick Add
-        </button>
 
         <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', borderLeft: '1px solid var(--border-color)', paddingLeft: '1rem' }}>
           <button style={{ background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', position: 'relative' }} onClick={() => addToast('Opening Notification Center')}>

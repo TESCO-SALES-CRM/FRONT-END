@@ -128,7 +128,9 @@ h1, h2, h3, h4, h5, h6 {
 .content-scroll {
   flex: 1;
   overflow-y: auto;
+  overflow-x: hidden;
   padding: 2rem;
+  min-height: 0;
 }
 
 /* Tooltip */

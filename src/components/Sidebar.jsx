@@ -3,9 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { 
   LayoutDashboard, 
   Users, 
-  PhoneCall, 
   Calendar, 
-  UserCheck, 
   FileText, 
   FolderOpen, 
   CreditCard, 
@@ -17,9 +15,7 @@ import {
 const menuItems = [
   { path: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
   { path: '/leads', label: 'Lead Management', icon: Users },
-  { path: '/calling', label: 'Calling Updates', icon: PhoneCall },
   { path: '/appointments', label: 'Appointments', icon: Calendar },
-  { path: '/assigned-leads', label: 'Assigned Leads', icon: UserCheck },
   { path: '/quotations', label: 'Quotations', icon: FileText },
   { path: '/projects', label: 'Project Filing', icon: FolderOpen },
   { path: '/payments', label: 'Payment Collection', icon: CreditCard },

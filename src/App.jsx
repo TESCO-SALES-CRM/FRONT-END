@@ -4,9 +4,7 @@ import { ToastProvider } from './components/Toast';
 import DashboardLayout from './components/DashboardLayout';
 import DashboardHome from './views/DashboardHome';
 import LeadManagement from './views/LeadManagement';
-import CallingWorkflow from './views/CallingWorkflow';
 import Appointments from './views/Appointments';
-import AssignedLeads from './views/AssignedLeads';
 import Quotations from './views/Quotations';
 import ProjectFiling from './views/ProjectFiling';
 import Payments from './views/Payments';
@@ -23,9 +21,7 @@ function App() {
           <Route index element={<Navigate to="/dashboard" replace />} />
           <Route path="dashboard" element={<DashboardHome />} />
           <Route path="leads" element={<LeadManagement />} />
-          <Route path="calling" element={<CallingWorkflow />} />
           <Route path="appointments" element={<Appointments />} />
-          <Route path="assigned-leads" element={<AssignedLeads />} />
           <Route path="quotations" element={<Quotations />} />
           <Route path="projects" element={<ProjectFiling />} />
           <Route path="payments" element={<Payments />} />
