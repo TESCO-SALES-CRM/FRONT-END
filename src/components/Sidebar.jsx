@@ -3,7 +3,13 @@ import { NavLink } from 'react-router-dom';
 import { 
   LayoutDashboard, 
   Users, 
+<<<<<<< HEAD
   Calendar, 
+=======
+  PhoneCall, 
+  Calendar, 
+  UserCheck, 
+>>>>>>> 7de2f04a0609998f838860361518918c881edffb
   FileText, 
   FolderOpen, 
   CreditCard, 
@@ -15,7 +21,13 @@ import {
 const menuItems = [
   { path: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
   { path: '/leads', label: 'Lead Management', icon: Users },
+<<<<<<< HEAD
   { path: '/appointments', label: 'Appointments', icon: Calendar },
+=======
+  { path: '/calling', label: 'Calling Updates', icon: PhoneCall },
+  { path: '/appointments', label: 'Appointments', icon: Calendar },
+  { path: '/assigned-leads', label: 'Assigned Leads', icon: UserCheck },
+>>>>>>> 7de2f04a0609998f838860361518918c881edffb
   { path: '/quotations', label: 'Quotations', icon: FileText },
   { path: '/projects', label: 'Project Filing', icon: FolderOpen },
   { path: '/payments', label: 'Payment Collection', icon: CreditCard },

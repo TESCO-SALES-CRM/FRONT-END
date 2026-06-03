@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 import { 
   Phone, Flame, CalendarCheck, FileText, DollarSign, TrendingUp, CheckCircle, Clock, 
+<<<<<<< HEAD
   Plus, MoreVertical, MapPin, UploadCloud, DownloadCloud, Activity, Bell, ChevronRight, User, Trash,
   Calendar, ChevronLeft
+=======
+  Plus, MoreVertical, MapPin, UploadCloud, DownloadCloud, Activity, Bell, ChevronRight, User, Trash
+>>>>>>> 7de2f04a0609998f838860361518918c881edffb
 } from 'lucide-react';
 import { 
   LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
@@ -86,6 +90,7 @@ const DashboardHome = () => {
     end: new Date().toISOString().split('T')[0]
   });
 
+<<<<<<< HEAD
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
   const [selectedPreset, setSelectedPreset] = useState('Last 30 Days');
   const [rangeSelectionState, setRangeSelectionState] = useState('start');
@@ -201,6 +206,8 @@ const DashboardHome = () => {
     return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
   };
 
+=======
+>>>>>>> 7de2f04a0609998f838860361518918c881edffb
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem', paddingBottom: '4rem' }}>
       
@@ -209,6 +216,10 @@ const DashboardHome = () => {
         padding: '2rem', borderRadius: 'var(--radius-xl)',
         background: 'linear-gradient(135deg, rgba(49, 46, 129, 0.05) 0%, rgba(79, 70, 229, 0.1) 100%)',
         border: '1px solid rgba(49, 46, 129, 0.1)',
+<<<<<<< HEAD
+=======
+        display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem'
+>>>>>>> 7de2f04a0609998f838860361518918c881edffb
       }}>
         <div>
           <h1 style={{ fontSize: '2rem', marginBottom: '0.5rem', color: 'var(--text-main)' }}>Welcome Back, Akash 👋</h1>
@@ -216,6 +227,7 @@ const DashboardHome = () => {
             Manage construction leads, appointments, quotations, and project coordination efficiently.
           </p>
         </div>
+<<<<<<< HEAD
       </div>
 
       {/* Date Picker Controls */}
@@ -369,6 +381,24 @@ const DashboardHome = () => {
             </div>
           </div>
         )}
+=======
+        <div style={{ display: 'flex', gap: '1rem' }}>
+          <button className="btn btn-outline" onClick={() => addToast('Opening Appointment Modal...')}><CalendarCheck size={16} style={{marginRight: '0.5rem'}}/> Fix Appointment</button>
+          <button className="btn btn-outline" onClick={() => addToast('Opening Quotation Modal...')}><FileText size={16} style={{marginRight: '0.5rem'}}/> Create Quotation</button>
+          <button className="btn btn-primary" onClick={() => addToast('Opening Lead Modal...')}><Plus size={16} style={{marginRight: '0.5rem'}}/> Add Lead</button>
+        </div>
+      </div>
+
+      {/* Date Picker Controls */}
+      <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '-1rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', background: 'var(--surface-color)', padding: '0.5rem 1rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)', boxShadow: '0 1px 2px rgba(0,0,0,0.05)' }}>
+          <span style={{ color: 'var(--text-muted)', fontSize: '0.875rem', fontWeight: '500' }}>From</span>
+          <input type="date" value={dateRange.start} onChange={(e) => setDateRange({...dateRange, start: e.target.value})} style={{ border: 'none', background: 'transparent', outline: 'none', fontSize: '0.875rem', color: 'var(--text-main)' }} />
+          <span style={{ color: 'var(--text-muted)' }}>-</span>
+          <span style={{ color: 'var(--text-muted)', fontSize: '0.875rem', fontWeight: '500' }}>To</span>
+          <input type="date" value={dateRange.end} onChange={(e) => setDateRange({...dateRange, end: e.target.value})} style={{ border: 'none', background: 'transparent', outline: 'none', fontSize: '0.875rem', color: 'var(--text-main)' }} />
+        </div>
+>>>>>>> 7de2f04a0609998f838860361518918c881edffb
       </div>
 
       {/* 2. KPI Cards */}
@@ -387,7 +417,11 @@ const DashboardHome = () => {
       {/* Row 2: Appointments | Quotation Overview */}
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
         <div className="card">
+<<<<<<< HEAD
           <SectionHeader title="Today's Appointments" action="View All" />
+=======
+          <SectionHeader title="Today's Appointments" action="View Calendar" />
+>>>>>>> 7de2f04a0609998f838860361518918c881edffb
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             {appointmentsData.map(apt => (
               <div key={apt.id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-md)' }}>
