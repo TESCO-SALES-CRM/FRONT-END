@@ -3,8 +3,8 @@ import { FolderOpen, File, UploadCloud, Users, CheckCircle, Clock } from 'lucide
 import { useToast } from '../components/Toast';
 
 const projectsData = [
-  { id: 'PRJ-901', client: 'Acme Corp', type: 'Office Renovation', quote: '$500,000', team: 'Execution Team Alpha', status: 'Handover Pending', files: 12 },
-  { id: 'PRJ-902', client: 'Globex Inc', type: 'Residential Villa', quote: '$850,000', team: 'Design Team B', status: 'Project File Created', files: 4 },
+  { id: 'PRJ-901', client: 'Acme Corp', type: 'Office Renovation', quote: '₹500,000', team: 'Execution Team Alpha', status: 'Handover Pending', files: 12 },
+  { id: 'PRJ-902', client: 'Globex Inc', type: 'Residential Villa', quote: '₹850,000', team: 'Design Team B', status: 'Project File Created', files: 4 },
 ];
 
 const TimelineStep = ({ label, active, completed }) => (

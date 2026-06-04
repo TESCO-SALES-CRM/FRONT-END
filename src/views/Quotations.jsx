@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { FileText, Download, Eye, Plus, CheckCircle, Clock, X, ThumbsUp, Send, Upload } from 'lucide-react';
 
 const initialQuotesData = [
-  { id: 'QT-5001', leadId: 'LD-1001', client: 'Acme Corp', project: 'PEB', amount: '$500,000', gst: '$90,000', approvalStatus: 'Approved', quotationStatus: 'Prepared', revision: 'Rev 1', fileName: 'acme_renovation_final.pdf' },
-  { id: 'QT-5002', leadId: 'LD-1002', client: 'John Doe', project: 'Tensile', amount: '$150,000', gst: '$27,000', approvalStatus: 'Pending', quotationStatus: 'Prepared', revision: 'Rev 3', fileName: null },
-  { id: 'QT-5003', leadId: 'LD-1003', client: 'Stark Industries', project: 'Other roofing', amount: '$1,200,000', gst: '$216,000', approvalStatus: 'Pending', quotationStatus: 'In Preparation', revision: 'Rev 0', fileName: null },
-  { id: 'QT-5004', leadId: 'LD-1004', client: 'Wayne Enterprises', project: 'PEB', amount: '$850,000', gst: '$153,000', approvalStatus: 'Approved', quotationStatus: 'Prepared', revision: 'Rev 2', fileName: 'wayne_manor_proposal.pdf' },
-  { id: 'QT-5005', leadId: 'LD-1005', client: 'Oscorp Labs', project: 'Tensile', amount: '$320,000', gst: '$57,600', approvalStatus: 'Approved', quotationStatus: 'Prepared', revision: 'Rev 1', fileName: null },
-  { id: 'QT-5006', leadId: 'LD-1006', client: 'LexCorp', project: 'Other roofing', amount: '$450,000', gst: '$81,000', approvalStatus: 'Pending', quotationStatus: 'In Preparation', revision: 'Rev 1', fileName: null },
+  { id: 'QT-5001', leadId: 'LD-1001', client: 'Acme Corp', project: 'PEB', amount: '₹500,000', gst: '₹90,000', approvalStatus: 'Approved', quotationStatus: 'Prepared', revision: 'Rev 1', fileName: 'acme_renovation_final.pdf' },
+  { id: 'QT-5002', leadId: 'LD-1002', client: 'John Doe', project: 'Tensile', amount: '₹150,000', gst: '₹27,000', approvalStatus: 'Pending', quotationStatus: 'Prepared', revision: 'Rev 3', fileName: null },
+  { id: 'QT-5003', leadId: 'LD-1003', client: 'Stark Industries', project: 'Other roofing', amount: '₹1,200,000', gst: '₹216,000', approvalStatus: 'Pending', quotationStatus: 'In Preparation', revision: 'Rev 0', fileName: null },
+  { id: 'QT-5004', leadId: 'LD-1004', client: 'Wayne Enterprises', project: 'PEB', amount: '₹850,000', gst: '₹153,000', approvalStatus: 'Approved', quotationStatus: 'Prepared', revision: 'Rev 2', fileName: 'wayne_manor_proposal.pdf' },
+  { id: 'QT-5005', leadId: 'LD-1005', client: 'Oscorp Labs', project: 'Tensile', amount: '₹320,000', gst: '₹57,600', approvalStatus: 'Approved', quotationStatus: 'Prepared', revision: 'Rev 1', fileName: null },
+  { id: 'QT-5006', leadId: 'LD-1006', client: 'LexCorp', project: 'Other roofing', amount: '₹450,000', gst: '₹81,000', approvalStatus: 'Pending', quotationStatus: 'In Preparation', revision: 'Rev 1', fileName: null },
 ];
 
 const getApprovalStatusStyle = (status) => {
@@ -70,9 +70,9 @@ const Quotations = () => {
     e.preventDefault();
     const newId = `QT-${5001 + quotes.length}`;
     
-    // Ensure amount and gst have $ symbol
-    const formattedAmount = newQuote.amount.startsWith('$') ? newQuote.amount : `$${newQuote.amount}`;
-    const formattedGst = newQuote.gst.startsWith('$') ? newQuote.gst : `$${newQuote.gst}`;
+    // Ensure amount and gst have ₹ symbol
+    const formattedAmount = newQuote.amount.startsWith('₹') ? newQuote.amount : `₹${newQuote.amount}`;
+    const formattedGst = newQuote.gst.startsWith('₹') ? newQuote.gst : `₹${newQuote.gst}`;
     
     setQuotes([...quotes, { 
       ...newQuote, 
@@ -310,11 +310,11 @@ const Quotations = () => {
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
                 <div>
                   <label style={{ display: 'block', fontSize: '0.875rem', marginBottom: '0.25rem', color: 'var(--text-muted)' }}>Amount (ex. GST)</label>
-                  <input required value={newQuote.amount} onChange={(e) => setNewQuote({...newQuote, amount: e.target.value})} type="text" placeholder="e.g. $100,000" style={{ width: '100%', padding: '0.5rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)' }} />
+                  <input required value={newQuote.amount} onChange={(e) => setNewQuote({...newQuote, amount: e.target.value})} type="text" placeholder="e.g. ₹100,000" style={{ width: '100%', padding: '0.5rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)' }} />
                 </div>
                 <div>
                   <label style={{ display: 'block', fontSize: '0.875rem', marginBottom: '0.25rem', color: 'var(--text-muted)' }}>GST Amount</label>
-                  <input required value={newQuote.gst} onChange={(e) => setNewQuote({...newQuote, gst: e.target.value})} type="text" placeholder="e.g. $18,000" style={{ width: '100%', padding: '0.5rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)' }} />
+                  <input required value={newQuote.gst} onChange={(e) => setNewQuote({...newQuote, gst: e.target.value})} type="text" placeholder="e.g. ₹18,000" style={{ width: '100%', padding: '0.5rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)' }} />
                 </div>
               </div>
               <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '1rem', marginTop: '1rem' }}>

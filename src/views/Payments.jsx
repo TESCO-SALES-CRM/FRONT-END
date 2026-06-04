@@ -4,9 +4,9 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContaine
 import { useToast } from '../components/Toast';
 
 const paymentData = [
-  { id: 'INV-2026-01', client: 'Acme Corp', due: 'Oct 15, 2026', amount: '$150,000', status: 'Overdue' },
-  { id: 'INV-2026-02', client: 'Globex Inc', due: 'Oct 30, 2026', amount: '$425,000', status: 'Pending' },
-  { id: 'INV-2026-03', client: 'Stark Industries', due: 'Oct 10, 2026', amount: '$600,000', status: 'Received' },
+  { id: 'INV-2026-01', client: 'Acme Corp', due: 'Oct 15, 2026', amount: '₹150,000', status: 'Overdue' },
+  { id: 'INV-2026-02', client: 'Globex Inc', due: 'Oct 30, 2026', amount: '₹425,000', status: 'Pending' },
+  { id: 'INV-2026-03', client: 'Stark Industries', due: 'Oct 10, 2026', amount: '₹600,000', status: 'Received' },
 ];
 
 const chartData = [
@@ -39,10 +39,10 @@ const Payments = () => {
       <h2 style={{ margin: 0, fontSize: '1.5rem', fontWeight: '700' }}>Payment Collection</h2>
       
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1.5rem' }}>
-        <KpiCard title="Total Collected" value="$1.25M" icon={CheckCircle} color="var(--success-color)" />
-        <KpiCard title="Advance Payments" value="$450K" icon={TrendingUp} color="var(--primary-color)" />
-        <KpiCard title="Pending Collection" value="$850K" icon={DollarSign} color="var(--warning-color)" />
-        <KpiCard title="Overdue Payments" value="$150K" icon={AlertCircle} color="#DC2626" />
+        <KpiCard title="Total Collected" value="₹1.25M" icon={CheckCircle} color="var(--success-color)" />
+        <KpiCard title="Advance Payments" value="₹450K" icon={TrendingUp} color="var(--primary-color)" />
+        <KpiCard title="Pending Collection" value="₹850K" icon={DollarSign} color="var(--warning-color)" />
+        <KpiCard title="Overdue Payments" value="₹150K" icon={AlertCircle} color="#DC2626" />
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '1.5rem' }}>

@@ -31,7 +31,7 @@ const initialLeadsData = [
     projectType: 'PEB', 
     phone: '+1 234 567 8900', 
     source: 'Website Enquiry', 
-    budget: '$150k - $200k', 
+    budget: '₹150k - ₹200k', 
     status: 'Hot Leads', 
     manager: 'Sarah Smith', 
     followUp: 'Today, 2:00 PM', 
@@ -49,7 +49,7 @@ const initialLeadsData = [
     projectType: 'Tensile', 
     phone: '+1 987 654 3210', 
     source: 'Referral', 
-    budget: '$500k+', 
+    budget: '₹500k+', 
     status: 'Appointment Fixed', 
     manager: 'Mike Johnson', 
     followUp: 'Tomorrow', 
@@ -68,7 +68,7 @@ const initialLeadsData = [
     projectType: 'Other roofing', 
     phone: '+1 555 123 4567', 
     source: 'Cold Calling', 
-    budget: '$80k - $120k', 
+    budget: '₹80k - ₹120k', 
     status: 'Warm Leads', 
     manager: 'Sarah Smith', 
     followUp: 'Next Week', 
@@ -393,18 +393,18 @@ const LeadManagement = () => {
     e.preventDefault();
     const formattedTime = getFormattedTimestamp();
 
-    // Ensure amount and gst have $ symbol
-    const formattedAmount = genQuoteDetails.amount.startsWith('$') ? genQuoteDetails.amount : `$${genQuoteDetails.amount}`;
-    const formattedGst = genQuoteDetails.gst.startsWith('$') ? genQuoteDetails.gst : `$${genQuoteDetails.gst}`;
+    // Ensure amount and gst have ₹ symbol
+    const formattedAmount = genQuoteDetails.amount.startsWith('₹') ? genQuoteDetails.amount : `₹${genQuoteDetails.amount}`;
+    const formattedGst = genQuoteDetails.gst.startsWith('₹') ? genQuoteDetails.gst : `₹${genQuoteDetails.gst}`;
 
     // Read existing quotes from localStorage to calculate new ID
     const initialQuotesDataFallback = [
-      { id: 'QT-5001', leadId: 'LD-1001', client: 'Acme Corp', project: 'PEB', amount: '$500,000', gst: '$90,000', approvalStatus: 'Approved', quotationStatus: 'Prepared', revision: 'Rev 1', fileName: 'acme_renovation_final.pdf' },
-      { id: 'QT-5002', leadId: 'LD-1002', client: 'John Doe', project: 'Tensile', amount: '$150,000', gst: '$27,000', approvalStatus: 'Pending', quotationStatus: 'Prepared', revision: 'Rev 3', fileName: null },
-      { id: 'QT-5003', leadId: 'LD-1003', client: 'Stark Industries', project: 'Other roofing', amount: '$1,200,000', gst: '$216,000', approvalStatus: 'Pending', quotationStatus: 'In Preparation', revision: 'Rev 0', fileName: null },
-      { id: 'QT-5004', leadId: 'LD-1004', client: 'Wayne Enterprises', project: 'PEB', amount: '$850,000', gst: '$153,000', approvalStatus: 'Approved', quotationStatus: 'Prepared', revision: 'Rev 2', fileName: 'wayne_manor_proposal.pdf' },
-      { id: 'QT-5005', leadId: 'LD-1005', client: 'Oscorp Labs', project: 'Tensile', amount: '$320,000', gst: '$57,600', approvalStatus: 'Approved', quotationStatus: 'Prepared', revision: 'Rev 1', fileName: null },
-      { id: 'QT-5006', leadId: 'LD-1006', client: 'LexCorp', project: 'Other roofing', amount: '$450,000', gst: '$81,000', approvalStatus: 'Pending', quotationStatus: 'In Preparation', revision: 'Rev 1', fileName: null },
+      { id: 'QT-5001', leadId: 'LD-1001', client: 'Acme Corp', project: 'PEB', amount: '₹500,000', gst: '₹90,000', approvalStatus: 'Approved', quotationStatus: 'Prepared', revision: 'Rev 1', fileName: 'acme_renovation_final.pdf' },
+      { id: 'QT-5002', leadId: 'LD-1002', client: 'John Doe', project: 'Tensile', amount: '₹150,000', gst: '₹27,000', approvalStatus: 'Pending', quotationStatus: 'Prepared', revision: 'Rev 3', fileName: null },
+      { id: 'QT-5003', leadId: 'LD-1003', client: 'Stark Industries', project: 'Other roofing', amount: '₹1,200,000', gst: '₹216,000', approvalStatus: 'Pending', quotationStatus: 'In Preparation', revision: 'Rev 0', fileName: null },
+      { id: 'QT-5004', leadId: 'LD-1004', client: 'Wayne Enterprises', project: 'PEB', amount: '₹850,000', gst: '₹153,000', approvalStatus: 'Approved', quotationStatus: 'Prepared', revision: 'Rev 2', fileName: 'wayne_manor_proposal.pdf' },
+      { id: 'QT-5005', leadId: 'LD-1005', client: 'Oscorp Labs', project: 'Tensile', amount: '₹320,000', gst: '₹57,600', approvalStatus: 'Approved', quotationStatus: 'Prepared', revision: 'Rev 1', fileName: null },
+      { id: 'QT-5006', leadId: 'LD-1006', client: 'LexCorp', project: 'Other roofing', amount: '₹450,000', gst: '₹81,000', approvalStatus: 'Pending', quotationStatus: 'In Preparation', revision: 'Rev 1', fileName: null },
     ];
     const savedQuotesStr = localStorage.getItem('crm_quotes');
     const existingQuotes = savedQuotesStr ? JSON.parse(savedQuotesStr) : initialQuotesDataFallback;
@@ -1254,7 +1254,7 @@ const LeadManagement = () => {
                     value={genQuoteDetails.amount} 
                     onChange={(e) => setGenQuoteDetails({...genQuoteDetails, amount: e.target.value})} 
                     type="text" 
-                    placeholder="e.g. $100,000" 
+                    placeholder="e.g. ₹100,000" 
                     style={{ 
                       width: '100%', 
                       padding: '0.625rem 0.875rem', 
@@ -1278,7 +1278,7 @@ const LeadManagement = () => {
                     value={genQuoteDetails.gst} 
                     onChange={(e) => setGenQuoteDetails({...genQuoteDetails, gst: e.target.value})} 
                     type="text" 
-                    placeholder="e.g. $18,000" 
+                    placeholder="e.g. ₹18,000" 
                     style={{ 
                       width: '100%', 
                       padding: '0.625rem 0.875rem', 

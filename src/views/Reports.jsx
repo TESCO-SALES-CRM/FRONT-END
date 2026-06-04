@@ -51,9 +51,9 @@ const Reports = () => {
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.5rem' }}>
-        <KpiWidget title="Sales Pipeline" value="$2.4M" subtitle="+15% from last month" icon={TrendingUp} color="var(--success-color)" />
+        <KpiWidget title="Sales Pipeline" value="₹2.4M" subtitle="+15% from last month" icon={TrendingUp} color="var(--success-color)" />
         <KpiWidget title="Lead Conversion" value="28%" subtitle="+4% from last month" icon={Users} color="var(--success-color)" />
-        <KpiWidget title="Quotation Value" value="$1.8M" subtitle="-2% from last month" icon={DollarSign} color="var(--warning-color)" />
+        <KpiWidget title="Quotation Value" value="₹1.8M" subtitle="-2% from last month" icon={DollarSign} color="var(--warning-color)" />
         <KpiWidget title="Success Rate" value="65%" subtitle="Consistent" icon={PieChart} color="var(--primary-color)" />
       </div>
 
