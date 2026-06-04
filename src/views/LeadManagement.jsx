@@ -979,9 +979,6 @@ const LeadManagement = () => {
               }}
             />
           </div>
-          <button className="btn btn-outline" style={{ display: 'flex', gap: '0.5rem' }}>
-            <Filter size={16} /> Filters
-          </button>
           <button className="btn btn-primary" onClick={() => setIsModalOpen(true)}>Add New Lead</button>
         </div>
       </div>
