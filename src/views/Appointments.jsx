@@ -27,6 +27,32 @@ function formatDisplayDate(dateStr) {
   return `${day < 10 ? '0'+day : day} ${month} ${year}`;
 }
 
+function convertTo12Hour(time24) {
+  if (!time24) return '';
+  const [hoursStr, minutesStr] = time24.split(':');
+  let hours = parseInt(hoursStr, 10);
+  const minutes = minutesStr;
+  const ampm = hours >= 12 ? 'PM' : 'AM';
+  hours = hours % 12;
+  hours = hours ? hours : 12;
+  const hoursFormatted = hours < 10 ? '0' + hours : hours;
+  return `${hoursFormatted}:${minutes} ${ampm}`;
+}
+
+function convertTo24Hour(time12) {
+  if (!time12) return '';
+  const [time, modifier] = time12.split(' ');
+  let [hours, minutes] = time.split(':');
+  if (hours === '12') {
+    hours = '00';
+  }
+  if (modifier === 'PM') {
+    hours = parseInt(hours, 10) + 12;
+  }
+  const hoursStr = parseInt(hours, 10) < 10 ? '0' + parseInt(hours, 10) : hours.toString();
+  return `${hoursStr}:${minutes}`;
+}
+
 const Appointments = () => {
   const addToast = useToast();
   const [appointments, setAppointments] = useState(initialAppointments);
@@ -35,6 +61,9 @@ const Appointments = () => {
   const [calendarDate, setCalendarDate] = useState(new Date(2026, 4, 1)); // May 2026
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [newVisit, setNewVisit] = useState({ title: '', date: '', timeStart: '', timeEnd: '', manager: '', phone: '', location: '', status: 'Waiting', type: 'Appointment' });
+  const [isRescheduleModalOpen, setIsRescheduleModalOpen] = useState(false);
+  const [rescheduleAptId, setRescheduleAptId] = useState(null);
+  const [rescheduleDetails, setRescheduleDetails] = useState({ date: '', timeStart: '', timeEnd: '' });
 
   /* ── Live counts ── */
   const totalAppointments = appointments.length;
@@ -69,7 +98,33 @@ const Appointments = () => {
     addToast('Appointment started!', 'success');
   };
 
-  const handleReschedule = (title) => addToast(`Rescheduling: ${title}`);
+  const handleReschedule = (apt) => {
+    setRescheduleAptId(apt.id);
+    setRescheduleDetails({
+      date: apt.date,
+      timeStart: convertTo24Hour(apt.timeStart),
+      timeEnd: convertTo24Hour(apt.timeEnd)
+    });
+    setIsRescheduleModalOpen(true);
+  };
+
+  const handleRescheduleSubmit = (e) => {
+    e.preventDefault();
+    setAppointments(prev => prev.map(a => {
+      if (a.id === rescheduleAptId) {
+        return {
+          ...a,
+          date: rescheduleDetails.date,
+          timeStart: convertTo12Hour(rescheduleDetails.timeStart),
+          timeEnd: convertTo12Hour(rescheduleDetails.timeEnd)
+        };
+      }
+      return a;
+    }));
+    setIsRescheduleModalOpen(false);
+    setRescheduleAptId(null);
+    addToast('Appointment rescheduled successfully!', 'success');
+  };
 
   const handleAddSubmit = (e) => {
     e.preventDefault();
@@ -190,7 +245,7 @@ const Appointments = () => {
                 {/* Actions */}
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', alignItems: 'flex-end', minWidth: '120px' }}>
                   <button
-                    onClick={() => handleReschedule(apt.title)}
+                    onClick={() => handleReschedule(apt)}
                     style={{ padding: '0.35rem 1rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)', background: 'transparent', fontSize: '0.8rem', fontWeight: '500', color: 'var(--text-main)', cursor: 'pointer', width: '100%' }}
                   >
                     Reschedule
@@ -266,6 +321,90 @@ const Appointments = () => {
           </div>
         </div>
       </div>
+
+      {/* ── Reschedule Modal ── */}
+      {isRescheduleModalOpen && (
+        <div style={{
+          position: 'fixed', inset: 0,
+          backgroundColor: 'rgba(0,0,0,0.5)', zIndex: 1000,
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          backdropFilter: 'blur(4px)',
+          WebkitBackdropFilter: 'blur(4px)'
+        }}>
+          <div className="card" style={{ width: '100%', maxWidth: '450px', padding: '2rem', animation: 'scaleIn 0.2s ease-out' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
+              <h3 style={{ margin: 0, fontSize: '1.25rem', fontFamily: 'Poppins, sans-serif', fontWeight: '700', color: 'var(--text-main)' }}>
+                Reschedule Appointment
+              </h3>
+              <button 
+                onClick={() => {
+                  setIsRescheduleModalOpen(false);
+                  setRescheduleAptId(null);
+                }} 
+                style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-muted)' }}
+              >
+                <X size={20} />
+              </button>
+            </div>
+            <form onSubmit={handleRescheduleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+              <div>
+                <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '600', marginBottom: '0.5rem', color: 'var(--text-main)' }}>
+                  New Date
+                </label>
+                <input 
+                  type="date" 
+                  value={rescheduleDetails.date} 
+                  onChange={e => setRescheduleDetails({ ...rescheduleDetails, date: e.target.value })} 
+                  required 
+                  style={{ width: '100%', padding: '0.65rem 0.75rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)', outline: 'none', fontSize: '0.875rem', color: 'var(--text-main)' }} 
+                />
+              </div>
+              <div>
+                <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '600', marginBottom: '0.5rem', color: 'var(--text-main)' }}>
+                  Time Duration
+                </label>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                  <input 
+                    type="time" 
+                    value={rescheduleDetails.timeStart} 
+                    onChange={e => setRescheduleDetails({ ...rescheduleDetails, timeStart: e.target.value })} 
+                    required 
+                    style={{ flex: 1, padding: '0.65rem 0.75rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)', outline: 'none', fontSize: '0.875rem', color: 'var(--text-main)' }} 
+                  />
+                  <span style={{ color: 'var(--text-muted)', fontSize: '0.875rem', fontWeight: '500' }}>to</span>
+                  <input 
+                    type="time" 
+                    value={rescheduleDetails.timeEnd} 
+                    onChange={e => setRescheduleDetails({ ...rescheduleDetails, timeEnd: e.target.value })} 
+                    required 
+                    style={{ flex: 1, padding: '0.65rem 0.75rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)', outline: 'none', fontSize: '0.875rem', color: 'var(--text-main)' }} 
+                  />
+                </div>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '1rem', marginTop: '0.5rem' }}>
+                <button 
+                  type="button" 
+                  onClick={() => {
+                    setIsRescheduleModalOpen(false);
+                    setRescheduleAptId(null);
+                  }} 
+                  className="btn btn-outline"
+                  style={{ padding: '0.55rem 1.25rem' }}
+                >
+                  Cancel
+                </button>
+                <button 
+                  type="submit" 
+                  className="btn btn-primary"
+                  style={{ padding: '0.55rem 1.25rem' }}
+                >
+                  Confirm Reschedule
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
 
       {/* ── Schedule Modal ── */}
       {isModalOpen && (
