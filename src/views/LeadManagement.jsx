@@ -172,6 +172,11 @@ const LeadManagement = () => {
     remark: ''
   });
 
+  const [isRemarkModalOpen, setIsRemarkModalOpen] = useState(false);
+  const [activeRemarkLeadId, setActiveRemarkLeadId] = useState(null);
+  const [pendingStatus, setPendingStatus] = useState('');
+  const [statusRemark, setStatusRemark] = useState('');
+
   const [selectedLeadForTimeline, setSelectedLeadForTimeline] = useState(null);
   const [timelineSortOrder, setTimelineSortOrder] = useState('desc'); // 'desc' (newest first) or 'asc' (oldest first)
   const addToast = useToast();
@@ -240,27 +245,54 @@ const LeadManagement = () => {
   };
 
   const updateLeadStatus = (id, newStatus) => {
-    const formattedTime = getFormattedTimestamp();
     if (newStatus === 'Appointment Fixed') {
       setActiveApptLeadId(id);
       setIsApptModalOpen(true);
     } else {
-      setLeads(leads.map(l => {
-        if (l.id === id) {
-          if (l.status === newStatus) return l;
-          const newHistory = [...(l.history || []), {
-            timestamp: formattedTime,
-            message: `Updated status to: ${newStatus.toUpperCase()}`
-          }];
-          const updatedLead = { ...l, status: newStatus, history: newHistory };
-          if (selectedLeadForTimeline && selectedLeadForTimeline.id === id) {
-            setSelectedLeadForTimeline(updatedLead);
-          }
-          return updatedLead;
-        }
-        return l;
-      }));
+      const currentLead = leads.find(l => l.id === id);
+      if (currentLead && currentLead.status === newStatus) return;
+      setActiveRemarkLeadId(id);
+      setPendingStatus(newStatus);
+      setStatusRemark('');
+      setIsRemarkModalOpen(true);
     }
+  };
+
+  const handleRemarkSubmit = (e) => {
+    e.preventDefault();
+    const formattedTime = getFormattedTimestamp();
+    setLeads(leads.map(l => {
+      if (l.id === activeRemarkLeadId) {
+        const newHistory = [...(l.history || []), {
+          timestamp: formattedTime,
+          message: `Updated status to: ${pendingStatus.toUpperCase()}`
+        }];
+        if (statusRemark.trim()) {
+          newHistory.push({
+            timestamp: formattedTime,
+            message: `Remark: "${statusRemark.trim()}"`
+          });
+        }
+        const updatedLead = { ...l, status: pendingStatus, history: newHistory };
+        if (selectedLeadForTimeline && selectedLeadForTimeline.id === activeRemarkLeadId) {
+          setSelectedLeadForTimeline(updatedLead);
+        }
+        return updatedLead;
+      }
+      return l;
+    }));
+    setIsRemarkModalOpen(false);
+    setActiveRemarkLeadId(null);
+    setPendingStatus('');
+    setStatusRemark('');
+    addToast('Status updated successfully!', 'success');
+  };
+
+  const cancelRemarkModal = () => {
+    setIsRemarkModalOpen(false);
+    setActiveRemarkLeadId(null);
+    setPendingStatus('');
+    setStatusRemark('');
   };
 
   const handleApptSubmit = (e) => {
@@ -855,6 +887,40 @@ const LeadManagement = () => {
               <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '1rem', marginTop: '1rem' }}>
                 <button type="button" onClick={cancelApptModal} className="btn btn-outline">Cancel</button>
                 <button type="submit" className="btn btn-primary">Confirm Appointment</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* Status Change Remark Modal */}
+      {isRemarkModalOpen && (
+        <div style={{
+          position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
+          backgroundColor: 'rgba(0,0,0,0.5)', zIndex: 1000,
+          display: 'flex', alignItems: 'center', justifyContent: 'center'
+        }}>
+          <div className="card" style={{ width: '100%', maxWidth: '450px', padding: '2rem' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
+              <h3 style={{ margin: 0, fontSize: '1.25rem' }}>Update Status to {pendingStatus.toUpperCase()}</h3>
+              <button onClick={cancelRemarkModal} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-muted)' }}>
+                <X size={20} />
+              </button>
+            </div>
+            <form onSubmit={handleRemarkSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              <div>
+                <label style={{ display: 'block', fontSize: '0.875rem', marginBottom: '0.5rem', color: 'var(--text-muted)' }}>Status Change Remark / Note</label>
+                <textarea 
+                  rows="3" 
+                  value={statusRemark} 
+                  onChange={(e) => setStatusRemark(e.target.value)} 
+                  placeholder="Enter a remark for this status change (optional)..." 
+                  style={{ width: '100%', padding: '0.5rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)', resize: 'vertical' }}
+                ></textarea>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '1rem', marginTop: '1rem' }}>
+                <button type="button" onClick={cancelRemarkModal} className="btn btn-outline">Cancel</button>
+                <button type="submit" className="btn btn-primary">Update Status</button>
               </div>
             </form>
           </div>
