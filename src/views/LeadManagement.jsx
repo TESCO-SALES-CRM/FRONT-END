@@ -2117,22 +2117,6 @@ const LeadManagement = () => {
                   <h4 style={{ margin: 0, fontSize: '0.9rem', fontWeight: '700', color: 'var(--text-main)' }}>
                     Change History & Logs
                   </h4>
-                  <button
-                    onClick={() => setTimelineSortOrder(timelineSortOrder === 'desc' ? 'asc' : 'desc')}
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '0.25rem',
-                      background: 'transparent',
-                      border: 'none',
-                      color: 'var(--secondary-color)',
-                      fontSize: '0.75rem',
-                      fontWeight: '600',
-                      cursor: 'pointer'
-                    }}
-                  >
-                    <ArrowUpDown size={12} /> {timelineSortOrder === 'desc' ? 'Newest First' : 'Oldest First'}
-                  </button>
                 </div>
 
                 <div style={{
