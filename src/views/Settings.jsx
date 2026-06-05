@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { User, Bell, Shield, PaintBucket, Briefcase, Save, LogOut } from 'lucide-react';
 import { useToast } from '../components/Toast';
 
@@ -35,6 +36,7 @@ const Toggle = ({ label, description, defaultChecked }) => (
 
 const Settings = () => {
   const addToast = useToast();
+  const navigate = useNavigate();
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', height: '100%', maxWidth: '800px', margin: '0 auto', width: '100%' }}>
@@ -99,7 +101,11 @@ const Settings = () => {
               cursor: 'pointer',
               transition: 'all 0.2s'
             }}
-            onClick={() => addToast('Logging out of your account...', 'info')}
+            onClick={() => {
+              localStorage.removeItem('crm_authenticated');
+              addToast('Logged out successfully!', 'success');
+              navigate('/login');
+            }}
             onMouseEnter={(e) => {
               e.currentTarget.style.backgroundColor = '#FEE2E2';
               e.currentTarget.style.borderColor = '#EF4444';

@@ -11,24 +11,33 @@ import Payments from './views/Payments';
 import Reports from './views/Reports';
 import Notifications from './views/Notifications';
 import Settings from './views/Settings';
+import Login from './views/Login';
+
+// Protect dashboard routes so unauthenticated visits redirect to /login
+const ProtectedRoute = ({ children }) => {
+  const isAuthenticated = localStorage.getItem('crm_authenticated') === 'true';
+  return isAuthenticated ? children : <Navigate to="/login" replace />;
+};
 
 function App() {
   return (
     <ToastProvider>
       <Router>
         <Routes>
-        <Route path="/" element={<DashboardLayout />}>
-          <Route index element={<Navigate to="/dashboard" replace />} />
-          <Route path="dashboard" element={<DashboardHome />} />
-          <Route path="leads" element={<LeadManagement />} />
-          <Route path="appointments" element={<Appointments />} />
-          <Route path="quotations" element={<Quotations />} />
-          <Route path="projects" element={<ProjectFiling />} />
-          <Route path="payments" element={<Payments />} />
-          <Route path="reports" element={<Reports />} />
-          <Route path="notifications" element={<Notifications />} />
-          <Route path="settings" element={<Settings />} />
-        </Route>
+          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<ProtectedRoute><DashboardLayout /></ProtectedRoute>}>
+            <Route index element={<Navigate to="/dashboard" replace />} />
+            <Route path="dashboard" element={<DashboardHome />} />
+            <Route path="leads" element={<LeadManagement />} />
+            <Route path="appointments" element={<Appointments />} />
+            <Route path="quotations" element={<Quotations />} />
+            <Route path="projects" element={<ProjectFiling />} />
+            <Route path="payments" element={<Payments />} />
+            <Route path="reports" element={<Reports />} />
+            <Route path="notifications" element={<Notifications />} />
+            <Route path="settings" element={<Settings />} />
+          </Route>
+          <Route path="*" element={<Navigate to="/dashboard" replace />} />
         </Routes>
       </Router>
     </ToastProvider>
