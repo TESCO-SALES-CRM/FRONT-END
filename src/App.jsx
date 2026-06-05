@@ -15,7 +15,9 @@ import Login from './views/Login';
 
 // Protect dashboard routes so unauthenticated visits redirect to /login
 const ProtectedRoute = ({ children }) => {
-  const isAuthenticated = localStorage.getItem('crm_authenticated') === 'true';
+  const isAuthenticated =
+    !!localStorage.getItem('crm_token') &&
+    localStorage.getItem('crm_authenticated') === 'true';
   return isAuthenticated ? children : <Navigate to="/login" replace />;
 };
 

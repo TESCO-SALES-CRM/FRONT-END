@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { User, Bell, Shield, PaintBucket, Briefcase, Save, LogOut } from 'lucide-react';
 import { useToast } from '../components/Toast';
+import { authApi, clearSession } from '../api/client';
 
 const SettingsSection = ({ title, icon: Icon, children }) => (
   <div className="card" style={{ marginBottom: '1.5rem' }}>
@@ -101,8 +102,13 @@ const Settings = () => {
               cursor: 'pointer',
               transition: 'all 0.2s'
             }}
-            onClick={() => {
-              localStorage.removeItem('crm_authenticated');
+            onClick={async () => {
+              try {
+                await authApi.logout(); // notify backend (records event)
+              } catch {
+                // even if the server is unreachable, clear the local session
+              }
+              clearSession();
               addToast('Logged out successfully!', 'success');
               navigate('/login');
             }}

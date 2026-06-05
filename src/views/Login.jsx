@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Mail, Lock, Eye, EyeOff, CheckCircle2, AtSign, ChevronDown, Key } from 'lucide-react';
 import { useToast } from '../components/Toast';
+import { authApi, setSession } from '../api/client';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -23,48 +24,62 @@ const Login = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [generatedOtp, setGeneratedOtp] = useState('');
 
-  const handleLoginSubmit = (e) => {
+  const handleLoginSubmit = async (e) => {
     e.preventDefault();
     if (!email || !password) {
       addToast('Please fill in all fields', 'warning');
       return;
     }
-    
-    // Simulate successful login
-    localStorage.setItem('crm_authenticated', 'true');
-    addToast('Welcome back to Nexus CRM!', 'success');
-    navigate('/dashboard');
+
+    try {
+      const data = await authApi.login(role, email, password);
+      setSession(data.token, data.user);
+      addToast('Welcome back to Nexus CRM!', 'success');
+      navigate('/dashboard');
+    } catch (err) {
+      addToast(err.message, 'error');
+    }
   };
 
-  const handleSendOTP = (e) => {
+  const handleSendOTP = async (e) => {
     e.preventDefault();
     if (!forgotEmail) {
       addToast('Please enter your email ID', 'warning');
       return;
     }
-    // Generate a random 6-digit OTP code
-    const code = Math.floor(100000 + Math.random() * 900000).toString();
-    setGeneratedOtp(code);
-    addToast(`OTP Sent! Your verification code is ${code}`, 'success');
-    console.log(`[Nexus CRM Mock OTP]: ${code}`);
-    setForgotStep(2);
+
+    try {
+      const data = await authApi.forgotPassword(forgotEmail);
+      if (data.devOtp) {
+        // Development mode: backend returns OTP since email is not configured
+        setGeneratedOtp(data.devOtp);
+        addToast(`OTP Sent! Your verification code is ${data.devOtp}`, 'success');
+      } else {
+        addToast('OTP sent to your email!', 'success');
+      }
+      setForgotStep(2);
+    } catch (err) {
+      addToast(err.message, 'error');
+    }
   };
 
-  const handleVerifyOTP = (e) => {
+  const handleVerifyOTP = async (e) => {
     e.preventDefault();
     if (!otpCode) {
       addToast('Please enter the verification OTP', 'warning');
       return;
     }
-    if (otpCode === generatedOtp || otpCode === '123456') {
+
+    try {
+      await authApi.verifyOtp(forgotEmail, otpCode);
       addToast('OTP verified successfully!', 'success');
       setForgotStep(3);
-    } else {
-      addToast('Invalid OTP. Please enter the correct code.', 'error');
+    } catch (err) {
+      addToast(err.message, 'error');
     }
   };
 
-  const handleResetPassword = (e) => {
+  const handleResetPassword = async (e) => {
     e.preventDefault();
     if (!newPassword || !confirmPassword) {
       addToast('Please fill in all password fields', 'warning');
@@ -74,15 +89,21 @@ const Login = () => {
       addToast('Passwords do not match!', 'error');
       return;
     }
-    addToast('Password has been reset successfully!', 'success');
-    setPassword(newPassword);
-    setEmail(forgotEmail);
-    setForgotStep(0);
-    setForgotEmail('');
-    setOtpCode('');
-    setNewPassword('');
-    setConfirmPassword('');
-    setGeneratedOtp('');
+
+    try {
+      await authApi.resetPassword(forgotEmail, otpCode, newPassword);
+      addToast('Password has been reset successfully!', 'success');
+      setPassword(newPassword);
+      setEmail(forgotEmail);
+      setForgotStep(0);
+      setForgotEmail('');
+      setOtpCode('');
+      setNewPassword('');
+      setConfirmPassword('');
+      setGeneratedOtp('');
+    } catch (err) {
+      addToast(err.message, 'error');
+    }
   };
 
   return (
