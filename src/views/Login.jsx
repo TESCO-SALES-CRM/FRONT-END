@@ -270,9 +270,9 @@ const Login = () => {
                         MozAppearance: 'none'
                       }}
                     >
+                      <option value="Sales Head">Sales Head</option>
+                      <option value="Sales Coordinator">Sales Coordinator</option>
                       <option value="Sales Manager">Sales Manager</option>
-                      <option value="Executive">Executive</option>
-                      <option value="Admin">Administrator</option>
                     </select>
                     <ChevronDown size={16} color="#94A3B8" style={{ position: 'absolute', right: '12px', pointerEvents: 'none' }} />
                   </div>
