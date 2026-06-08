@@ -2,12 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { FileText, Download, Eye, Plus, CheckCircle, Clock, X, ThumbsUp, Send, Upload } from 'lucide-react';
 
 const initialQuotesData = [
-  { id: 'QT-5001', leadId: 'LD-1001', client: 'Acme Corp', project: 'PEB', amount: '₹500,000', gst: '₹90,000', approvalStatus: 'Approved', quotationStatus: 'Prepared', revision: 'Rev 1', fileName: 'acme_renovation_final.pdf' },
-  { id: 'QT-5002', leadId: 'LD-1002', client: 'John Doe', project: 'Tensile', amount: '₹150,000', gst: '₹27,000', approvalStatus: 'Pending', quotationStatus: 'Prepared', revision: 'Rev 3', fileName: null },
-  { id: 'QT-5003', leadId: 'LD-1003', client: 'Stark Industries', project: 'Other roofing', amount: '₹1,200,000', gst: '₹216,000', approvalStatus: 'Pending', quotationStatus: 'In Preparation', revision: 'Rev 0', fileName: null },
-  { id: 'QT-5004', leadId: 'LD-1004', client: 'Wayne Enterprises', project: 'PEB', amount: '₹850,000', gst: '₹153,000', approvalStatus: 'Approved', quotationStatus: 'Prepared', revision: 'Rev 2', fileName: 'wayne_manor_proposal.pdf' },
-  { id: 'QT-5005', leadId: 'LD-1005', client: 'Oscorp Labs', project: 'Tensile', amount: '₹320,000', gst: '₹57,600', approvalStatus: 'Approved', quotationStatus: 'Prepared', revision: 'Rev 1', fileName: null },
-  { id: 'QT-5006', leadId: 'LD-1006', client: 'LexCorp', project: 'Other roofing', amount: '₹450,000', gst: '₹81,000', approvalStatus: 'Pending', quotationStatus: 'In Preparation', revision: 'Rev 1', fileName: null },
+  { id: 'QT-5001', leadId: 'LD-1001', client: 'Reference Client', project: 'PEB', amount: '₹100,000', gst: '₹18,000', approvalStatus: 'Pending', quotationStatus: 'In Preparation', revision: 'Rev 0', fileName: null },
 ];
 
 const getApprovalStatusStyle = (status) => {
@@ -52,15 +47,48 @@ const getQuotationStatusStyle = (status) => {
   return { ...base, backgroundColor: '#E0E7FF', color: '#3730A3' }; // In Preparation
 };
 
-const Quotations = () => {
-  const [quotes, setQuotes] = useState(() => {
-    const saved = localStorage.getItem('crm_quotes');
-    return saved ? JSON.parse(saved) : initialQuotesData;
-  });
+const QUOTES_API = 'http://localhost:5000/api/quotations';
 
+const Quotations = () => {
+  const [quotes, setQuotes] = useState([]);
+  const [quotesLoaded, setQuotesLoaded] = useState(false);
+
+  // Load from API; seed with reference if DB empty
   useEffect(() => {
+    const load = async () => {
+      try {
+        const res = await fetch(QUOTES_API);
+        const data = await res.json();
+        if (Array.isArray(data) && data.length > 0) {
+          setQuotes(data);
+        } else {
+          await fetch(`${QUOTES_API}/bulk`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(initialQuotesData)
+          });
+          setQuotes(initialQuotesData);
+        }
+      } catch (err) {
+        console.error('Failed to load quotations:', err);
+        setQuotes(initialQuotesData);
+      } finally {
+        setQuotesLoaded(true);
+      }
+    };
+    load();
+  }, []);
+
+  // Sync to API on change (also mirror to localStorage so dashboard/lead pages stay in sync)
+  useEffect(() => {
+    if (!quotesLoaded) return;
     localStorage.setItem('crm_quotes', JSON.stringify(quotes));
-  }, [quotes]);
+    fetch(`${QUOTES_API}/bulk`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(quotes)
+    }).catch(err => console.error('Failed to sync quotations:', err));
+  }, [quotes, quotesLoaded]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [newQuote, setNewQuote] = useState({
     leadId: '', client: '', project: '', amount: '', gst: '', approvalStatus: 'Pending', quotationStatus: 'In Preparation', revision: 'Rev 0', fileName: null

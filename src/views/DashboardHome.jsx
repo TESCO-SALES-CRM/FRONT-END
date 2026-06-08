@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   Phone, Flame, CalendarCheck, FileText, DollarSign, TrendingUp, CheckCircle, Clock, 
   Plus, MoreVertical, MapPin, UploadCloud, DownloadCloud, Activity, Bell, ChevronRight, User, Trash,
@@ -16,36 +16,9 @@ const pipelineData = [
   { name: 'Apr', value: 60 }, { name: 'May', value: 55 }, { name: 'Jun', value: 80 }
 ];
 
-const leadStatusData = [
-  { name: 'Hot', value: 24, color: 'var(--danger-color)' },
-  { name: 'Warm', value: 18, color: 'var(--warning-color)' },
-  { name: 'Cold', value: 12, color: 'var(--primary-color)' },
-  { name: 'Appointment Fixed', value: 9, color: 'var(--success-color)' },
-];
-
-const appointmentsData = [
-  { id: 1, client: 'Mr. Kumar', type: 'Site Visit', time: '10:00 AM', status: 'Confirmed' },
-  { id: 2, client: 'ABC Builders', type: 'Quotation Discussion', time: '02:30 PM', status: 'Pending' },
-];
-
-const assignedLeadsData = [
-  { name: 'John Doe', priority: 'High', manager: 'Sarah S.', status: 'Site Visit Scheduled' },
-  { name: 'Acme Corp', priority: 'Medium', manager: 'Mike J.', status: 'Quotation In Progress' },
-];
-
-const quotationsData = [
-  { client: 'Globex Inc', amount: '₹12.5L', status: 'Pending Approval', date: 'Today' },
-  { client: 'Stark Ind.', amount: '₹45L', status: 'Approved', date: 'Yesterday' },
-];
-
 const paymentsData = [
   { client: 'Wayne Ent.', amount: '₹5L', status: 'Advance Received', date: 'Oct 24' },
   { client: 'Daily Planet', amount: '₹2.1L', status: 'Overdue', date: 'Oct 15' },
-];
-
-const projectsData = [
-  { name: 'Office Renovation', client: 'Acme Corp', status: 'Project File Created' },
-  { name: 'Residential Villa', client: 'Mr. Kumar', status: 'Handover Pending' },
 ];
 
 // --- SUB-COMPONENTS ---
@@ -79,15 +52,89 @@ const SectionHeader = ({ title, action }) => (
 );
 
 // --- MAIN DASHBOARD ---
+const LEADS_API = 'http://localhost:5000/api/leads';
+const APPTS_API = 'http://localhost:5000/api/appointments';
+const QUOTES_API = 'http://localhost:5000/api/quotations';
+const PROJECTS_API = 'http://localhost:5000/api/projects';
+
 const DashboardHome = () => {
   const addToast = useToast();
+
+  // Live lead data from API for KPI cards
+  const [allLeads, setAllLeads] = useState([]);
+  const [allAppointments, setAllAppointments] = useState([]);
+  useEffect(() => {
+    fetch(LEADS_API)
+      .then(r => r.json())
+      .then(d => { if (Array.isArray(d)) setAllLeads(d); })
+      .catch(err => console.error('Dashboard failed to load leads:', err));
+    fetch(APPTS_API)
+      .then(r => r.json())
+      .then(d => { if (Array.isArray(d)) setAllAppointments(d.map(a => ({ ...a, id: a._id || a.id }))); })
+      .catch(err => console.error('Dashboard failed to load appointments:', err));
+  }, []);
+
+  const isNewStatus = (s) => {
+    const x = (s || '').toLowerCase();
+    return x.includes('new') || x.includes('received');
+  };
+  const countBy = (kw) => allLeads.filter(l => (l.status || '').toLowerCase().includes(kw)).length;
+
+  const receivedLeadsCount = allLeads.length;
+  const newLeadsCount = allLeads.filter(l => isNewStatus(l.status)).length;
+  // Calls Made = leads that have moved OUT of "New" (Hot/Warm/Cold/etc.)
+  const callsMadeCount = allLeads.filter(l => !isNewStatus(l.status)).length;
+  const hotLeadsCount = countBy('hot');
+  const warmLeadsCount = countBy('warm');
+  const coldLeadsCount = countBy('cold');
+  const junkLeadsCount = countBy('junk');
+  const appointmentFixedCount = countBy('appointment');
+
+  // Live lead-status pie data (replaces hardcoded leadStatusData)
+  const liveLeadStatusData = [
+    { name: 'Hot', value: hotLeadsCount, color: 'var(--danger-color)' },
+    { name: 'Warm', value: warmLeadsCount, color: 'var(--warning-color)' },
+    { name: 'Cold', value: coldLeadsCount, color: 'var(--primary-color)' },
+    { name: 'Appointment Fixed', value: appointmentFixedCount, color: 'var(--success-color)' },
+  ];
+
+  // Live assigned-leads list (leads that have a manager assigned)
+  const liveAssignedLeads = allLeads
+    .filter(l => l.manager && l.manager !== 'Unassigned')
+    .map(l => ({ name: l.name, priority: l.priority, manager: l.manager, status: l.status }));
+
+  // Live quotations from the quotations API
+  const [liveQuotes, setLiveQuotes] = useState([]);
+  const [liveProjects, setLiveProjects] = useState([]);
+  useEffect(() => {
+    fetch(QUOTES_API)
+      .then(r => r.json())
+      .then(d => { if (Array.isArray(d)) setLiveQuotes(d); })
+      .catch(err => console.error('Failed to load quotations:', err));
+    fetch(PROJECTS_API)
+      .then(r => r.json())
+      .then(d => { if (Array.isArray(d)) setLiveProjects(d); })
+      .catch(err => console.error('Failed to load projects:', err));
+  }, []);
+
+  // Live quotation count for the KPI card
+  const quotationPreparedCount = liveQuotes.length;
+
+  // Live appointments for the dashboard list (normalized)
+  const liveAppointments = allAppointments.map(a => ({
+    id: a.id,
+    client: a.title || a.manager,
+    type: a.type,
+    time: a.timeStart,
+    status: a.status
+  }));
   const [dateRange, setDateRange] = useState({
-    start: new Date(new Date().setDate(new Date().getDate() - 30)).toISOString().split('T')[0],
+    start: new Date().toISOString().split('T')[0],
     end: new Date().toISOString().split('T')[0]
   });
 
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
-  const [selectedPreset, setSelectedPreset] = useState('Last 30 Days');
+  const [selectedPreset, setSelectedPreset] = useState('Today');
   const [rangeSelectionState, setRangeSelectionState] = useState('start');
   const [currentNavDate, setCurrentNavDate] = useState(new Date());
 
@@ -373,14 +420,14 @@ const DashboardHome = () => {
 
       {/* 2. KPI Cards */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem' }}>
-        <KpiCard title="Received Leads" value="150" subtitle="+20 New Today" icon={FileText} color="#4F46E5" bg="#EEF4FF" borderColor="#C7D2FE" />
-        <KpiCard title="Total Calls Made" value="128" subtitle="+12% from yesterday" icon={Phone} color="#7C3AED" bg="#F5F3FF" borderColor="#DDD6FE" />
-        <KpiCard title="Hot Leads" value="24" subtitle="High conversion chance" icon={Flame} color="#E11D48" bg="#FFF1F2" borderColor="#FECDD3" />
-        <KpiCard title="Followup Leads" value="45" subtitle="Needs attention" icon={Clock} color="#F97316" bg="#FFF7ED" borderColor="#FED7AA" />
-        <KpiCard title="Warm Leads" value="35" subtitle="Moderate potential" icon={Activity} color="#D97706" bg="#FFFBEB" borderColor="#FDE68A" />
-        <KpiCard title="Junk Leads" value="12" subtitle="Low quality" icon={Trash} color="#6B7280" bg="#F3F4F6" borderColor="#D1D5DB" />
-        <KpiCard title="Appointment Fixed" value="18" subtitle="+5 New Today" icon={CalendarCheck} color="#22C55E" bg="#ECFDF5" borderColor="#BBF7D0" />
-        <KpiCard title="Quotation Prepared" value="32" subtitle="₹12.5L Proposal Value" icon={FileText} color="#6366F1" bg="#EEF2FF" borderColor="#C7D2FE" />
+        <KpiCard title="Received Leads" value={receivedLeadsCount} subtitle="+20 New Today" icon={FileText} color="#4F46E5" bg="#EEF4FF" borderColor="#C7D2FE" />
+        <KpiCard title="Total Calls Made" value={callsMadeCount} subtitle="+12% from yesterday" icon={Phone} color="#7C3AED" bg="#F5F3FF" borderColor="#DDD6FE" />
+        <KpiCard title="Hot Leads" value={hotLeadsCount} subtitle="High conversion chance" icon={Flame} color="#E11D48" bg="#FFF1F2" borderColor="#FECDD3" />
+        <KpiCard title="Followup Leads" value={coldLeadsCount} subtitle="Needs attention" icon={Clock} color="#F97316" bg="#FFF7ED" borderColor="#FED7AA" />
+        <KpiCard title="Warm Leads" value={warmLeadsCount} subtitle="Moderate potential" icon={Activity} color="#D97706" bg="#FFFBEB" borderColor="#FDE68A" />
+        <KpiCard title="Junk Leads" value={junkLeadsCount} subtitle="Low quality" icon={Trash} color="#6B7280" bg="#F3F4F6" borderColor="#D1D5DB" />
+        <KpiCard title="Appointment Fixed" value={appointmentFixedCount} subtitle="+5 New Today" icon={CalendarCheck} color="#22C55E" bg="#ECFDF5" borderColor="#BBF7D0" />
+        <KpiCard title="Quotation Prepared" value={quotationPreparedCount} subtitle="Total Quotations" icon={FileText} color="#6366F1" bg="#EEF2FF" borderColor="#C7D2FE" />
         <KpiCard title="Payment Collection" value="₹8.4L" subtitle="₹2.1L Pending" icon={DollarSign} color="#16A34A" bg="#F0FDF4" borderColor="#86EFAC" />
       </div>
 
@@ -389,7 +436,10 @@ const DashboardHome = () => {
         <div className="card">
           <SectionHeader title="Today's Appointments" action="View All" />
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-            {appointmentsData.map(apt => (
+            {liveAppointments.length === 0 && (
+              <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', padding: '0.5rem' }}>No appointments yet.</div>
+            )}
+            {liveAppointments.map(apt => (
               <div key={apt.id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-md)' }}>
                 <div>
                   <div style={{ fontSize: '0.875rem', fontWeight: '600', marginBottom: '0.25rem' }}>{apt.time} — {apt.type}</div>
@@ -414,12 +464,12 @@ const DashboardHome = () => {
               </tr>
             </thead>
             <tbody>
-              {quotationsData.map((quote, idx) => (
-                <tr key={idx} style={{ borderBottom: idx === quotationsData.length - 1 ? 'none' : '1px solid var(--border-color)' }}>
+              {liveQuotes.map((quote, idx) => (
+                <tr key={idx} style={{ borderBottom: idx === liveQuotes.length - 1 ? 'none' : '1px solid var(--border-color)' }}>
                   <td style={{ padding: '0.75rem 0', fontSize: '0.875rem', fontWeight: '500' }}>{quote.client}</td>
                   <td style={{ padding: '0.75rem 0', fontSize: '0.875rem', color: 'var(--text-muted)' }}>{quote.amount}</td>
                   <td style={{ padding: '0.75rem 0' }}>
-                    <span className={`badge ${quote.status === 'Approved' ? 'badge-success' : 'badge-warning'}`}>{quote.status}</span>
+                    <span className={`badge ${(quote.status || quote.approvalStatus) === 'Approved' ? 'badge-success' : 'badge-warning'}`}>{quote.status || quote.approvalStatus}</span>
                   </td>
                 </tr>
               ))}
@@ -457,14 +507,14 @@ const DashboardHome = () => {
         <div className="card">
           <SectionHeader title="Project Filing Status" action="View All" />
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-            {projectsData.map((proj, idx) => (
+            {liveProjects.map((proj, idx) => (
               <div key={idx} style={{ padding: '1rem', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-md)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <div>
-                  <div style={{ fontWeight: '600', fontSize: '0.875rem' }}>{proj.name}</div>
+                  <div style={{ fontWeight: '600', fontSize: '0.875rem' }}>{proj.name || proj.type}</div>
                   <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Client: {proj.client}</div>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                  <span className={`badge ${proj.status.includes('Pending') ? 'badge-warning' : 'badge-success'}`}>{proj.status}</span>
+                  <span className={`badge ${(proj.status || '').includes('Pending') ? 'badge-warning' : 'badge-success'}`}>{proj.status}</span>
                   <button className="btn btn-outline" style={{ padding: '0.25rem', border: 'none' }}><ChevronRight size={16}/></button>
                 </div>
               </div>
@@ -480,3 +530,4 @@ const DashboardHome = () => {
 };
 
 export default DashboardHome;
+

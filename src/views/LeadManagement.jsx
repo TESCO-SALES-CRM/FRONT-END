@@ -24,353 +24,22 @@ const getSourceStyles = (source) => {
 };
 
 const initialLeadsData = [
-  { 
-    id: 'LD-1029', 
-    date: 'Oct 24, 2026', 
-    name: 'John Doe', 
-    projectType: 'PEB', 
-    phone: '+1 234 567 8900', 
-    source: 'Website Enquiry', 
-    budget: '₹150k - ₹200k', 
-    status: 'Hot Leads', 
-    manager: 'Sarah Smith', 
-    followUp: 'Today, 2:00 PM', 
-    priority: 'High', 
-    notes: 'Interested in open plan layout',
-    history: [
-      { timestamp: 'Oct 24, 2026 - 10:00 AM', message: 'Lead created from Website form' },
-      { timestamp: 'Oct 24, 2026 - 11:15 AM', message: 'Status changed to HOT' },
-    ]
-  },
-  { 
-    id: 'LD-1030', 
-    date: 'Oct 23, 2026', 
-    name: 'Acme Corp', 
-    projectType: 'Tensile', 
-    phone: '+1 987 654 3210', 
-    source: 'Referral', 
-    budget: '₹500k+', 
-    status: 'Appointment Fixed', 
-    manager: 'Mike Johnson', 
-    followUp: 'Tomorrow', 
-    priority: 'Medium', 
-    notes: 'Needs quote ASAP',
-    history: [
-      { timestamp: 'Oct 23, 2026 - 09:30 AM', message: 'Lead created from Referral form' },
-      { timestamp: 'Oct 23, 2026 - 02:15 PM', message: 'Assigned to manager: Mike Johnson' },
-      { timestamp: 'Oct 23, 2026 - 04:00 PM', message: 'Status changed to APPOINTMENT FIXED' },
-    ]
-  },
-  { 
-    id: 'LD-1031', 
-    date: 'Oct 21, 2026', 
-    name: 'Globex Inc', 
-    projectType: 'Other roofing', 
-    phone: '+1 555 123 4567', 
-    source: 'Cold Calling', 
-    budget: '₹80k - ₹120k', 
-    status: 'Warm Leads', 
-    manager: 'Sarah Smith', 
-    followUp: 'Next Week', 
-    priority: 'Medium', 
-    notes: 'Follow up after holidays',
-    history: [
-      { timestamp: 'Oct 21, 2026 - 11:00 AM', message: 'Lead created from Cold Calling database' },
-      { timestamp: 'Oct 21, 2026 - 01:30 PM', message: 'Status changed to WARM' },
-    ]
-  },
-  { 
-    id: 'LD-1032', 
-    date: 'Oct 18, 2026', 
-    name: 'Stark Industries', 
-    projectType: 'PEB', 
-    phone: '+1 444 987 1234', 
-    source: 'LinkedIn Leads', 
-    budget: 'Pending', 
-    status: 'Cold Leads', 
-    manager: 'Alex Wong', 
-    followUp: 'No Date', 
-    priority: 'Low', 
-    notes: 'Sent initial brochure',
-    history: [
-      { timestamp: 'Oct 18, 2026 - 08:45 AM', message: 'Lead created from LinkedIn ad campaign' },
-      { timestamp: 'Oct 18, 2026 - 10:15 AM', message: 'Assigned to manager: Alex Wong' },
-      { timestamp: 'Oct 18, 2026 - 12:00 PM', message: 'Status changed to COLD' },
-    ]
-  },
   {
-    id: 'LD-1033',
-    date: 'Jun 4, 2026',
-    name: 'Rajesh Patel',
+    id: 'LD-1001',
+    date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
+    name: 'Reference Lead',
+    type: 'new leads',
     projectType: 'PEB',
-    phone: '+91 98765 43210',
-    source: 'Referral',
-    budget: '₹450k',
-    status: 'Hot Leads',
-    manager: 'Sarah Smith',
-    followUp: 'Today, 5:00 PM',
-    priority: 'High',
-    notes: 'Needs urgent structural drawing approval.',
-    history: [
-      { timestamp: 'Jun 4, 2026 - 10:00 AM', message: 'Lead created via Referral' },
-      { timestamp: 'Jun 4, 2026 - 11:30 AM', message: 'Assigned to Sarah Smith' }
-    ]
-  },
-  {
-    id: 'LD-1034',
-    date: 'Jun 3, 2026',
-    name: 'Sanjay Sharma',
-    projectType: 'Tensile',
-    phone: '+91 87654 32109',
+    phone: '+91 90000 00000',
     source: 'Website Enquiry',
-    budget: '₹180k',
-    status: 'New Lead',
-    manager: 'Unassigned',
-    followUp: 'Tomorrow',
-    priority: 'Medium',
-    notes: 'Enquired through tensile canopy contact form.',
-    history: [
-      { timestamp: 'Jun 3, 2026 - 02:15 PM', message: 'Lead created via Website' }
-    ]
-  },
-  {
-    id: 'LD-1035',
-    date: 'Jun 3, 2026',
-    name: 'Priya Nair',
-    projectType: 'Other roofing',
-    phone: '+91 76543 21098',
-    source: 'Cold Calling',
-    budget: '₹95k',
-    status: 'Warm Leads',
-    manager: 'Alex Wong',
-    followUp: 'Next Week',
-    priority: 'Medium',
-    notes: 'Looking for warehouse roof insulation.',
-    history: [
-      { timestamp: 'Jun 3, 2026 - 09:30 AM', message: 'Lead created via Cold Calling' },
-      { timestamp: 'Jun 3, 2026 - 04:00 PM', message: 'Assigned to Alex Wong' }
-    ]
-  },
-  {
-    id: 'LD-1036',
-    date: 'Jun 2, 2026',
-    name: 'Amit Verma',
-    projectType: 'PEB',
-    phone: '+91 95432 10987',
-    source: 'Meta Leads',
-    budget: '₹1.2M',
-    status: 'Appointment Fixed',
-    manager: 'Mike Johnson',
-    followUp: 'Jun 8, 11:00 AM',
-    priority: 'High',
-    notes: 'Meeting scheduled at site location in Noida.',
-    history: [
-      { timestamp: 'Jun 2, 2026 - 11:00 AM', message: 'Lead created via Meta Ads' },
-      { timestamp: 'Jun 2, 2026 - 01:15 PM', message: 'Assigned to Mike Johnson' },
-      { timestamp: 'Jun 2, 2026 - 03:30 PM', message: 'Status changed to APPOINTMENT FIXED' }
-    ]
-  },
-  {
-    id: 'LD-1037',
-    date: 'Jun 4, 2026',
-    name: 'mnjdbljs',
-    projectType: 'Tensile',
-    phone: '1234543234',
-    source: 'Cold Calling',
-    budget: '₹150k',
+    budget: '₹100k',
     status: 'New Lead',
     manager: 'Unassigned',
     followUp: 'No Date',
-    priority: 'Low',
-    notes: 'Sample lead.',
-    history: [
-      { timestamp: 'Jun 4, 2026 - 01:00 PM', message: 'Lead created' }
-    ]
-  },
-  {
-    id: 'LD-1038',
-    date: 'Jun 1, 2026',
-    name: 'Vikram Malhotra',
-    projectType: 'Other roofing',
-    phone: '+91 93210 98765',
-    source: 'LinkedIn Leads',
-    budget: '₹320k',
-    status: 'Quotation Send',
-    manager: 'Sarah Smith',
-    followUp: 'Tomorrow',
-    priority: 'High',
-    notes: 'Quotation sent for Polycarbonate sheet roofing.',
-    history: [
-      { timestamp: 'Jun 1, 2026 - 08:30 AM', message: 'Lead created via LinkedIn' },
-      { timestamp: 'Jun 1, 2026 - 11:00 AM', message: 'Assigned to Sarah Smith' },
-      { timestamp: 'Jun 1, 2026 - 04:00 PM', message: 'Quotation generated and sent' }
-    ]
-  },
-  {
-    id: 'LD-1039',
-    date: 'May 28, 2026',
-    name: 'Anjali Gupta',
-    projectType: 'PEB',
-    phone: '+91 92109 87654',
-    source: 'Website Enquiry',
-    budget: '₹800k',
-    status: 'Negotiation',
-    manager: 'Mike Johnson',
-    followUp: 'Jun 6, 2:30 PM',
-    priority: 'High',
-    notes: 'Negotiating project margin and terms.',
-    history: [
-      { timestamp: 'May 28, 2026 - 10:00 AM', message: 'Lead created via Website' },
-      { timestamp: 'May 28, 2026 - 02:00 PM', message: 'Assigned to Mike Johnson' },
-      { timestamp: 'May 28, 2026 - 05:00 PM', message: 'Status changed to NEGOTIATION' }
-    ]
-  },
-  {
-    id: 'LD-1040',
-    date: 'May 25, 2026',
-    name: 'Deepak Rao',
-    projectType: 'Tensile',
-    phone: '+91 91098 76543',
-    source: 'Referral',
-    budget: '₹250k',
-    status: 'Order Confirmed',
-    manager: 'Alex Wong',
-    followUp: 'No Date',
-    priority: 'High',
-    notes: 'Advance payment cleared, design initiated.',
-    history: [
-      { timestamp: 'May 25, 2026 - 11:30 AM', message: 'Lead created via Referral' },
-      { timestamp: 'May 25, 2026 - 01:00 PM', message: 'Assigned to Alex Wong' },
-      { timestamp: 'May 25, 2026 - 04:30 PM', message: 'Status changed to ORDER CONFIRMED' }
-    ]
-  },
-  {
-    id: 'LD-1041',
-    date: 'May 22, 2026',
-    name: 'Rohan Das',
-    projectType: 'PEB',
-    phone: '+91 90987 65432',
-    source: 'Meta Leads',
-    budget: '₹1.5M',
-    status: 'Quotation Send',
-    manager: 'Sarah Smith',
-    followUp: 'Today',
     priority: 'Medium',
-    notes: 'Awaiting review from corporate board.',
+    notes: 'Sample reference lead.',
     history: [
-      { timestamp: 'May 22, 2026 - 09:00 AM', message: 'Lead created via Meta Ads' },
-      { timestamp: 'May 22, 2026 - 12:00 PM', message: 'Assigned to Sarah Smith' },
-      { timestamp: 'May 22, 2026 - 03:00 PM', message: 'Quotation generated and sent' }
-    ]
-  },
-  {
-    id: 'LD-1042',
-    date: 'May 20, 2026',
-    name: 'Karan Singh',
-    projectType: 'Other roofing',
-    phone: '+91 89876 54321',
-    source: 'Cold Calling',
-    budget: '₹60k',
-    status: 'Junk',
-    manager: 'Unassigned',
-    followUp: 'No Date',
-    priority: 'Low',
-    notes: 'Wrong number / Not interested.',
-    history: [
-      { timestamp: 'May 20, 2026 - 11:00 AM', message: 'Lead created via Cold Calling' },
-      { timestamp: 'May 20, 2026 - 02:00 PM', message: 'Status changed to JUNK' }
-    ]
-  },
-  {
-    id: 'LD-1043',
-    date: 'May 18, 2026',
-    name: 'Neha Kapoor',
-    projectType: 'Tensile',
-    phone: '+91 88765 43210',
-    source: 'LinkedIn Leads',
-    budget: '₹400k',
-    status: 'Warm Leads',
-    manager: 'Mike Johnson',
-    followUp: 'Next Week',
-    priority: 'Medium',
-    notes: 'Follow up after budget approval.',
-    history: [
-      { timestamp: 'May 18, 2026 - 10:30 AM', message: 'Lead created via LinkedIn' },
-      { timestamp: 'May 18, 2026 - 03:00 PM', message: 'Assigned to Mike Johnson' }
-    ]
-  },
-  {
-    id: 'LD-1044',
-    date: 'May 15, 2026',
-    name: 'Arjun Mehra',
-    projectType: 'PEB',
-    phone: '+91 87654 32101',
-    source: 'Website Enquiry',
-    budget: '₹650k',
-    status: 'Appointment Fixed',
-    manager: 'Alex Wong',
-    followUp: 'Jun 12, 10:00 AM',
-    priority: 'High',
-    notes: 'Site feasibility report scheduled.',
-    history: [
-      { timestamp: 'May 15, 2026 - 09:45 AM', message: 'Lead created via Website' },
-      { timestamp: 'May 15, 2026 - 01:15 PM', message: 'Assigned to Alex Wong' },
-      { timestamp: 'May 15, 2026 - 04:00 PM', message: 'Status changed to APPOINTMENT FIXED' }
-    ]
-  },
-  {
-    id: 'LD-1045',
-    date: 'May 12, 2026',
-    name: 'Divya Teja',
-    projectType: 'Other roofing',
-    phone: '+91 86543 21098',
-    source: 'Referral',
-    budget: '₹120k',
-    status: 'Cold Leads',
-    manager: 'Sarah Smith',
-    followUp: 'No Date',
-    priority: 'Low',
-    notes: 'Low response, follow up later.',
-    history: [
-      { timestamp: 'May 12, 2026 - 11:00 AM', message: 'Lead created via Referral' },
-      { timestamp: 'May 12, 2026 - 02:00 PM', message: 'Assigned to Sarah Smith' }
-    ]
-  },
-  {
-    id: 'LD-1046',
-    date: 'May 10, 2026',
-    name: 'Aditya Birla',
-    projectType: 'PEB',
-    phone: '+91 85432 10987',
-    source: 'LinkedIn Leads',
-    budget: '₹2.5M',
-    status: 'Negotiation',
-    manager: 'Mike Johnson',
-    followUp: 'Jun 15',
-    priority: 'High',
-    notes: 'Large commercial shed proposal revision in progress.',
-    history: [
-      { timestamp: 'May 10, 2026 - 09:00 AM', message: 'Lead created via LinkedIn' },
-      { timestamp: 'May 10, 2026 - 12:00 PM', message: 'Assigned to Mike Johnson' },
-      { timestamp: 'May 10, 2026 - 03:00 PM', message: 'Status changed to NEGOTIATION' }
-    ]
-  },
-  {
-    id: 'LD-1047',
-    date: 'May 08, 2026',
-    name: 'Meera Reddy',
-    projectType: 'Tensile',
-    phone: '+91 84321 09876',
-    source: 'Meta Leads',
-    budget: '₹300k',
-    status: 'New Lead',
-    manager: 'Alex Wong',
-    followUp: 'Tomorrow',
-    priority: 'Medium',
-    notes: 'Sent catalog on WhatsApp.',
-    history: [
-      { timestamp: 'May 08, 2026 - 10:15 AM', message: 'Lead created via Meta Ads' },
-      { timestamp: 'May 08, 2026 - 01:30 PM', message: 'Assigned to Alex Wong' }
+      { timestamp: new Date().toLocaleDateString('en-GB') + ', ' + new Date().toLocaleTimeString('en-US', { hour12: false }), message: 'Lead created (reference)' }
     ]
   }
 ];
@@ -419,30 +88,55 @@ const LeadOverviewCard = ({ title, value, subtitle, icon: Icon, color, bg, borde
   </div>
 );
 
-const LeadManagement = () => {
-  const [leads, setLeads] = useState(() => {
-    const saved = localStorage.getItem('crm_leads');
-    if (saved) {
-      const parsed = JSON.parse(saved);
-      if (parsed.length < 5) {
-        return initialLeadsData;
-      }
-      return parsed;
-    }
-    return initialLeadsData;
-  });
+const API_URL = 'http://localhost:5000/api/leads';
 
+const LeadManagement = () => {
+  const [leads, setLeads] = useState([]);
+  const [leadsLoaded, setLeadsLoaded] = useState(false);
+
+  // Load leads from backend API on mount (seed with initial data if DB empty)
   useEffect(() => {
-    localStorage.setItem('crm_leads', JSON.stringify(leads));
-  }, [leads]);
+    const loadLeads = async () => {
+      try {
+        const res = await fetch(API_URL);
+        const data = await res.json();
+        if (Array.isArray(data) && data.length > 0) {
+          setLeads(data);
+        } else {
+          await fetch(`${API_URL}/bulk`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(initialLeadsData)
+          });
+          setLeads(initialLeadsData);
+        }
+      } catch (err) {
+        console.error('Failed to load leads from API:', err);
+        setLeads(initialLeadsData);
+      } finally {
+        setLeadsLoaded(true);
+      }
+    };
+    loadLeads();
+  }, []);
+
+  // Sync leads to backend API whenever they change
+  useEffect(() => {
+    if (!leadsLoaded) return;
+    fetch(`${API_URL}/bulk`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(leads)
+    }).catch(err => console.error('Failed to sync leads to API:', err));
+  }, [leads, leadsLoaded]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [dateRange, setDateRange] = useState({
-    start: new Date(new Date().setDate(new Date().getDate() - 30)).toISOString().split('T')[0],
+    start: new Date().toISOString().split('T')[0],
     end: new Date().toISOString().split('T')[0]
   });
 
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
-  const [selectedPreset, setSelectedPreset] = useState('Last 30 Days');
+  const [selectedPreset, setSelectedPreset] = useState('Today');
   const [rangeSelectionState, setRangeSelectionState] = useState('start');
   const [currentNavDate, setCurrentNavDate] = useState(new Date());
 
@@ -562,6 +256,42 @@ const LeadManagement = () => {
     date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
     name: '', projectType: '', phone: '', budget: '', source: '', status: 'Lead Received', notes: ''
   });
+
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [editLead, setEditLead] = useState(null);
+
+  const openEditModal = (lead) => {
+    setEditLead({ ...lead });
+    setIsEditModalOpen(true);
+  };
+
+  const handleEditLead = (e) => {
+    e.preventDefault();
+    const formattedTime = getFormattedTimestamp();
+    setLeads(leads.map(l => {
+      if (l.id === editLead.id) {
+        const changes = [];
+        if (l.name !== editLead.name) changes.push(`name to "${editLead.name}"`);
+        if (l.phone !== editLead.phone) changes.push(`phone to "${editLead.phone}"`);
+        if (l.projectType !== editLead.projectType) changes.push(`service to "${editLead.projectType}"`);
+        if (l.source !== editLead.source) changes.push(`source to "${editLead.source}"`);
+        if (l.budget !== editLead.budget) changes.push(`budget to "${editLead.budget}"`);
+        if (l.notes !== editLead.notes) changes.push('notes');
+        const newHistory = changes.length
+          ? [...(l.history || []), { timestamp: formattedTime, message: `Updated ${changes.join(', ')}` }]
+          : (l.history || []);
+        const updatedLead = { ...l, ...editLead, history: newHistory };
+        if (selectedLeadForTimeline && selectedLeadForTimeline.id === l.id) {
+          setSelectedLeadForTimeline(updatedLead);
+        }
+        return updatedLead;
+      }
+      return l;
+    }));
+    setIsEditModalOpen(false);
+    setEditLead(null);
+    addToast('Lead updated successfully!', 'success');
+  };
 
   const [isApptModalOpen, setIsApptModalOpen] = useState(false);
   const [activeApptLeadId, setActiveApptLeadId] = useState(null);
@@ -813,7 +543,8 @@ const LeadManagement = () => {
     ];
     const savedQuotesStr = localStorage.getItem('crm_quotes');
     const existingQuotes = savedQuotesStr ? JSON.parse(savedQuotesStr) : initialQuotesDataFallback;
-    const newQuoteId = `QT-${5001 + existingQuotes.length}`;
+    const maxQuoteNum = existingQuotes.reduce((max, q) => { const n = parseInt((q.id || '').replace('QT-', ''), 10); return isNaN(n) ? max : Math.max(max, n); }, 5000);
+    const newQuoteId = `QT-${maxQuoteNum + 1}`;
 
     // Append new quote to quotes list in localStorage
     const newQuoteObj = {
@@ -830,6 +561,13 @@ const LeadManagement = () => {
     };
     const updatedQuotes = [...existingQuotes, newQuoteObj];
     localStorage.setItem('crm_quotes', JSON.stringify(updatedQuotes));
+
+    // Persist the new quotation to the backend API (so dashboard/Quotations page show it)
+    fetch('http://localhost:5000/api/quotations', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(newQuoteObj)
+    }).catch(err => console.error('Failed to save quotation to API:', err));
 
     // Update the lead's status & history timeline log
     setLeads(leads.map(l => {
@@ -918,14 +656,16 @@ const LeadManagement = () => {
 
   const handleAddLead = (e) => {
     e.preventDefault();
-    const newId = `LD-${1033 + leads.length}`;
+    const maxIdNum = leads.reduce((max, l) => { const n = parseInt((l.id || '').replace('LD-', ''), 10); return isNaN(n) ? max : Math.max(max, n); }, 1000);
+    const newId = `LD-${maxIdNum + 1}`;
     const formattedTime = getFormattedTimestamp();
     
-    const leadToAdd = { 
-      ...newLead, 
-      id: newId, 
-      manager: 'Unassigned', 
-      followUp: 'Pending', 
+    const leadToAdd = {
+      ...newLead,
+      id: newId,
+      type: 'new leads',
+      manager: 'Unassigned',
+      followUp: 'Pending',
       priority: 'Medium',
       history: [
         { timestamp: formattedTime, message: `Lead created from ${newLead.source || 'Manual Form'}` }
@@ -1541,10 +1281,10 @@ const LeadManagement = () => {
                     >
                       <Activity size={12} />
                     </button>
-                    <button title="Edit" style={{ background: '#E0E7FF', border: 'none', color: 'var(--primary-color)', width: '28px', height: '28px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}>
+                    <button title="Edit" onClick={() => openEditModal(lead)} style={{ background: '#E0E7FF', border: 'none', color: 'var(--primary-color)', width: '28px', height: '28px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}>
                       <Edit2 size={12} />
                     </button>
-                    <button title="Delete" onClick={() => setLeads(leads.filter(l => l.id !== lead.id))} style={{ background: '#FEE2E2', border: 'none', color: 'var(--danger-color, #991B1B)', width: '28px', height: '28px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}>
+                    <button title="Delete" onClick={() => { fetch(`${API_URL}/${lead.id}`, { method: 'DELETE' }).catch(err => console.error('Failed to delete lead:', err)); setLeads(leads.filter(l => l.id !== lead.id)); }} style={{ background: '#FEE2E2', border: 'none', color: 'var(--danger-color, #991B1B)', width: '28px', height: '28px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}>
                       <Trash2 size={12} />
                     </button>
                   </div>
@@ -1632,6 +1372,67 @@ const LeadManagement = () => {
               <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '1rem', marginTop: '1rem' }}>
                 <button type="button" onClick={() => setIsModalOpen(false)} className="btn btn-outline">Cancel</button>
                 <button type="submit" className="btn btn-primary">Save Lead</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {isEditModalOpen && editLead && (
+        <div style={{
+          position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
+          backgroundColor: 'rgba(0,0,0,0.5)', zIndex: 100,
+          display: 'flex', alignItems: 'center', justifyContent: 'center'
+        }}>
+          <div className="card" style={{ width: '100%', maxWidth: '500px', padding: '2rem' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
+              <h3 style={{ margin: 0, fontSize: '1.25rem' }}>Edit Lead</h3>
+              <button onClick={() => { setIsEditModalOpen(false); setEditLead(null); }} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-muted)' }}>
+                <X size={20} />
+              </button>
+            </div>
+            <form onSubmit={handleEditLead} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              <div>
+                <label style={{ display: 'block', fontSize: '0.875rem', marginBottom: '0.25rem', color: 'var(--text-muted)' }}>Customer Name</label>
+                <input required value={editLead.name} onChange={(e) => setEditLead({...editLead, name: e.target.value})} type="text" style={{ width: '100%', padding: '0.5rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)' }} />
+              </div>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+                <div>
+                  <label style={{ display: 'block', fontSize: '0.875rem', marginBottom: '0.25rem', color: 'var(--text-muted)' }}>Services</label>
+                  <select required value={editLead.projectType} onChange={(e) => setEditLead({...editLead, projectType: e.target.value})} style={{ width: '100%', padding: '0.5rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)', backgroundColor: 'var(--surface-color)', color: 'var(--text-main)', outline: 'none' }}>
+                    <option value="">Select type</option>
+                    <option value="PEB">PEB</option>
+                    <option value="Tensile">Tensile</option>
+                    <option value="Other roofing">Other roofing</option>
+                  </select>
+                </div>
+                <div>
+                  <label style={{ display: 'block', fontSize: '0.875rem', marginBottom: '0.25rem', color: 'var(--text-muted)' }}>Phone Number</label>
+                  <input required value={editLead.phone} onChange={(e) => setEditLead({...editLead, phone: e.target.value})} type="text" style={{ width: '100%', padding: '0.5rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)' }} />
+                </div>
+              </div>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+                <div>
+                  <label style={{ display: 'block', fontSize: '0.875rem', marginBottom: '0.25rem', color: 'var(--text-muted)' }}>Lead Source</label>
+                   <select required value={editLead.source} onChange={(e) => setEditLead({...editLead, source: e.target.value})} style={{ width: '100%', padding: '0.5rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)' }}>
+                     <option value="">Select source</option>
+                     {LEAD_SOURCES.map(src => (
+                       <option key={src} value={src}>{src}</option>
+                     ))}
+                   </select>
+                </div>
+                <div>
+                  <label style={{ display: 'block', fontSize: '0.875rem', marginBottom: '0.25rem', color: 'var(--text-muted)' }}>Budget</label>
+                  <input value={editLead.budget || ''} onChange={(e) => setEditLead({...editLead, budget: e.target.value})} type="text" style={{ width: '100%', padding: '0.5rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)' }} />
+                </div>
+              </div>
+              <div>
+                <label style={{ display: 'block', fontSize: '0.875rem', marginBottom: '0.25rem', color: 'var(--text-muted)' }}>Notes</label>
+                <textarea rows="3" value={editLead.notes || ''} onChange={(e) => setEditLead({...editLead, notes: e.target.value})} placeholder="Any additional context..." style={{ width: '100%', padding: '0.5rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)', resize: 'vertical' }}></textarea>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '1rem', marginTop: '1rem' }}>
+                <button type="button" onClick={() => { setIsEditModalOpen(false); setEditLead(null); }} className="btn btn-outline">Cancel</button>
+                <button type="submit" className="btn btn-primary">Update Lead</button>
               </div>
             </form>
           </div>

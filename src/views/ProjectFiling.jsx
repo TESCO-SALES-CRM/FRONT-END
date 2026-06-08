@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { FolderOpen, File, UploadCloud, Users, CheckCircle, Clock } from 'lucide-react';
 import { useToast } from '../components/Toast';
 
-const projectsData = [
-  { id: 'PRJ-901', client: 'Acme Corp', type: 'Office Renovation', quote: '₹500,000', team: 'Execution Team Alpha', status: 'Handover Pending', files: 12 },
-  { id: 'PRJ-902', client: 'Globex Inc', type: 'Residential Villa', quote: '₹850,000', team: 'Design Team B', status: 'Project File Created', files: 4 },
+const PROJECTS_API = 'http://localhost:5000/api/projects';
+
+const initialProjectsData = [
+  { id: 'PRJ-901', client: 'Reference Client', type: 'Office Renovation', quote: '₹100,000', team: 'Execution Team Alpha', status: 'Project File Created', files: 0 },
 ];
 
 const TimelineStep = ({ label, active, completed }) => (
@@ -25,6 +26,31 @@ const TimelineStep = ({ label, active, completed }) => (
 
 const ProjectFiling = () => {
   const addToast = useToast();
+  const [projectsData, setProjectsData] = useState([]);
+
+  // Load projects from API; seed with reference if DB empty
+  useEffect(() => {
+    const load = async () => {
+      try {
+        const res = await fetch(PROJECTS_API);
+        const data = await res.json();
+        if (Array.isArray(data) && data.length > 0) {
+          setProjectsData(data);
+        } else {
+          await fetch(`${PROJECTS_API}/bulk`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(initialProjectsData)
+          });
+          setProjectsData(initialProjectsData);
+        }
+      } catch (err) {
+        console.error('Failed to load projects:', err);
+        setProjectsData(initialProjectsData);
+      }
+    };
+    load();
+  }, []);
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', height: '100%' }}>

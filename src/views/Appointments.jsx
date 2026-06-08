@@ -1,13 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Search, Filter, User, Phone, MapPin, ChevronLeft, ChevronRight, CalendarCheck2, CalendarClock, CheckCircle2, Flag, X, Calendar as CalendarIcon } from 'lucide-react';
 import { useToast } from '../components/Toast';
 
-const initialAppointments = [
-  { id: 1, title: 'Initial Consultation', date: '2026-05-20', timeStart: '04:00 PM', timeEnd: '05:00 PM', manager: 'Priya Sharma', phone: '+91 87654 32109', location: 'Main Office', status: 'Waiting', type: 'Appointment' },
-  { id: 2, title: 'Design Finalization', date: '2026-05-21', timeStart: '11:00 AM', timeEnd: '12:30 PM', manager: 'Rahul Gupta', phone: '+91 76543 21098', location: 'Virtual', status: 'Assigned', type: 'Appointment' },
-  { id: 3, title: 'Site Survey', date: '2026-05-22', timeStart: '09:30 AM', timeEnd: '11:00 AM', manager: 'Sarah Smith', phone: '+91 98765 43210', location: 'Client Site, Block A', status: 'Completed', type: 'Visits' },
-  { id: 4, title: 'Final Walkthrough', date: '2026-05-28', timeStart: '02:00 PM', timeEnd: '03:30 PM', manager: 'Alex Wong', phone: '+91 87654 12345', location: 'Project Site', status: 'Waiting', type: 'Visits' },
-];
+const APPT_API = 'http://localhost:5000/api/appointments';
 
 const STATUS_STYLES = {
   Waiting:   { bg: '#FEF3C7', color: '#92400E', label: 'WAITING' },
@@ -55,10 +50,32 @@ function convertTo24Hour(time12) {
 
 const Appointments = () => {
   const addToast = useToast();
-  const [appointments, setAppointments] = useState(initialAppointments);
+  const [appointments, setAppointments] = useState([]);
+  const [apptLoaded, setApptLoaded] = useState(false);
+
+  // Normalize API record so existing JSX (apt.id) keeps working
+  const normalize = (a) => ({ ...a, id: a._id || a.id });
+
+  // Load appointments from API on mount (show only what is stored)
+  useEffect(() => {
+    const load = async () => {
+      try {
+        const res = await fetch(APPT_API);
+        const data = await res.json();
+        if (Array.isArray(data)) setAppointments(data.map(normalize));
+      } catch (err) {
+        console.error('Failed to load appointments:', err);
+      } finally {
+        setApptLoaded(true);
+      }
+    };
+    load();
+  }, []);
+
   const [activeTab, setActiveTab] = useState('Appointment');
   const [searchQuery, setSearchQuery] = useState('');
-  const [calendarDate, setCalendarDate] = useState(new Date(2026, 4, 1)); // May 2026
+  const [calendarDate, setCalendarDate] = useState(() => { const t = new Date(); return new Date(t.getFullYear(), t.getMonth(), 1); });
+  const [selectedDay, setSelectedDay] = useState(null); // 'YYYY-MM-DD' when a calendar day is clicked
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [newVisit, setNewVisit] = useState({ title: '', date: '', timeStart: '', timeEnd: '', manager: '', phone: '', location: '', status: 'Waiting', type: 'Appointment' });
   const [isRescheduleModalOpen, setIsRescheduleModalOpen] = useState(false);
@@ -77,7 +94,8 @@ const Appointments = () => {
   const filtered = appointments.filter(a => {
     const matchesTab = a.type === activeTab;
     const matchesManager = selectedManager === 'All' || a.manager === selectedManager;
-    return matchesTab && matchesManager;
+    const matchesDay = !selectedDay || a.date === selectedDay;
+    return matchesTab && matchesManager && matchesDay;
   });
 
   /* ── Calendar helpers ── */
@@ -97,6 +115,11 @@ const Appointments = () => {
 
   const handleStart = (id) => {
     setAppointments(prev => prev.map(a => a.id === id ? { ...a, status: 'Started' } : a));
+    fetch(`${APPT_API}/${id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ status: 'Started' })
+    }).catch(err => console.error('Failed to update appointment:', err));
     addToast('Appointment started!', 'success');
   };
 
@@ -112,17 +135,17 @@ const Appointments = () => {
 
   const handleRescheduleSubmit = (e) => {
     e.preventDefault();
-    setAppointments(prev => prev.map(a => {
-      if (a.id === rescheduleAptId) {
-        return {
-          ...a,
-          date: rescheduleDetails.date,
-          timeStart: convertTo12Hour(rescheduleDetails.timeStart),
-          timeEnd: convertTo12Hour(rescheduleDetails.timeEnd)
-        };
-      }
-      return a;
-    }));
+    const updated = {
+      date: rescheduleDetails.date,
+      timeStart: convertTo12Hour(rescheduleDetails.timeStart),
+      timeEnd: convertTo12Hour(rescheduleDetails.timeEnd)
+    };
+    setAppointments(prev => prev.map(a => a.id === rescheduleAptId ? { ...a, ...updated } : a));
+    fetch(`${APPT_API}/${rescheduleAptId}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(updated)
+    }).catch(err => console.error('Failed to reschedule appointment:', err));
     setIsRescheduleModalOpen(false);
     setRescheduleAptId(null);
     addToast('Appointment rescheduled successfully!', 'success');
@@ -130,7 +153,17 @@ const Appointments = () => {
 
   const handleAddSubmit = (e) => {
     e.preventDefault();
-    setAppointments(prev => [...prev, { ...newVisit, id: Date.now() }]);
+    fetch(APPT_API, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(newVisit)
+    })
+      .then(r => r.json())
+      .then(saved => setAppointments(prev => [...prev, normalize(saved)]))
+      .catch(err => {
+        console.error('Failed to add appointment:', err);
+        setAppointments(prev => [...prev, { ...newVisit, id: Date.now() }]);
+      });
     setIsModalOpen(false);
     setNewVisit({ title: '', date: '', timeStart: '', timeEnd: '', manager: '', phone: '', location: '', status: 'Waiting', type: 'Appointment' });
     addToast('Appointment scheduled!', 'success');
@@ -279,13 +312,13 @@ const Appointments = () => {
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
               <span style={{ fontWeight: '700', fontSize: '1rem', color: 'var(--text-main)' }}>Calendar View</span>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                <button onClick={() => setCalendarDate(new Date(year, month - 1, 1))} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-muted)', display: 'flex' }}>
+                <button onClick={() => { setSelectedDay(null); setCalendarDate(new Date(year, month - 1, 1)); }} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-muted)', display: 'flex' }}>
                   <ChevronLeft size={16} />
                 </button>
                 <span style={{ fontSize: '0.875rem', fontWeight: '600', color: 'var(--primary-color)', whiteSpace: 'nowrap' }}>
                   {MONTHS[month].slice(0, 3)} {year}
                 </span>
-                <button onClick={() => setCalendarDate(new Date(year, month + 1, 1))} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-muted)', display: 'flex' }}>
+                <button onClick={() => { setSelectedDay(null); setCalendarDate(new Date(year, month + 1, 1)); }} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-muted)', display: 'flex' }}>
                   <ChevronRight size={16} />
                 </button>
               </div>
@@ -305,9 +338,11 @@ const Appointments = () => {
                 const hasAppt = apptDays.has(day);
                 const today = new Date();
                 const isToday = today.getDate() === day && today.getMonth() === month && today.getFullYear() === year;
+                const dayStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+                const isSelectedDay = selectedDay === dayStr;
                 return (
-                  <div key={day} style={{ textAlign: 'center', padding: '0.35rem 0', borderRadius: 'var(--radius-sm)', position: 'relative', cursor: hasAppt ? 'pointer' : 'default', background: isToday ? 'var(--primary-color)' : 'transparent' }}>
-                    <span style={{ fontSize: '0.8rem', fontWeight: isToday ? '700' : hasAppt ? '600' : '400', color: isToday ? '#fff' : hasAppt ? 'var(--primary-color)' : 'var(--text-main)' }}>
+                  <div key={day} onClick={() => setSelectedDay(isSelectedDay ? null : dayStr)} style={{ textAlign: 'center', padding: '0.35rem 0', borderRadius: 'var(--radius-sm)', position: 'relative', cursor: 'pointer', background: isToday ? 'var(--primary-color)' : isSelectedDay ? '#EEF2FF' : 'transparent', boxShadow: isSelectedDay && !isToday ? 'inset 0 0 0 1px var(--primary-color)' : 'none' }}>
+                    <span style={{ fontSize: '0.8rem', fontWeight: isToday ? '700' : (hasAppt || isSelectedDay) ? '600' : '400', color: isToday ? '#fff' : (hasAppt || isSelectedDay) ? 'var(--primary-color)' : 'var(--text-main)' }}>
                       {day}
                     </span>
                     {hasAppt && !isToday && (
