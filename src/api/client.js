@@ -1,57 +1,67 @@
-// Small API client for the Nexus CRM backend
-const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+// Mock API Client for Frontend Development
 
-export const getToken = () => localStorage.getItem('crm_token');
+const MOCK_DELAY = 800;
+
+const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
 export const setSession = (token, user) => {
   localStorage.setItem('crm_token', token);
-  localStorage.setItem('crm_user', JSON.stringify(user));
   localStorage.setItem('crm_authenticated', 'true');
+  localStorage.setItem('user', JSON.stringify(user));
 };
 
 export const clearSession = () => {
   localStorage.removeItem('crm_token');
-  localStorage.removeItem('crm_user');
   localStorage.removeItem('crm_authenticated');
+  localStorage.removeItem('user');
 };
 
-export const getUser = () => {
-  try {
-    return JSON.parse(localStorage.getItem('crm_user'));
-  } catch {
-    return null;
-  }
+export const getSession = () => {
+  return {
+    token: localStorage.getItem('crm_token'),
+    user: JSON.parse(localStorage.getItem('user') || 'null')
+  };
 };
 
-export async function api(path, { method = 'GET', body, auth = false } = {}) {
-  const headers = { 'Content-Type': 'application/json' };
-  if (auth && getToken()) headers.Authorization = `Bearer ${getToken()}`;
-
-  let res;
-  try {
-    res = await fetch(`${API_BASE}${path}`, {
-      method,
-      headers,
-      body: body ? JSON.stringify(body) : undefined,
-    });
-  } catch {
-    throw new Error('Cannot reach server. Is the backend running?');
-  }
-
-  const data = await res.json().catch(() => ({}));
-  if (!res.ok) throw new Error(data.message || 'Request failed');
-  return data;
-}
-
+// Mock Auth API
 export const authApi = {
-  login: (role, email, password) =>
-    api('/auth/login', { method: 'POST', body: { role, email, password } }),
-  logout: () => api('/auth/logout', { method: 'POST', auth: true }),
-  forgotPassword: (email) =>
-    api('/auth/forgot-password', { method: 'POST', body: { email } }),
-  verifyOtp: (email, otp) =>
-    api('/auth/verify-otp', { method: 'POST', body: { email, otp } }),
-  resetPassword: (email, otp, newPassword) =>
-    api('/auth/reset-password', { method: 'POST', body: { email, otp, newPassword } }),
-  me: () => api('/auth/me', { auth: true }),
+  login: async (role, email, password) => {
+    await delay(MOCK_DELAY);
+    
+    // Simulate successful login for any email for dev purposes
+    if (email && password) {
+      return {
+        token: 'mock-jwt-token-12345',
+        user: {
+          id: 1,
+          email,
+          role,
+          name: email.split('@')[0]
+        }
+      };
+    }
+    throw new Error('Invalid email or password');
+  },
+
+  forgotPassword: async (email) => {
+    await delay(MOCK_DELAY);
+    // Return a mock OTP in dev mode
+    return { devOtp: '123456' };
+  },
+
+  verifyOtp: async (email, otp) => {
+    await delay(MOCK_DELAY);
+    if (otp !== '123456') {
+      throw new Error('Invalid OTP');
+    }
+    return { success: true };
+  },
+
+  resetPassword: async (email, otp, newPassword) => {
+    await delay(MOCK_DELAY);
+    if (otp !== '123456') {
+      throw new Error('Invalid or expired OTP');
+    }
+    return { success: true };
+  }
 };

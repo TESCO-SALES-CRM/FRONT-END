@@ -1,112 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import { FolderOpen, File, UploadCloud, Users, CheckCircle, Clock } from 'lucide-react';
-import { useToast } from '../components/Toast';
-
-const PROJECTS_API = 'http://localhost:5000/api/projects';
-
-const initialProjectsData = [
-  { id: 'PRJ-901', client: 'Reference Client', type: 'Office Renovation', quote: '₹100,000', team: 'Execution Team Alpha', status: 'Project File Created', files: 0 },
-];
-
-const TimelineStep = ({ label, active, completed }) => (
-  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem', flex: 1, position: 'relative' }}>
-    <div style={{
-      width: '24px', height: '24px', borderRadius: '50%', zIndex: 1,
-      backgroundColor: completed ? 'var(--success-color)' : active ? 'var(--surface-color)' : 'var(--surface-color)',
-      border: completed ? 'none' : active ? '2px solid var(--warning-color)' : '2px solid var(--border-color)',
-      display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white'
-    }}>
-      {completed ? <CheckCircle size={14} /> : active ? <Clock size={14} color="var(--warning-color)" /> : null}
-    </div>
-    <span style={{ fontSize: '0.75rem', textAlign: 'center', color: active || completed ? 'var(--text-main)' : 'var(--text-muted)', fontWeight: active || completed ? '600' : '400' }}>
-      {label}
-    </span>
-  </div>
-);
+import React from 'react';
+import { Hammer } from 'lucide-react';
 
 const ProjectFiling = () => {
-  const addToast = useToast();
-  const [projectsData, setProjectsData] = useState([]);
-
-  // Load projects from API; seed with reference if DB empty
-  useEffect(() => {
-    const load = async () => {
-      try {
-        const res = await fetch(PROJECTS_API);
-        const data = await res.json();
-        if (Array.isArray(data) && data.length > 0) {
-          setProjectsData(data);
-        } else {
-          await fetch(`${PROJECTS_API}/bulk`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(initialProjectsData)
-          });
-          setProjectsData(initialProjectsData);
-        }
-      } catch (err) {
-        console.error('Failed to load projects:', err);
-        setProjectsData(initialProjectsData);
-      }
-    };
-    load();
-  }, []);
-
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', height: '100%' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <h2 style={{ margin: 0, fontSize: '1.5rem', fontWeight: '700' }}>Project Filing</h2>
-        <button className="btn btn-primary" style={{ display: 'flex', gap: '0.5rem' }} onClick={() => addToast('Opening New Project File modal...')}>
-          <FolderOpen size={16} /> New Project File
-        </button>
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '70vh', textAlign: 'center' }}>
+      <div style={{ backgroundColor: '#EEF2FF', padding: '1.5rem', borderRadius: '50%', marginBottom: '1.5rem' }}>
+        <Hammer size={48} color="var(--primary-color)" />
       </div>
-
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(450px, 1fr))', gap: '1.5rem' }}>
-        {projectsData.map((project) => (
-          <div key={project.id} className="card" style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-              <div>
-                <h3 style={{ margin: 0, fontSize: '1.125rem', fontWeight: '600', color: 'var(--primary-color)' }}>{project.id}</h3>
-                <h4 style={{ margin: '0.25rem 0', fontSize: '1rem', fontWeight: '500' }}>{project.client}</h4>
-                <p style={{ margin: 0, fontSize: '0.875rem', color: 'var(--text-muted)' }}>{project.type}</p>
-              </div>
-              <div style={{ textAlign: 'right' }}>
-                <span className="badge badge-success" style={{ marginBottom: '0.25rem' }}>{project.status}</span>
-                <p style={{ margin: 0, fontSize: '0.875rem', fontWeight: '600' }}>Quote: {project.quote}</p>
-              </div>
-            </div>
-
-            <div style={{ position: 'relative', display: 'flex', marginTop: '0.5rem' }}>
-               <div style={{ position: 'absolute', top: '12px', left: '10%', right: '10%', height: '2px', backgroundColor: 'var(--border-color)', zIndex: 0 }}></div>
-               <TimelineStep label="Quotation Approved" completed={true} />
-               <TimelineStep label="Advance Payment" completed={true} />
-               <TimelineStep label="Project File Created" completed={project.status === 'Handover Pending'} active={project.status === 'Project File Created'} />
-               <TimelineStep label="Handover Pending" completed={false} active={project.status === 'Handover Pending'} />
-            </div>
-
-            <div style={{ display: 'flex', gap: '1rem', backgroundColor: 'var(--background-light)', padding: '1rem', borderRadius: 'var(--radius-md)' }}>
-              <div style={{ flex: 1 }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
-                  <Users size={16} color="var(--text-muted)" />
-                  <span style={{ fontSize: '0.875rem', fontWeight: '500' }}>{project.team}</span>
-                </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                  <File size={16} color="var(--text-muted)" />
-                  <span style={{ fontSize: '0.875rem', color: 'var(--text-muted)' }}>{project.files} Documents Uploaded</span>
-                </div>
-              </div>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                <button className="btn btn-outline" style={{ display: 'flex', gap: '0.5rem', padding: '0.25rem 0.75rem', fontSize: '0.75rem' }} onClick={() => addToast(`Opening file picker for ${project.id}`)}>
-                  <UploadCloud size={14} /> Upload Files
-                </button>
-                <button className="btn btn-outline" style={{ display: 'flex', gap: '0.5rem', padding: '0.25rem 0.75rem', fontSize: '0.75rem', color: 'var(--primary-color)', borderColor: 'var(--primary-color)' }} onClick={() => addToast(`Viewing documents for ${project.id}`)}>
-                  View Documents
-                </button>
-              </div>
-            </div>
-          </div>
-        ))}
+      <h2 style={{ fontSize: '2.5rem', fontWeight: '700', color: 'var(--text-main)', marginBottom: '1rem' }}>Project Filing</h2>
+      <div style={{ padding: '0.5rem 1.25rem', backgroundColor: '#FEF3C7', color: '#92400E', borderRadius: '9999px', fontWeight: '700', fontSize: '0.875rem', letterSpacing: '0.5px' }}>
+        COMING SOON
       </div>
+      <p style={{ marginTop: '1.5rem', color: 'var(--text-muted)', maxWidth: '450px', lineHeight: '1.6', fontSize: '1.1rem' }}>
+        We are actively working on building the Project Filing module. It will be available in a future update!
+      </p>
     </div>
   );
 };

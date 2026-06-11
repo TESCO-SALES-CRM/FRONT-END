@@ -446,6 +446,24 @@ const LeadManagement = () => {
         gst: ''
       });
       setIsGenQuoteModalOpen(true);
+    } else if (newStatus.toLowerCase() === 'new lead') {
+      const formattedTime = getFormattedTimestamp();
+      setLeads(leads.map(l => {
+        if (l.id === id) {
+          const newHistory = [...(l.history || []), {
+            timestamp: formattedTime,
+            message: `Updated status to: ${newStatus.toUpperCase()}`,
+            remark: ''
+          }];
+          const updatedLead = { ...l, status: newStatus, history: newHistory };
+          if (selectedLeadForTimeline && selectedLeadForTimeline.id === id) {
+            setSelectedLeadForTimeline(updatedLead);
+          }
+          return updatedLead;
+        }
+        return l;
+      }));
+      addToast('Status updated to New Lead!', 'success');
     } else {
       setRemarkLeadId(id);
       setRemarkNewStatus(newStatus);
@@ -1137,7 +1155,7 @@ const LeadManagement = () => {
                     <option value="Alex Wong" style={{ color: 'var(--text-main)' }}>ALEX WONG</option>
                   </select>
                 </th>
-                 <th style={{ padding: '0.75rem 1rem', fontWeight: '600', fontSize: '0.75rem', color: 'var(--text-muted)', textAlign: 'center', whiteSpace: 'nowrap' }}>Follow-up</th>
+                 <th style={{ padding: '0.75rem 1rem', fontWeight: '600', fontSize: '0.75rem', color: 'var(--text-muted)', textAlign: 'center', whiteSpace: 'nowrap' }}>cold calling</th>
                  <th style={{ padding: '0.75rem 1rem', fontWeight: '600', fontSize: '0.75rem', color: 'var(--text-muted)', textAlign: 'center', whiteSpace: 'nowrap' }}>Actions</th>
                  <th style={{ padding: '0.75rem 1rem', fontWeight: '600', fontSize: '0.75rem', color: 'var(--text-muted)', textAlign: 'center', whiteSpace: 'nowrap' }}>Notes</th>
             </tr>
@@ -1772,7 +1790,7 @@ const LeadManagement = () => {
             <form onSubmit={handleApptSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
                 <div>
-                  <label style={{ display: 'block', fontSize: '0.875rem', marginBottom: '0.25rem', color: 'var(--text-muted)' }}>Appointment from (Date)</label>
+                  <label style={{ display: 'block', fontSize: '0.875rem', marginBottom: '0.25rem', color: 'var(--text-muted)' }}>Date</label>
                   <input required value={apptDetails.date} onChange={(e) => setApptDetails({...apptDetails, date: e.target.value})} type="date" style={{ width: '100%', padding: '0.5rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)' }} />
                 </div>
                 <div>

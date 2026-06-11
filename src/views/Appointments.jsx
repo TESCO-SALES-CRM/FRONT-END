@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Search, Filter, User, Phone, MapPin, ChevronLeft, ChevronRight, CalendarCheck2, CalendarClock, CheckCircle2, Flag, X, Calendar as CalendarIcon } from 'lucide-react';
 import { useToast } from '../components/Toast';
+import DateRangePicker from '../components/DateRangePicker';
 
 const APPT_API = 'http://localhost:5000/api/appointments';
 
@@ -74,8 +75,11 @@ const Appointments = () => {
 
   const [activeTab, setActiveTab] = useState('Appointment');
   const [searchQuery, setSearchQuery] = useState('');
-  const [calendarDate, setCalendarDate] = useState(() => { const t = new Date(); return new Date(t.getFullYear(), t.getMonth(), 1); });
-  const [selectedDay, setSelectedDay] = useState(null); // 'YYYY-MM-DD' when a calendar day is clicked
+  const [dateRange, setDateRange] = useState({
+    start: new Date(new Date().setDate(new Date().getDate() - 30)).toISOString().split('T')[0],
+    end: new Date().toISOString().split('T')[0]
+  });
+  const [calendarDate, setCalendarDate] = useState(new Date(2026, 4, 1)); // May 2026
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [newVisit, setNewVisit] = useState({ title: '', date: '', timeStart: '', timeEnd: '', manager: '', phone: '', location: '', status: 'Waiting', type: 'Appointment' });
   const [isRescheduleModalOpen, setIsRescheduleModalOpen] = useState(false);
@@ -94,8 +98,12 @@ const Appointments = () => {
   const filtered = appointments.filter(a => {
     const matchesTab = a.type === activeTab;
     const matchesManager = selectedManager === 'All' || a.manager === selectedManager;
-    const matchesDay = !selectedDay || a.date === selectedDay;
-    return matchesTab && matchesManager && matchesDay;
+    let matchesDate = true;
+    if (dateRange.start && dateRange.end) {
+      const aptDate = new Date(a.date).toISOString().split('T')[0];
+      matchesDate = aptDate >= dateRange.start && aptDate <= dateRange.end;
+    }
+    return matchesTab && matchesManager && matchesDate;
   });
 
   /* ── Calendar helpers ── */
@@ -201,8 +209,8 @@ const Appointments = () => {
         ))}
       </div>
 
-      {/* ── Main 2-col layout ── */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 320px', gap: '1.5rem', alignItems: 'start' }}>
+      {/* ── Main 1-col layout ── */}
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '1.5rem', alignItems: 'start' }}>
 
         {/* ── LEFT: List ── */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
@@ -221,7 +229,8 @@ const Appointments = () => {
                 </button>
               ))}
             </div>
-            <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
+            <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center', position: 'relative' }}>
+              <DateRangePicker dateRange={dateRange} setDateRange={setDateRange} />
               <select
                 value={selectedManager}
                 onChange={e => setSelectedManager(e.target.value)}
@@ -305,72 +314,7 @@ const Appointments = () => {
           })}
         </div>
 
-        {/* ── RIGHT: Calendar + Summary ── */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-          <div className="card" style={{ padding: '1.5rem' }}>
-            {/* Calendar header */}
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
-              <span style={{ fontWeight: '700', fontSize: '1rem', color: 'var(--text-main)' }}>Calendar View</span>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                <button onClick={() => { setSelectedDay(null); setCalendarDate(new Date(year, month - 1, 1)); }} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-muted)', display: 'flex' }}>
-                  <ChevronLeft size={16} />
-                </button>
-                <span style={{ fontSize: '0.875rem', fontWeight: '600', color: 'var(--primary-color)', whiteSpace: 'nowrap' }}>
-                  {MONTHS[month].slice(0, 3)} {year}
-                </span>
-                <button onClick={() => { setSelectedDay(null); setCalendarDate(new Date(year, month + 1, 1)); }} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-muted)', display: 'flex' }}>
-                  <ChevronRight size={16} />
-                </button>
-              </div>
-            </div>
 
-            {/* Day headers */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', textAlign: 'center', marginBottom: '0.5rem' }}>
-              {DAYS.map(d => (
-                <div key={d} style={{ fontSize: '0.7rem', fontWeight: '600', color: 'var(--text-muted)', padding: '0.25rem 0' }}>{d}</div>
-              ))}
-            </div>
-
-            {/* Day grid */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: '2px' }}>
-              {Array.from({ length: firstDay }).map((_, i) => <div key={`e${i}`} />)}
-              {Array.from({ length: daysInMonth }, (_, i) => i + 1).map(day => {
-                const hasAppt = apptDays.has(day);
-                const today = new Date();
-                const isToday = today.getDate() === day && today.getMonth() === month && today.getFullYear() === year;
-                const dayStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-                const isSelectedDay = selectedDay === dayStr;
-                return (
-                  <div key={day} onClick={() => setSelectedDay(isSelectedDay ? null : dayStr)} style={{ textAlign: 'center', padding: '0.35rem 0', borderRadius: 'var(--radius-sm)', position: 'relative', cursor: 'pointer', background: isToday ? 'var(--primary-color)' : isSelectedDay ? '#EEF2FF' : 'transparent', boxShadow: isSelectedDay && !isToday ? 'inset 0 0 0 1px var(--primary-color)' : 'none' }}>
-                    <span style={{ fontSize: '0.8rem', fontWeight: isToday ? '700' : (hasAppt || isSelectedDay) ? '600' : '400', color: isToday ? '#fff' : (hasAppt || isSelectedDay) ? 'var(--primary-color)' : 'var(--text-main)' }}>
-                      {day}
-                    </span>
-                    {hasAppt && !isToday && (
-                      <div style={{ width: '4px', height: '4px', borderRadius: '50%', background: 'var(--primary-color)', margin: '2px auto 0' }} />
-                    )}
-                  </div>
-                );
-              })}
-            </div>
-
-            {/* Quick Summary */}
-            <div style={{ marginTop: '1.5rem', paddingTop: '1.25rem', borderTop: '1px solid var(--border-color)' }}>
-              <h4 style={{ margin: '0 0 0.75rem 0', fontSize: '0.9rem', fontWeight: '700', color: 'var(--text-main)' }}>Quick Summary</h4>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                {[
-                  { label: 'Tomorrow', detail: `${appointments.filter(a => a.type === 'Visits').length} Site Visits` },
-                  { label: 'This Week', detail: `${appointments.filter(a => a.status === 'Assigned').length} Office Meeting${appointments.filter(a => a.status === 'Assigned').length !== 1 ? 's' : ''}` },
-                  { label: 'Pending', detail: `${appointments.filter(a => a.status === 'Waiting').length} Awaiting Confirmation` },
-                ].map(({ label, detail }) => (
-                  <div key={label} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', fontSize: '0.82rem', color: 'var(--text-muted)' }}>
-                    <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: 'var(--primary-color)', marginTop: '5px', flexShrink: 0 }} />
-                    <span><strong style={{ color: 'var(--text-main)' }}>{label}:</strong> {detail}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
 
       {/* ── Reschedule Modal ── */}
@@ -466,19 +410,32 @@ const Appointments = () => {
               <button onClick={() => setIsModalOpen(false)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-muted)' }}><X size={20} /></button>
             </div>
             <form onSubmit={handleAddSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-              {[
-                { label: 'Title', key: 'title', type: 'text', required: true },
-                { label: 'Manager Name', key: 'manager', type: 'text', required: true },
-                { label: 'Phone', key: 'phone', type: 'text', required: true },
-                { label: 'Location', key: 'location', type: 'text', required: true },
-              ].map(({ label, key, type, required }) => (
-                <div key={key}>
-                  <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', marginBottom: '0.4rem' }}>{label}</label>
-                  <input type={type} value={newVisit[key]} onChange={e => setNewVisit({ ...newVisit, [key]: e.target.value })}
-                    required={required}
-                    style={{ width: '100%', padding: '0.6rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)', outline: 'none', fontSize: '0.875rem' }} />
-                </div>
-              ))}
+              <div>
+                <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', marginBottom: '0.4rem' }}>Title</label>
+                <input type="text" value={newVisit.title || ''} onChange={e => setNewVisit({ ...newVisit, title: e.target.value })} required style={{ width: '100%', padding: '0.6rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)', outline: 'none', fontSize: '0.875rem' }} />
+              </div>
+              
+              <div>
+                <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', marginBottom: '0.4rem' }}>Manager Name</label>
+                <select value={newVisit.manager || ''} onChange={e => setNewVisit({ ...newVisit, manager: e.target.value })} required style={{ width: '100%', padding: '0.6rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)', outline: 'none', fontSize: '0.875rem', backgroundColor: 'var(--surface-color)' }}>
+                  <option value="" disabled>Select Manager</option>
+                  <option value="Anil Kumar">Anil Kumar</option>
+                  <option value="Sunil Patel">Sunil Patel</option>
+                  <option value="Vikas Sharma">Vikas Sharma</option>
+                  <option value="John Doe">John Doe</option>
+                  <option value="Alex Wong">Alex Wong</option>
+                </select>
+              </div>
+
+              <div>
+                <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', marginBottom: '0.4rem' }}>Phone</label>
+                <input type="text" value={newVisit.phone || ''} onChange={e => setNewVisit({ ...newVisit, phone: e.target.value })} required style={{ width: '100%', padding: '0.6rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)', outline: 'none', fontSize: '0.875rem' }} />
+              </div>
+
+              <div>
+                <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', marginBottom: '0.4rem' }}>Location</label>
+                <input type="text" value={newVisit.location || ''} onChange={e => setNewVisit({ ...newVisit, location: e.target.value })} required style={{ width: '100%', padding: '0.6rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)', outline: 'none', fontSize: '0.875rem' }} />
+              </div>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '0.75rem' }}>
                 <div>
                   <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', marginBottom: '0.4rem' }}>Date</label>
