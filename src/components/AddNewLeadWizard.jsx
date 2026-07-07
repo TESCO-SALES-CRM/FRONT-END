@@ -330,42 +330,66 @@ export default function AddNewLeadWizard({ isOpen, onClose, onSave, initialData 
                  {formData.customProjectType === 'Tensile Roofing' && (
                    <>
                      <div style={{ marginBottom: '1.5rem' }}>
-                       <label style={labelStyle}>Roof Type</label>
+                       <label style={labelStyle}>Project Type</label>
                        <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-                         {['PVC Fabric', 'PTFE Fabric', 'ETFE Membrane', 'HDPE Shade Net'].map(t => (
-                           <SelectPill key={t} label={t} selected={formData.roofingType === t} onClick={() => handleChange('roofingType', t)} />
+                         {['Car Parking', 'Walkway', 'Entrance Canopy', 'Swimming Pool', 'Sports Stadium', 'Auditorium', 'Resort', 'Shopping Mall', 'Commercial Building', 'Airport', 'Bus Terminal', 'School / College', 'Custom Project'].map(t => (
+                           <SelectPill key={t} label={t} selected={formData.projectTypeDetail === t} onClick={() => handleChange('projectTypeDetail', t)} />
                          ))}
                        </div>
                      </div>
                      <div style={{ marginBottom: '1.5rem' }}>
-                       <label style={labelStyle}>Application Type</label>
+                       <label style={labelStyle}>Fabric Type</label>
                        <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-                         {['Car Parking', 'Walkway', 'Swimming Pool', 'Stadium', 'Commercial', 'Resort', 'Auditorium'].map(t => (
-                           <SelectPill key={t} label={t} selected={formData.projectTypeDetail === t} onClick={() => handleChange('projectTypeDetail', t)} />
+                         {['PVC Fabric', 'PTFE Fabric', 'ETFE Membrane', 'HDPE Shade Net', 'PVDF Fabric'].map(t => (
+                           <SelectPill key={t} label={t} selected={formData.fabricType === t} onClick={() => handleChange('fabricType', t)} />
                          ))}
                        </div>
                      </div>
                      <div style={{ marginBottom: '1.5rem' }}>
                        <label style={labelStyle}>Structure Type</label>
                        <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-                         {['Cantilever', 'Cone', 'Arch', 'Barrel Vault', 'Hypar', 'Custom Design'].map(t => (
+                         {['Cantilever', 'Cone', 'Hypar', 'Barrel Vault', 'Arch', 'Pyramid', 'Wave', 'Umbrella', 'Custom Design'].map(t => (
                            <SelectPill key={t} label={t} selected={formData.structureType === t} onClick={() => handleChange('structureType', t)} />
+                         ))}
+                       </div>
+                     </div>
+                     <div style={{ marginBottom: '1.5rem' }}>
+                       <label style={labelStyle}>Frame Material</label>
+                       <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+                         {['Mild Steel', 'Galvanized Steel', 'Stainless Steel', 'Aluminium'].map(t => (
+                           <SelectPill key={t} label={t} selected={formData.frameMaterial === t} onClick={() => handleChange('frameMaterial', t)} />
+                         ))}
+                       </div>
+                     </div>
+                     <div style={{ marginBottom: '1.5rem' }}>
+                       <label style={labelStyle}>Area Size</label>
+                       <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+                         {['Below 500 sq.ft', '500-1000 sq.ft', '1000-3000 sq.ft', '3000-5000 sq.ft', 'Above 5000 sq.ft'].map(t => (
+                           <SelectPill key={t} label={t} selected={formData.areaSize === t} onClick={() => handleChange('areaSize', t)} />
+                         ))}
+                       </div>
+                     </div>
+                     <div style={{ marginBottom: '1.5rem' }}>
+                       <label style={labelStyle}>Wind Load Requirement</label>
+                       <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+                         {['Normal', 'Coastal', 'High Wind', 'Cyclone Zone'].map(t => (
+                           <SelectPill key={t} label={t} selected={formData.windLoad === t} onClick={() => handleChange('windLoad', t)} />
                          ))}
                        </div>
                      </div>
                      <div style={{ marginBottom: '1.5rem' }}>
                        <label style={labelStyle}>Site Condition</label>
                        <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-                         {['Flat', 'Sloped', 'Existing Building', 'Open Ground'].map(t => (
+                         {['Flat Land', 'Sloped Land', 'Existing Building', 'RCC Terrace'].map(t => (
                            <SelectPill key={t} label={t} selected={formData.siteCondition === t} onClick={() => handleChange('siteCondition', t)} />
                          ))}
                        </div>
                      </div>
                      <div>
-                       <label style={labelStyle}>Foundation Ready?</label>
+                       <label style={labelStyle}>Foundation Status</label>
                        <div style={{ display: 'inline-flex', backgroundColor: '#F8FAFC', borderRadius: '8px', padding: '0.25rem', border: '1px solid #E2E8F0' }}>
-                         <button type="button" onClick={() => handleChange('foundationReady', 'Yes')} style={{ ...toggleBtnStyle, ...(formData.foundationReady === 'Yes' ? toggleBtnActiveStyle : {}) }}>Yes</button>
-                         <button type="button" onClick={() => handleChange('foundationReady', 'No')} style={{ ...toggleBtnStyle, ...(formData.foundationReady === 'No' ? toggleBtnActiveStyle : {}) }}>No</button>
+                         <button type="button" onClick={() => handleChange('foundationReady', 'Ready')} style={{ ...toggleBtnStyle, ...(formData.foundationReady === 'Ready' ? toggleBtnActiveStyle : {}) }}>Ready</button>
+                         <button type="button" onClick={() => handleChange('foundationReady', 'Not Ready')} style={{ ...toggleBtnStyle, ...(formData.foundationReady === 'Not Ready' ? toggleBtnActiveStyle : {}) }}>Not Ready</button>
                        </div>
                      </div>
                    </>
@@ -376,16 +400,16 @@ export default function AddNewLeadWizard({ isOpen, onClose, onSave, initialData 
                      <div style={{ marginBottom: '1.5rem' }}>
                        <label style={labelStyle}>Building Type</label>
                        <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-                         {['Industrial', 'Warehouse', 'Factory', 'Residential', 'Commercial'].map(t => (
+                         {['Factory', 'Warehouse', 'Industrial Shed', 'Residential', 'Commercial', 'Farm House', 'Poultry Farm'].map(t => (
                            <SelectPill key={t} label={t} selected={formData.projectTypeDetail === t} onClick={() => handleChange('projectTypeDetail', t)} />
                          ))}
                        </div>
                      </div>
                      <div style={{ marginBottom: '1.5rem' }}>
-                       <label style={labelStyle}>Roof Structure</label>
+                       <label style={labelStyle}>Purpose</label>
                        <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-                         {['New Structure', 'Existing Structure', 'Shed Extension', 'Replacement'].map(t => (
-                           <SelectPill key={t} label={t} selected={formData.structureType === t} onClick={() => handleChange('structureType', t)} />
+                         {['New Roofing', 'Roof Replacement', 'Roof Extension'].map(t => (
+                           <SelectPill key={t} label={t} selected={formData.purpose === t} onClick={() => handleChange('purpose', t)} />
                          ))}
                        </div>
                      </div>
@@ -398,18 +422,50 @@ export default function AddNewLeadWizard({ isOpen, onClose, onSave, initialData 
                        </div>
                      </div>
                      <div style={{ marginBottom: '1.5rem' }}>
-                       <label style={labelStyle}>Site Condition</label>
+                       <label style={labelStyle}>Sheet Profile</label>
                        <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-                         {['Flat', 'Sloped', 'Coastal Area', 'High Wind Area'].map(t => (
-                           <SelectPill key={t} label={t} selected={formData.siteCondition === t} onClick={() => handleChange('siteCondition', t)} />
+                         {['Corrugated', 'Trapezoidal', 'Tile Profile'].map(t => (
+                           <SelectPill key={t} label={t} selected={formData.sheetProfile === t} onClick={() => handleChange('sheetProfile', t)} />
+                         ))}
+                       </div>
+                     </div>
+                     <div style={{ marginBottom: '1.5rem' }}>
+                       <label style={labelStyle}>Building Width</label>
+                       <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+                         {['Below 20 ft', '20-40 ft', '40-80 ft', 'Above 80 ft'].map(t => (
+                           <SelectPill key={t} label={t} selected={formData.buildingWidth === t} onClick={() => handleChange('buildingWidth', t)} />
+                         ))}
+                       </div>
+                     </div>
+                     <div style={{ marginBottom: '1.5rem' }}>
+                       <label style={labelStyle}>Roof Slope</label>
+                       <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+                         {['Flat', 'Medium', 'High'].map(t => (
+                           <SelectPill key={t} label={t} selected={formData.roofSlope === t} onClick={() => handleChange('roofSlope', t)} />
+                         ))}
+                       </div>
+                     </div>
+                     <div style={{ marginBottom: '1.5rem' }}>
+                       <label style={labelStyle}>Location Type</label>
+                       <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+                         {['Coastal', 'Industrial', 'Residential', 'High Temperature Area'].map(t => (
+                           <SelectPill key={t} label={t} selected={formData.locationType === t} onClick={() => handleChange('locationType', t)} />
+                         ))}
+                       </div>
+                     </div>
+                     <div style={{ marginBottom: '1.5rem' }}>
+                       <label style={labelStyle}>Existing Roof</label>
+                       <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+                         {['RCC', 'GI Sheet', 'Asbestos', 'No Existing Roof'].map(t => (
+                           <SelectPill key={t} label={t} selected={formData.existingRoof === t} onClick={() => handleChange('existingRoof', t)} />
                          ))}
                        </div>
                      </div>
                      <div>
-                       <label style={labelStyle}>Old Roof Removal?</label>
+                       <label style={labelStyle}>Insulation Required?</label>
                        <div style={{ display: 'inline-flex', backgroundColor: '#F8FAFC', borderRadius: '8px', padding: '0.25rem', border: '1px solid #E2E8F0' }}>
-                         <button type="button" onClick={() => handleChange('oldRoofRemoval', 'Yes')} style={{ ...toggleBtnStyle, ...(formData.oldRoofRemoval === 'Yes' ? toggleBtnActiveStyle : {}) }}>Yes</button>
-                         <button type="button" onClick={() => handleChange('oldRoofRemoval', 'No')} style={{ ...toggleBtnStyle, ...(formData.oldRoofRemoval === 'No' ? toggleBtnActiveStyle : {}) }}>No</button>
+                         <button type="button" onClick={() => handleChange('insulationRequired', 'Yes')} style={{ ...toggleBtnStyle, ...(formData.insulationRequired === 'Yes' ? toggleBtnActiveStyle : {}) }}>Yes</button>
+                         <button type="button" onClick={() => handleChange('insulationRequired', 'No')} style={{ ...toggleBtnStyle, ...(formData.insulationRequired === 'No' ? toggleBtnActiveStyle : {}) }}>No</button>
                        </div>
                      </div>
                    </>
@@ -418,9 +474,9 @@ export default function AddNewLeadWizard({ isOpen, onClose, onSave, initialData 
                  {formData.customProjectType === 'Polycarbonate Roofing' && (
                    <>
                      <div style={{ marginBottom: '1.5rem' }}>
-                       <label style={labelStyle}>Application Type</label>
+                       <label style={labelStyle}>Application</label>
                        <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-                         {['Skylight', 'Walkway', 'Car Parking', 'Balcony', 'Terrace', 'Greenhouse'].map(t => (
+                         {['Skylight', 'Walkway', 'Balcony', 'Car Parking', 'Greenhouse', 'Terrace', 'Commercial Entrance'].map(t => (
                            <SelectPill key={t} label={t} selected={formData.projectTypeDetail === t} onClick={() => handleChange('projectTypeDetail', t)} />
                          ))}
                        </div>
@@ -428,7 +484,7 @@ export default function AddNewLeadWizard({ isOpen, onClose, onSave, initialData 
                      <div style={{ marginBottom: '1.5rem' }}>
                        <label style={labelStyle}>Sheet Type</label>
                        <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-                         {['Solid', 'Multiwall', 'Corrugated', 'Embossed'].map(t => (
+                         {['Solid', 'Multiwall', 'Corrugated', 'Twin Wall', 'Honeycomb'].map(t => (
                            <SelectPill key={t} label={t} selected={formData.sheetType === t} onClick={() => handleChange('sheetType', t)} />
                          ))}
                        </div>
@@ -436,7 +492,7 @@ export default function AddNewLeadWizard({ isOpen, onClose, onSave, initialData 
                      <div style={{ marginBottom: '1.5rem' }}>
                        <label style={labelStyle}>Sheet Color</label>
                        <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-                         {['Clear', 'Bronze', 'Blue', 'Green', 'Opal'].map(t => (
+                         {['Clear', 'Blue', 'Bronze', 'Green', 'Opal', 'Grey'].map(t => (
                            <SelectPill key={t} label={t} selected={formData.sheetColor === t} onClick={() => handleChange('sheetColor', t)} />
                          ))}
                        </div>
@@ -444,17 +500,33 @@ export default function AddNewLeadWizard({ isOpen, onClose, onSave, initialData 
                      <div style={{ marginBottom: '1.5rem' }}>
                        <label style={labelStyle}>Frame Type</label>
                        <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-                         {['MS', 'Aluminium', 'Existing Frame', 'Custom'].map(t => (
+                         {['Aluminium', 'Mild Steel', 'Stainless Steel', 'Existing Frame'].map(t => (
                            <SelectPill key={t} label={t} selected={formData.frameMaterial === t} onClick={() => handleChange('frameMaterial', t)} />
                          ))}
                        </div>
                      </div>
                      <div style={{ marginBottom: '1.5rem' }}>
-                       <label style={labelStyle}>Installation Type</label>
+                       <label style={labelStyle}>Installation</label>
                        <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
                          {['New', 'Replacement'].map(t => (
                            <SelectPill key={t} label={t} selected={formData.installationType === t} onClick={() => handleChange('installationType', t)} />
                          ))}
+                       </div>
+                     </div>
+                     <div style={{ display: 'flex', gap: '3rem', flexWrap: 'wrap' }}>
+                       <div>
+                         <label style={labelStyle}>UV Protection?</label>
+                         <div style={{ display: 'inline-flex', backgroundColor: '#F8FAFC', borderRadius: '8px', padding: '0.25rem', border: '1px solid #E2E8F0' }}>
+                           <button type="button" onClick={() => handleChange('uvProtection', 'Required')} style={{ ...toggleBtnStyle, ...(formData.uvProtection === 'Required' ? toggleBtnActiveStyle : {}) }}>Required</button>
+                           <button type="button" onClick={() => handleChange('uvProtection', 'Not Required')} style={{ ...toggleBtnStyle, ...(formData.uvProtection === 'Not Required' ? toggleBtnActiveStyle : {}) }}>Not Required</button>
+                         </div>
+                       </div>
+                       <div>
+                         <label style={labelStyle}>Waterproofing?</label>
+                         <div style={{ display: 'inline-flex', backgroundColor: '#F8FAFC', borderRadius: '8px', padding: '0.25rem', border: '1px solid #E2E8F0' }}>
+                           <button type="button" onClick={() => handleChange('waterproofingRequired', 'Required')} style={{ ...toggleBtnStyle, ...(formData.waterproofingRequired === 'Required' ? toggleBtnActiveStyle : {}) }}>Required</button>
+                           <button type="button" onClick={() => handleChange('waterproofingRequired', 'Not Required')} style={{ ...toggleBtnStyle, ...(formData.waterproofingRequired === 'Not Required' ? toggleBtnActiveStyle : {}) }}>Not Required</button>
+                         </div>
                        </div>
                      </div>
                    </>
@@ -465,7 +537,7 @@ export default function AddNewLeadWizard({ isOpen, onClose, onSave, initialData 
                      <div style={{ marginBottom: '1.5rem' }}>
                        <label style={labelStyle}>Application</label>
                        <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-                         {['Skylight', 'Atrium', 'Terrace', 'Office', 'Villa', 'Commercial'].map(t => (
+                         {['Skylight', 'Atrium', 'Villa', 'Office', 'Terrace', 'Shopping Mall', 'Hotel'].map(t => (
                            <SelectPill key={t} label={t} selected={formData.projectTypeDetail === t} onClick={() => handleChange('projectTypeDetail', t)} />
                          ))}
                        </div>
@@ -473,32 +545,48 @@ export default function AddNewLeadWizard({ isOpen, onClose, onSave, initialData 
                      <div style={{ marginBottom: '1.5rem' }}>
                        <label style={labelStyle}>Glass Type</label>
                        <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-                         {['Toughened', 'Laminated', 'Double Glazed', 'Tempered'].map(t => (
+                         {['Toughened', 'Laminated', 'Double Glazed', 'Tempered', 'Low-E Glass'].map(t => (
                            <SelectPill key={t} label={t} selected={formData.glassType === t} onClick={() => handleChange('glassType', t)} />
+                         ))}
+                       </div>
+                     </div>
+                     <div style={{ marginBottom: '1.5rem' }}>
+                       <label style={labelStyle}>Glass Thickness</label>
+                       <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+                         {['8 mm', '10 mm', '12 mm', 'Custom'].map(t => (
+                           <SelectPill key={t} label={t} selected={formData.glassThickness === t} onClick={() => handleChange('glassThickness', t)} />
                          ))}
                        </div>
                      </div>
                      <div style={{ marginBottom: '1.5rem' }}>
                        <label style={labelStyle}>Frame Material</label>
                        <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-                         {['Aluminium', 'MS', 'Stainless Steel'].map(t => (
+                         {['Aluminium', 'Stainless Steel', 'Mild Steel'].map(t => (
                            <SelectPill key={t} label={t} selected={formData.frameMaterial === t} onClick={() => handleChange('frameMaterial', t)} />
                          ))}
                        </div>
                      </div>
                      <div style={{ marginBottom: '1.5rem' }}>
-                       <label style={labelStyle}>Design Type</label>
+                       <label style={labelStyle}>Design Style</label>
                        <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-                         {['Flat', 'Pyramid', 'Dome', 'Sloped'].map(t => (
+                         {['Flat', 'Pyramid', 'Dome', 'Sloped', 'Custom'].map(t => (
                            <SelectPill key={t} label={t} selected={formData.structureType === t} onClick={() => handleChange('structureType', t)} />
                          ))}
                        </div>
                      </div>
+                     <div style={{ marginBottom: '1.5rem' }}>
+                       <label style={labelStyle}>Water Drainage</label>
+                       <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+                         {['Internal', 'External'].map(t => (
+                           <SelectPill key={t} label={t} selected={formData.waterDrainage === t} onClick={() => handleChange('waterDrainage', t)} />
+                         ))}
+                       </div>
+                     </div>
                      <div>
-                       <label style={labelStyle}>Waterproofing Required?</label>
+                       <label style={labelStyle}>Safety Film Required?</label>
                        <div style={{ display: 'inline-flex', backgroundColor: '#F8FAFC', borderRadius: '8px', padding: '0.25rem', border: '1px solid #E2E8F0' }}>
-                         <button type="button" onClick={() => handleChange('waterproofingRequired', 'Yes')} style={{ ...toggleBtnStyle, ...(formData.waterproofingRequired === 'Yes' ? toggleBtnActiveStyle : {}) }}>Yes</button>
-                         <button type="button" onClick={() => handleChange('waterproofingRequired', 'No')} style={{ ...toggleBtnStyle, ...(formData.waterproofingRequired === 'No' ? toggleBtnActiveStyle : {}) }}>No</button>
+                         <button type="button" onClick={() => handleChange('safetyFilm', 'Required')} style={{ ...toggleBtnStyle, ...(formData.safetyFilm === 'Required' ? toggleBtnActiveStyle : {}) }}>Required</button>
+                         <button type="button" onClick={() => handleChange('safetyFilm', 'Not Required')} style={{ ...toggleBtnStyle, ...(formData.safetyFilm === 'Not Required' ? toggleBtnActiveStyle : {}) }}>Not Required</button>
                        </div>
                      </div>
                    </>
@@ -515,18 +603,26 @@ export default function AddNewLeadWizard({ isOpen, onClose, onSave, initialData 
                        </div>
                      </div>
                      <div style={{ marginBottom: '1.5rem' }}>
-                       <label style={labelStyle}>Roof Type</label>
+                       <label style={labelStyle}>Tile Type</label>
                        <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-                         {['New Roof', 'Renovation', 'Replacement'].map(t => (
-                           <SelectPill key={t} label={t} selected={formData.structureType === t} onClick={() => handleChange('structureType', t)} />
+                         {['Clay Tile', 'Ceramic Tile', 'Traditional Tile', 'Premium Tile'].map(t => (
+                           <SelectPill key={t} label={t} selected={formData.tileType === t} onClick={() => handleChange('tileType', t)} />
                          ))}
                        </div>
                      </div>
                      <div style={{ marginBottom: '1.5rem' }}>
-                       <label style={labelStyle}>Tile Type</label>
+                       <label style={labelStyle}>Roof Frame</label>
                        <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-                         {['Clay Tile', 'Ceramic Tile', 'Traditional Tile'].map(t => (
-                           <SelectPill key={t} label={t} selected={formData.tileType === t} onClick={() => handleChange('tileType', t)} />
+                         {['Wooden', 'Steel', 'RCC'].map(t => (
+                           <SelectPill key={t} label={t} selected={formData.frameMaterial === t} onClick={() => handleChange('frameMaterial', t)} />
+                         ))}
+                       </div>
+                     </div>
+                     <div style={{ marginBottom: '1.5rem' }}>
+                       <label style={labelStyle}>New or Replacement</label>
+                       <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+                         {['New', 'Replacement'].map(t => (
+                           <SelectPill key={t} label={t} selected={formData.installationType === t} onClick={() => handleChange('installationType', t)} />
                          ))}
                        </div>
                      </div>
@@ -538,12 +634,20 @@ export default function AddNewLeadWizard({ isOpen, onClose, onSave, initialData 
                          ))}
                        </div>
                      </div>
-                     <div style={{ marginBottom: '1.5rem' }}>
-                       <label style={labelStyle}>Existing Structure?</label>
-                       <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-                         {['RCC', 'Steel', 'Wooden', 'New Construction'].map(t => (
-                           <SelectPill key={t} label={t} selected={formData.existingStructure === t} onClick={() => handleChange('existingStructure', t)} />
-                         ))}
+                     <div style={{ display: 'flex', gap: '3rem', flexWrap: 'wrap' }}>
+                       <div>
+                         <label style={labelStyle}>Insulation Required?</label>
+                         <div style={{ display: 'inline-flex', backgroundColor: '#F8FAFC', borderRadius: '8px', padding: '0.25rem', border: '1px solid #E2E8F0' }}>
+                           <button type="button" onClick={() => handleChange('insulationRequired', 'Yes')} style={{ ...toggleBtnStyle, ...(formData.insulationRequired === 'Yes' ? toggleBtnActiveStyle : {}) }}>Yes</button>
+                           <button type="button" onClick={() => handleChange('insulationRequired', 'No')} style={{ ...toggleBtnStyle, ...(formData.insulationRequired === 'No' ? toggleBtnActiveStyle : {}) }}>No</button>
+                         </div>
+                       </div>
+                       <div>
+                         <label style={labelStyle}>Ceiling Required?</label>
+                         <div style={{ display: 'inline-flex', backgroundColor: '#F8FAFC', borderRadius: '8px', padding: '0.25rem', border: '1px solid #E2E8F0' }}>
+                           <button type="button" onClick={() => handleChange('ceilingRequired', 'Yes')} style={{ ...toggleBtnStyle, ...(formData.ceilingRequired === 'Yes' ? toggleBtnActiveStyle : {}) }}>Yes</button>
+                           <button type="button" onClick={() => handleChange('ceilingRequired', 'No')} style={{ ...toggleBtnStyle, ...(formData.ceilingRequired === 'No' ? toggleBtnActiveStyle : {}) }}>No</button>
+                         </div>
                        </div>
                      </div>
                    </>
@@ -552,9 +656,9 @@ export default function AddNewLeadWizard({ isOpen, onClose, onSave, initialData 
                  {formData.customProjectType === 'Shingles Roofing' && (
                    <>
                      <div style={{ marginBottom: '1.5rem' }}>
-                       <label style={labelStyle}>Building Type</label>
+                       <label style={labelStyle}>Application</label>
                        <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-                         {['Villa', 'House', 'Resort', 'Gazebo', 'Cottage'].map(t => (
+                         {['House', 'Villa', 'Cottage', 'Resort', 'Gazebo'].map(t => (
                            <SelectPill key={t} label={t} selected={formData.projectTypeDetail === t} onClick={() => handleChange('projectTypeDetail', t)} />
                          ))}
                        </div>
@@ -562,32 +666,41 @@ export default function AddNewLeadWizard({ isOpen, onClose, onSave, initialData 
                      <div style={{ marginBottom: '1.5rem' }}>
                        <label style={labelStyle}>Shingle Type</label>
                        <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-                         {['Asphalt', 'Architectural', 'Fiberglass', 'Designer'].map(t => (
+                         {['Asphalt', 'Fiberglass', 'Designer', 'Architectural'].map(t => (
                            <SelectPill key={t} label={t} selected={formData.shingleType === t} onClick={() => handleChange('shingleType', t)} />
+                         ))}
+                       </div>
+                     </div>
+                     <div style={{ marginBottom: '1.5rem' }}>
+                       <label style={labelStyle}>Color</label>
+                       <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+                         {['Black', 'Brown', 'Grey', 'Red', 'Green'].map(t => (
+                           <SelectPill key={t} label={t} selected={formData.sheetColor === t} onClick={() => handleChange('sheetColor', t)} />
                          ))}
                        </div>
                      </div>
                      <div style={{ marginBottom: '1.5rem' }}>
                        <label style={labelStyle}>Roof Shape</label>
                        <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-                         {['Gable', 'Hip', 'Flat', 'Pyramid'].map(t => (
+                         {['Gable', 'Hip', 'Pyramid', 'Flat'].map(t => (
                            <SelectPill key={t} label={t} selected={formData.structureType === t} onClick={() => handleChange('structureType', t)} />
                          ))}
                        </div>
                      </div>
-                     <div style={{ marginBottom: '1.5rem' }}>
-                       <label style={labelStyle}>Installation</label>
-                       <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-                         {['New', 'Replacement'].map(t => (
-                           <SelectPill key={t} label={t} selected={formData.installationType === t} onClick={() => handleChange('installationType', t)} />
-                         ))}
+                     <div style={{ display: 'flex', gap: '3rem', flexWrap: 'wrap' }}>
+                       <div>
+                         <label style={labelStyle}>Underlayment Required?</label>
+                         <div style={{ display: 'inline-flex', backgroundColor: '#F8FAFC', borderRadius: '8px', padding: '0.25rem', border: '1px solid #E2E8F0' }}>
+                           <button type="button" onClick={() => handleChange('underlaymentRequired', 'Required')} style={{ ...toggleBtnStyle, ...(formData.underlaymentRequired === 'Required' ? toggleBtnActiveStyle : {}) }}>Required</button>
+                           <button type="button" onClick={() => handleChange('underlaymentRequired', 'Not Required')} style={{ ...toggleBtnStyle, ...(formData.underlaymentRequired === 'Not Required' ? toggleBtnActiveStyle : {}) }}>Not Required</button>
+                         </div>
                        </div>
-                     </div>
-                     <div>
-                       <label style={labelStyle}>Underlayment Required?</label>
-                       <div style={{ display: 'inline-flex', backgroundColor: '#F8FAFC', borderRadius: '8px', padding: '0.25rem', border: '1px solid #E2E8F0' }}>
-                         <button type="button" onClick={() => handleChange('underlaymentRequired', 'Yes')} style={{ ...toggleBtnStyle, ...(formData.underlaymentRequired === 'Yes' ? toggleBtnActiveStyle : {}) }}>Yes</button>
-                         <button type="button" onClick={() => handleChange('underlaymentRequired', 'No')} style={{ ...toggleBtnStyle, ...(formData.underlaymentRequired === 'No' ? toggleBtnActiveStyle : {}) }}>No</button>
+                       <div>
+                         <label style={labelStyle}>Ventilation Required?</label>
+                         <div style={{ display: 'inline-flex', backgroundColor: '#F8FAFC', borderRadius: '8px', padding: '0.25rem', border: '1px solid #E2E8F0' }}>
+                           <button type="button" onClick={() => handleChange('ventilationRequired', 'Required')} style={{ ...toggleBtnStyle, ...(formData.ventilationRequired === 'Required' ? toggleBtnActiveStyle : {}) }}>Required</button>
+                           <button type="button" onClick={() => handleChange('ventilationRequired', 'Not Required')} style={{ ...toggleBtnStyle, ...(formData.ventilationRequired === 'Not Required' ? toggleBtnActiveStyle : {}) }}>Not Required</button>
+                         </div>
                        </div>
                      </div>
                    </>
@@ -598,7 +711,7 @@ export default function AddNewLeadWizard({ isOpen, onClose, onSave, initialData 
                      <div style={{ marginBottom: '1.5rem' }}>
                        <label style={labelStyle}>Building Type</label>
                        <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-                         {['Industrial', 'Warehouse', 'Factory', 'Commercial', 'Agricultural'].map(t => (
+                         {['Factory', 'Warehouse', 'Workshop', 'Commercial', 'Agricultural'].map(t => (
                            <SelectPill key={t} label={t} selected={formData.projectTypeDetail === t} onClick={() => handleChange('projectTypeDetail', t)} />
                          ))}
                        </div>
@@ -606,32 +719,49 @@ export default function AddNewLeadWizard({ isOpen, onClose, onSave, initialData 
                      <div style={{ marginBottom: '1.5rem' }}>
                        <label style={labelStyle}>Sheet Type</label>
                        <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-                         {['Corrugated', 'Trapezoidal', 'Colour Coated', 'Plain GI'].map(t => (
+                         {['Corrugated', 'Trapezoidal', 'Plain GI', 'Color Coated'].map(t => (
                            <SelectPill key={t} label={t} selected={formData.sheetType === t} onClick={() => handleChange('sheetType', t)} />
                          ))}
                        </div>
                      </div>
                      <div style={{ marginBottom: '1.5rem' }}>
-                       <label style={labelStyle}>Structure Type</label>
+                       <label style={labelStyle}>Sheet Thickness</label>
+                       <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+                         {['0.35 mm', '0.45 mm', '0.50 mm', '0.60 mm'].map(t => (
+                           <SelectPill key={t} label={t} selected={formData.sheetThickness === t} onClick={() => handleChange('sheetThickness', t)} />
+                         ))}
+                       </div>
+                     </div>
+                     <div style={{ marginBottom: '1.5rem' }}>
+                       <label style={labelStyle}>Insulation</label>
+                       <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+                         {['PUF Panel', 'Glass Wool', 'Rock Wool', 'None'].map(t => (
+                           <SelectPill key={t} label={t} selected={formData.insulationRequired === t} onClick={() => handleChange('insulationRequired', t)} />
+                         ))}
+                       </div>
+                     </div>
+                     <div style={{ marginBottom: '1.5rem' }}>
+                       <label style={labelStyle}>Structure</label>
                        <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
                          {['New', 'Existing', 'Extension'].map(t => (
                            <SelectPill key={t} label={t} selected={formData.structureType === t} onClick={() => handleChange('structureType', t)} />
                          ))}
                        </div>
                      </div>
-                     <div style={{ marginBottom: '1.5rem' }}>
-                       <label style={labelStyle}>Site Condition</label>
-                       <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-                         {['Flat', 'Sloped', 'Coastal', 'High Wind'].map(t => (
-                           <SelectPill key={t} label={t} selected={formData.siteCondition === t} onClick={() => handleChange('siteCondition', t)} />
-                         ))}
+                     <div style={{ display: 'flex', gap: '3rem', flexWrap: 'wrap' }}>
+                       <div>
+                         <label style={labelStyle}>Gutter Required?</label>
+                         <div style={{ display: 'inline-flex', backgroundColor: '#F8FAFC', borderRadius: '8px', padding: '0.25rem', border: '1px solid #E2E8F0' }}>
+                           <button type="button" onClick={() => handleChange('gutterRequired', 'Yes')} style={{ ...toggleBtnStyle, ...(formData.gutterRequired === 'Yes' ? toggleBtnActiveStyle : {}) }}>Yes</button>
+                           <button type="button" onClick={() => handleChange('gutterRequired', 'No')} style={{ ...toggleBtnStyle, ...(formData.gutterRequired === 'No' ? toggleBtnActiveStyle : {}) }}>No</button>
+                         </div>
                        </div>
-                     </div>
-                     <div>
-                       <label style={labelStyle}>Insulation Required?</label>
-                       <div style={{ display: 'inline-flex', backgroundColor: '#F8FAFC', borderRadius: '8px', padding: '0.25rem', border: '1px solid #E2E8F0' }}>
-                         <button type="button" onClick={() => handleChange('insulationRequired', 'Yes')} style={{ ...toggleBtnStyle, ...(formData.insulationRequired === 'Yes' ? toggleBtnActiveStyle : {}) }}>Yes</button>
-                         <button type="button" onClick={() => handleChange('insulationRequired', 'No')} style={{ ...toggleBtnStyle, ...(formData.insulationRequired === 'No' ? toggleBtnActiveStyle : {}) }}>No</button>
+                       <div>
+                         <label style={labelStyle}>Turbo Ventilator?</label>
+                         <div style={{ display: 'inline-flex', backgroundColor: '#F8FAFC', borderRadius: '8px', padding: '0.25rem', border: '1px solid #E2E8F0' }}>
+                           <button type="button" onClick={() => handleChange('turboVentilator', 'Yes')} style={{ ...toggleBtnStyle, ...(formData.turboVentilator === 'Yes' ? toggleBtnActiveStyle : {}) }}>Yes</button>
+                           <button type="button" onClick={() => handleChange('turboVentilator', 'No')} style={{ ...toggleBtnStyle, ...(formData.turboVentilator === 'No' ? toggleBtnActiveStyle : {}) }}>No</button>
+                         </div>
                        </div>
                      </div>
                    </>
@@ -642,7 +772,7 @@ export default function AddNewLeadWizard({ isOpen, onClose, onSave, initialData 
                      <div style={{ marginBottom: '1.5rem' }}>
                        <label style={labelStyle}>Application</label>
                        <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-                         {['Restaurant', 'Terrace', 'Swimming Pool', 'Balcony', 'Commercial', 'Café'].map(t => (
+                         {['Restaurant', 'Café', 'Terrace', 'Balcony', 'Swimming Pool', 'Resort'].map(t => (
                            <SelectPill key={t} label={t} selected={formData.projectTypeDetail === t} onClick={() => handleChange('projectTypeDetail', t)} />
                          ))}
                        </div>
@@ -650,7 +780,7 @@ export default function AddNewLeadWizard({ isOpen, onClose, onSave, initialData 
                      <div style={{ marginBottom: '1.5rem' }}>
                        <label style={labelStyle}>Operating Type</label>
                        <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-                         {['Manual', 'Motorized', 'Remote Control'].map(t => (
+                         {['Manual', 'Motorized', 'Remote Control', 'Smart Automation'].map(t => (
                            <SelectPill key={t} label={t} selected={formData.operatingType === t} onClick={() => handleChange('operatingType', t)} />
                          ))}
                        </div>
@@ -658,7 +788,7 @@ export default function AddNewLeadWizard({ isOpen, onClose, onSave, initialData 
                      <div style={{ marginBottom: '1.5rem' }}>
                        <label style={labelStyle}>Roof Material</label>
                        <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-                         {['Fabric', 'Polycarbonate', 'Glass'].map(t => (
+                         {['PVC Fabric', 'Polycarbonate', 'Glass'].map(t => (
                            <SelectPill key={t} label={t} selected={formData.roofMaterial === t} onClick={() => handleChange('roofMaterial', t)} />
                          ))}
                        </div>
@@ -666,23 +796,88 @@ export default function AddNewLeadWizard({ isOpen, onClose, onSave, initialData 
                      <div style={{ marginBottom: '1.5rem' }}>
                        <label style={labelStyle}>Frame Material</label>
                        <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-                         {['Aluminium', 'MS', 'Stainless Steel'].map(t => (
+                         {['Aluminium', 'Mild Steel', 'Stainless Steel'].map(t => (
                            <SelectPill key={t} label={t} selected={formData.frameMaterial === t} onClick={() => handleChange('frameMaterial', t)} />
                          ))}
                        </div>
                      </div>
-                     <div>
-                       <label style={labelStyle}>Weather Sensor Required?</label>
-                       <div style={{ display: 'inline-flex', backgroundColor: '#F8FAFC', borderRadius: '8px', padding: '0.25rem', border: '1px solid #E2E8F0' }}>
-                         <button type="button" onClick={() => handleChange('weatherSensorRequired', 'Yes')} style={{ ...toggleBtnStyle, ...(formData.weatherSensorRequired === 'Yes' ? toggleBtnActiveStyle : {}) }}>Yes</button>
-                         <button type="button" onClick={() => handleChange('weatherSensorRequired', 'No')} style={{ ...toggleBtnStyle, ...(formData.weatherSensorRequired === 'No' ? toggleBtnActiveStyle : {}) }}>No</button>
+                     <div style={{ marginBottom: '1.5rem' }}>
+                       <label style={labelStyle}>Weather Sensor</label>
+                       <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+                         {['Rain Sensor', 'Wind Sensor', 'Both', 'None'].map(t => (
+                           <SelectPill key={t} label={t} selected={formData.weatherSensor === t} onClick={() => handleChange('weatherSensor', t)} />
+                         ))}
+                       </div>
+                     </div>
+                     <div style={{ marginBottom: '1.5rem' }}>
+                       <label style={labelStyle}>Lighting Required</label>
+                       <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+                         {['LED Lighting', 'Decorative Lighting', 'None'].map(t => (
+                           <SelectPill key={t} label={t} selected={formData.lighting === t} onClick={() => handleChange('lighting', t)} />
+                         ))}
+                       </div>
+                     </div>
+                     <div style={{ marginBottom: '1.5rem' }}>
+                       <label style={labelStyle}>Side Cover</label>
+                       <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+                         {['Glass', 'Fabric', 'Aluminium', 'None'].map(t => (
+                           <SelectPill key={t} label={t} selected={formData.sideCover === t} onClick={() => handleChange('sideCover', t)} />
+                         ))}
+                       </div>
+                     </div>
+                     <div style={{ marginBottom: '1.5rem' }}>
+                       <label style={labelStyle}>Warranty Expectation</label>
+                       <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+                         {['5 Years', '10 Years', '15 Years'].map(t => (
+                           <SelectPill key={t} label={t} selected={formData.warranty === t} onClick={() => handleChange('warranty', t)} />
+                         ))}
                        </div>
                      </div>
                    </>
                  )}
                </>
              )}
-             
+
+             {/* Common questions for all roofing types */}
+             <div style={{ marginTop: '3rem', paddingTop: '2rem', borderTop: '2px dashed #E2E8F0' }}>
+               <h4 style={{ fontSize: '1rem', fontWeight: '700', marginBottom: '1.5rem', color: '#1E293B' }}>Final Project Details</h4>
+               
+               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', marginBottom: '1.5rem' }}>
+                 <div>
+                   <label style={labelStyle}>Approximate Area</label>
+                   <div style={{ position: 'relative' }}>
+                     <input type="number" placeholder="Enter Sq.ft" style={{ ...inputStyle, paddingRight: '4rem' }} value={formData.approxArea || ''} onChange={e => handleChange('approxArea', e.target.value)} />
+                     <span style={{ position: 'absolute', right: '1rem', top: '50%', transform: 'translateY(-50%)', color: '#64748B', fontWeight: '600', fontSize: '0.8rem' }}>sq.ft</span>
+                   </div>
+                 </div>
+                 
+                 <div>
+                   <label style={labelStyle}>Site Visit Required?</label>
+                   <div style={{ display: 'inline-flex', backgroundColor: '#F8FAFC', borderRadius: '8px', padding: '0.25rem', border: '1px solid #E2E8F0' }}>
+                     <button type="button" onClick={() => handleChange('siteVisitRequired', 'Yes')} style={{ ...toggleBtnStyle, ...(formData.siteVisitRequired === 'Yes' ? toggleBtnActiveStyle : {}) }}>Yes</button>
+                     <button type="button" onClick={() => handleChange('siteVisitRequired', 'No')} style={{ ...toggleBtnStyle, ...(formData.siteVisitRequired === 'No' ? toggleBtnActiveStyle : {}) }}>No</button>
+                   </div>
+                 </div>
+               </div>
+
+               <div style={{ marginBottom: '1.5rem' }}>
+                 <label style={labelStyle}>Budget Range</label>
+                 <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+                   {['Below ₹5 Lakhs', '₹5-10 Lakhs', '₹10-25 Lakhs', '₹25-50 Lakhs', 'Above ₹50 Lakhs'].map(t => (
+                     <SelectPill key={t} label={t} selected={formData.budgetRange === t} onClick={() => handleChange('budgetRange', t)} />
+                   ))}
+                 </div>
+               </div>
+
+               <div style={{ marginBottom: '1.5rem' }}>
+                 <label style={labelStyle}>Expected Start Date</label>
+                 <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+                   {['Immediately', 'Within 1 Month', 'Within 3 Months', 'Just Planning'].map(t => (
+                     <SelectPill key={t} label={t} selected={formData.expectedStartDate === t} onClick={() => handleChange('expectedStartDate', t)} />
+                   ))}
+                 </div>
+               </div>
+             </div>
           </div>
         );
       case 3:
