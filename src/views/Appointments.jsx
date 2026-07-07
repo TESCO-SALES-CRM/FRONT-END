@@ -49,9 +49,22 @@ function convertTo24Hour(time12) {
   return `${hoursStr}:${minutes}`;
 }
 
+const DUMMY_APPOINTMENTS = [
+  { id: '1', title: 'Site Inspection - Alpha Towers', date: '2026-07-08', timeStart: '10:00 AM', timeEnd: '11:00 AM', manager: 'Sarah Smith', phone: '9876543210', location: 'Downtown', status: 'Waiting', type: 'Appointment' },
+  { id: '2', title: 'Client Meeting - Tech Park', date: '2026-07-09', timeStart: '02:00 PM', timeEnd: '03:30 PM', manager: 'John Doe', phone: '9876543211', location: 'Tech Park, North Block', status: 'Assigned', type: 'Appointment' },
+  { id: '3', title: 'Final Handover - Villa 34', date: '2026-07-07', timeStart: '04:00 PM', timeEnd: '05:00 PM', manager: 'Emma Stone', phone: '9876543212', location: 'Sunny Heights', status: 'Completed', type: 'Appointment' },
+  { id: '4', title: 'Initial Consultation - Mall', date: '2026-07-10', timeStart: '11:00 AM', timeEnd: '12:00 PM', manager: 'Sarah Smith', phone: '9876543213', location: 'City Mall', status: 'Waiting', type: 'Appointment' },
+  { id: '5', title: 'Structural Review - Block B', date: '2026-07-11', timeStart: '09:00 AM', timeEnd: '10:30 AM', manager: 'John Doe', phone: '9876543214', location: 'Block B, Main St', status: 'Assigned', type: 'Appointment' },
+  { id: '6', title: 'Vendor Discussion - Roofing', date: '2026-07-12', timeStart: '01:00 PM', timeEnd: '02:00 PM', manager: 'Emma Stone', phone: '9876543215', location: 'Office HQ', status: 'Waiting', type: 'Appointment' },
+  { id: '7', title: 'Site Survey - Greenfield', date: '2026-07-13', timeStart: '10:00 AM', timeEnd: '01:00 PM', manager: 'Sarah Smith', phone: '9876543216', location: 'Greenfield Estate', status: 'Assigned', type: 'Visits' },
+  { id: '8', title: 'Safety Inspection - Alpha Towers', date: '2026-07-06', timeStart: '08:00 AM', timeEnd: '10:00 AM', manager: 'John Doe', phone: '9876543217', location: 'Downtown', status: 'Completed', type: 'Visits' },
+  { id: '9', title: 'Progress Update Meeting', date: '2026-07-14', timeStart: '03:00 PM', timeEnd: '04:00 PM', manager: 'Emma Stone', phone: '9876543218', location: 'Virtual', status: 'Waiting', type: 'Appointment' },
+  { id: '10', title: 'Quality Check - Villa 42', date: '2026-07-15', timeStart: '09:30 AM', timeEnd: '11:00 AM', manager: 'Sarah Smith', phone: '9876543219', location: 'Sunny Heights', status: 'Waiting', type: 'Visits' }
+];
+
 const Appointments = () => {
   const addToast = useToast();
-  const [appointments, setAppointments] = useState([]);
+  const [appointments, setAppointments] = useState(DUMMY_APPOINTMENTS);
   const [apptLoaded, setApptLoaded] = useState(false);
 
   // Normalize API record so existing JSX (apt.id) keeps working
@@ -63,9 +76,9 @@ const Appointments = () => {
       try {
         const res = await fetch(APPT_API);
         const data = await res.json();
-        if (Array.isArray(data)) setAppointments(data.map(normalize));
+        if (Array.isArray(data) && data.length > 0) setAppointments(data.map(normalize));
       } catch (err) {
-        console.error('Failed to load appointments:', err);
+        console.error('Failed to load appointments, using fallback:', err);
       } finally {
         setApptLoaded(true);
       }

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FileText, Download, Eye, Plus, CheckCircle, Clock, X, ThumbsUp, Send, Upload } from 'lucide-react';
+import QuotationPreviewModal from '../components/QuotationPreviewModal';
 
 const initialQuotesData = [
   { id: 'QT-5001', leadId: 'LD-1001', client: 'Reference Client', project: 'PEB', amount: '₹100,000', gst: '₹18,000', approvalStatus: 'Pending', quotationStatus: 'In Preparation', revision: 'Rev 0', fileName: null },
@@ -90,26 +91,24 @@ const Quotations = () => {
     }).catch(err => console.error('Failed to sync quotations:', err));
   }, [quotes, quotesLoaded]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [previewQuote, setPreviewQuote] = useState(null);
   const [newQuote, setNewQuote] = useState({
-    leadId: '', client: '', project: '', amount: '', gst: '', approvalStatus: 'Pending', quotationStatus: 'In Preparation', revision: 'Rev 0', fileName: null
+    leadId: '', client: '', project: '', quotationType: 'Initial', file: null, approvalStatus: 'Pending', quotationStatus: 'In Preparation', revision: 'Rev 0', fileName: null
   });
 
   const handleGenerateQuote = (e) => {
     e.preventDefault();
     const newId = `QT-${5001 + quotes.length}`;
-    
-    // Ensure amount and gst have ₹ symbol
-    const formattedAmount = newQuote.amount.startsWith('₹') ? newQuote.amount : `₹${newQuote.amount}`;
-    const formattedGst = newQuote.gst.startsWith('₹') ? newQuote.gst : `₹${newQuote.gst}`;
-    
     setQuotes([...quotes, { 
       ...newQuote, 
       id: newId,
-      amount: formattedAmount,
-      gst: formattedGst
+      amount: '',
+      gst: '',
+      revision: newQuote.quotationType,
+      fileName: newQuote.file ? newQuote.file.name : null
     }]);
     setIsModalOpen(false);
-    setNewQuote({ leadId: '', client: '', project: '', amount: '', gst: '', approvalStatus: 'Pending', quotationStatus: 'In Preparation', revision: 'Rev 0', fileName: null });
+    setNewQuote({ leadId: '', client: '', project: '', quotationType: 'Initial', file: null, approvalStatus: 'Pending', quotationStatus: 'In Preparation', revision: 'Rev 0', fileName: null });
   };
 
   const handleApprovalStatusChange = (id, newStatus) => {
@@ -144,7 +143,7 @@ const Quotations = () => {
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <h2 style={{ margin: 0, fontSize: '1.5rem', fontWeight: '700' }}>Quotations</h2>
         <button className="btn btn-primary" style={{ display: 'flex', gap: '0.5rem' }} onClick={() => setIsModalOpen(true)}>
-          <Plus size={16} /> Generate Quotation
+          <Plus size={16} /> Upload Quotation
         </button>
       </div>
 
@@ -284,7 +283,7 @@ const Quotations = () => {
                   {/* Action Column */}
                   <td style={{ padding: '1rem 1.5rem', textAlign: 'right' }}>
                     <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '0.5rem' }}>
-                      <button style={{ background: 'transparent', border: 'none', color: 'var(--text-muted)', cursor: 'pointer' }} title="Preview">
+                      <button onClick={() => setPreviewQuote(quote)} style={{ background: 'transparent', border: 'none', color: 'var(--text-muted)', cursor: 'pointer' }} title="Preview">
                         <Eye size={18} />
                       </button>
                       <button style={{ background: 'transparent', border: 'none', color: 'var(--text-muted)', cursor: 'pointer' }} title="Export PDF">
@@ -309,7 +308,7 @@ const Quotations = () => {
         }}>
           <div className="card" style={{ width: '100%', maxWidth: '500px', padding: '2rem' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
-              <h3 style={{ margin: 0, fontSize: '1.25rem' }}>Generate Quotation</h3>
+              <h3 style={{ margin: 0, fontSize: '1.25rem' }}>Upload Quotation</h3>
               <button onClick={() => setIsModalOpen(false)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-muted)' }}>
                 <X size={20} />
               </button>
@@ -337,22 +336,31 @@ const Quotations = () => {
 
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
                 <div>
-                  <label style={{ display: 'block', fontSize: '0.875rem', marginBottom: '0.25rem', color: 'var(--text-muted)' }}>Amount (ex. GST)</label>
-                  <input required value={newQuote.amount} onChange={(e) => setNewQuote({...newQuote, amount: e.target.value})} type="text" placeholder="e.g. ₹100,000" style={{ width: '100%', padding: '0.5rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)' }} />
+                  <label style={{ display: 'block', fontSize: '0.875rem', marginBottom: '0.25rem', color: 'var(--text-muted)' }}>Quotation Type</label>
+                  <select required value={newQuote.quotationType} onChange={(e) => setNewQuote({...newQuote, quotationType: e.target.value})} style={{ width: '100%', padding: '0.5rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)', backgroundColor: 'var(--surface-color)', color: 'var(--text-main)', outline: 'none' }}>
+                    <option value="Initial">Initial Quotation</option>
+                    <option value="Revised">Revised Quotation</option>
+                    <option value="Final">Final Quotation</option>
+                  </select>
                 </div>
                 <div>
-                  <label style={{ display: 'block', fontSize: '0.875rem', marginBottom: '0.25rem', color: 'var(--text-muted)' }}>GST Amount</label>
-                  <input required value={newQuote.gst} onChange={(e) => setNewQuote({...newQuote, gst: e.target.value})} type="text" placeholder="e.g. ₹18,000" style={{ width: '100%', padding: '0.5rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)' }} />
+                  <label style={{ display: 'block', fontSize: '0.875rem', marginBottom: '0.25rem', color: 'var(--text-muted)' }}>Upload File (PDF)</label>
+                  <input required onChange={(e) => setNewQuote({...newQuote, file: e.target.files[0]})} type="file" accept=".pdf" style={{ width: '100%', padding: '0.5rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)', outline: 'none' }} />
                 </div>
               </div>
               <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '1rem', marginTop: '1rem' }}>
                 <button type="button" onClick={() => setIsModalOpen(false)} className="btn btn-outline">Cancel</button>
-                <button type="submit" className="btn btn-primary">Generate</button>
+                <button type="submit" className="btn btn-primary">Upload</button>
               </div>
             </form>
           </div>
         </div>
       )}
+
+      <QuotationPreviewModal 
+        quotation={previewQuote} 
+        onClose={() => setPreviewQuote(null)} 
+      />
     </div>
   );
 };

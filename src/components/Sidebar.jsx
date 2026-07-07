@@ -9,7 +9,8 @@ import {
   CreditCard, 
   BarChart3, 
   Bell, 
-  Settings
+  Settings,
+  Handshake
 } from 'lucide-react';
 
 const menuItems = [
@@ -17,6 +18,7 @@ const menuItems = [
   { path: '/leads', label: 'Lead Management', icon: Users },
   { path: '/appointments', label: 'Appointments', icon: Calendar },
   { path: '/quotations', label: 'Quotations', icon: FileText },
+  { path: '/negotiation', label: 'Negotiation', icon: Handshake },
   { path: '/projects', label: 'Project Filing', icon: FolderOpen },
   { path: '/payments', label: 'Payment Collection', icon: CreditCard },
   { path: '/reports', label: 'Reports', icon: BarChart3 },
