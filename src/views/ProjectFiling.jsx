@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Save, CheckCircle2, Building, ClipboardList, Calendar, IndianRupee, PenTool, Plus, Edit2, ChevronLeft } from 'lucide-react';
 
 const dummyProjects = [
@@ -93,9 +94,26 @@ const emptyForm = {
 };
 
 const ProjectFiling = () => {
+  const location = useLocation();
   const [view, setView] = useState('list'); // 'list' | 'form'
   const [projects, setProjects] = useState(dummyProjects);
   const [formData, setFormData] = useState(emptyForm);
+
+    useEffect(() => {
+    if (location.state?.openForm) {
+      setView('form');
+      if (location.state?.lead) {
+        setFormData(prev => ({
+          ...prev,
+          clientName: location.state.lead.name || '',
+          projectLocation: location.state.lead.projectLocation || '',
+          phoneEmail: location.state.lead.phone || '',
+          projectType: location.state.lead.projectType || '',
+          projectSize: location.state.lead.projectSize || ''
+        }));
+      }
+    }
+  }, [location.state]);
 
   const handleCreateNew = () => {
     setFormData(emptyForm);

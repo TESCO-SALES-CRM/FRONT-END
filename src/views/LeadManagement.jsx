@@ -3,6 +3,7 @@ import { Search, Filter, Phone, MoreVertical, X, Edit2, Mail, Trash2, Users, Fla
 import { useToast } from '../components/Toast';
 import AddNewLeadWizard from '../components/AddNewLeadWizard';
 import LeadDetailsDrawer from '../components/LeadDetailsDrawer';
+import { useNavigate } from 'react-router-dom';
 
 const LEAD_SOURCES = [
   'Referral',
