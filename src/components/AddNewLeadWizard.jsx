@@ -63,6 +63,24 @@ export default function AddNewLeadWizard({ isOpen, onClose, onSave, initialData 
     numberOfSlopes: '2', existingRoofCondition: 'Good', existingStructure: 'Yes',
     openingLength: '', openingWidth: '', maxOpeningArea: '', installationHeight: '', motorLocation: 'Left',
     trackLength: '', sideClearance: '', controlType: 'Remote',
+    // Extended Dynamic Technical Details (Step 4)
+    structureGrade: 'Standard', designStandard: 'IS Standard', designLoad: '', windLoadTech: 'Medium', seismicZone: 'Zone III', liveLoad: '',
+    primaryMaterial: [], roofMaterialTech: 'GI Sheet', materialThickness: '', surfaceFinish: [], colorPreference: 'White', customColor: '',
+    roofProfile: 'Trapezoidal', roofPitchTech: '', roofVentilator: false, skylightRequired: false, insulationRequired: false, insulationThickness: '50mm',
+    accessories: [], lightingProvision: false, exhaustFan: false, motorizedSystem: false, powerSupplyAvailable: false, cableRouting: 'Internal',
+    installationPriority: 'Normal', workingHours: 'Day', safetyRequirement: [], siteConstraints: '',
+    warrantyRequired: false, warrantyPeriod: '1 Year', annualMaintenance: false, technicalNotes: '',
+    
+    craneCapacity: '', mezzanineFloorTech: false, futureExpansion: false, columnType: 'I-Section', bracingType: 'Rod Bracing', roofMonitorTech: false, wallCladdingTech: false, sandwichPanel: false,
+    fabricTypeTech: 'PVC', membraneThickness: '', edgeCable: '', mastHeight: '', cableDiameter: '', fabricColor: 'White', drainageSystem: 'Yes', lightingIntegration: false,
+    upvcSheetThickness: '', uvProtection: true, sheetColor: 'White', overlapType: 'Standard',
+    solidMultiwall: 'Solid', uvCoating: true, transparencyLevel: 'High', polycarbonateThickness: '',
+    glassTypeTech: 'Clear', toughenedGlass: true, laminatedGlass: false, glassTechThickness: '', frameType: 'Aluminum', siliconeSeal: 'Structural',
+    tileBrand: '', tileColor: 'Terracotta', underlayRequired: true, ridgeTile: true,
+    shingleTypeTech: 'Architectural', shingleWarranty: '10 Years', underlayment: true, starterStrip: true,
+    sheetGauge: '', zincCoating: '120 GSM', profileTypeTech: 'Trapezoidal', fastenerType: 'Self Drilling',
+    motorBrand: '', remoteControl: true, automation: false, manualOverride: true, trackSystem: 'Aluminum', waterproofSeal: true,
+
 
 
     
@@ -1369,31 +1387,596 @@ export default function AddNewLeadWizard({ isOpen, onClose, onSave, initialData 
       case 4:
         return (
           <div className="step-content animate-fade-in">
-             <h3 style={{ fontSize: '1.125rem', fontWeight: '700', marginBottom: '1.5rem', color: '#1E293B' }}>Technical Details</h3>
-             
              <div style={{ marginBottom: '2rem' }}>
-               <h4 style={{ fontSize: '0.85rem', fontWeight: '700', color: '#64748B', marginBottom: '1rem', textTransform: 'uppercase' }}>ROOF, WALL & FLOORING</h4>
-               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem' }}>
-                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', backgroundColor: '#F8FAFC', padding: '1rem', borderRadius: '8px', border: '1px solid #E2E8F0' }}>
-                   <span style={{ fontSize: '0.875rem', fontWeight: '600', color: '#334155' }}>Heat Insulation Required?</span>
-                   <ToggleSwitch checked={formData.heatInsulation} onChange={() => handleChange('heatInsulation', !formData.heatInsulation)} />
+               <h3 style={{ fontSize: '1.25rem', fontWeight: '700', marginBottom: '0.5rem', color: '#1E293B' }}>Technical Details</h3>
+               <p style={{ color: '#64748B', fontSize: '0.875rem' }}>Specify engineering, material, structural, and installation requirements to prepare an accurate proposal.</p>
+             </div>
+
+             {/* SECTION 1 — Structural Specifications */}
+             <div style={{ marginBottom: '2.5rem' }}>
+               <h4 style={{ fontSize: '0.85rem', fontWeight: '700', color: '#64748B', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>SECTION 1 — Structural Specifications</h4>
+               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
+                 <div>
+                   <label style={labelStyle}>Structure Grade</label>
+                   <select style={inputStyle} value={formData.structureGrade || ''} onChange={e => handleChange('structureGrade', e.target.value)}>
+                     <option value="Standard">Standard</option>
+                     <option value="Premium">Premium</option>
+                     <option value="Heavy Duty">Heavy Duty</option>
+                     <option value="Industrial">Industrial</option>
+                   </select>
+                 </div>
+                 <div>
+                   <label style={labelStyle}>Design Standard</label>
+                   <select style={inputStyle} value={formData.designStandard || ''} onChange={e => handleChange('designStandard', e.target.value)}>
+                     <option value="IS Standard">IS Standard</option>
+                     <option value="ASTM">ASTM</option>
+                     <option value="Euro Code">Euro Code</option>
+                     <option value="Client Specification">Client Specification</option>
+                   </select>
+                 </div>
+                 <UnitInput label="Design Load" placeholder="Enter design load" unit="kg/m²" value={formData.designLoad || ''} onChange={v => handleChange('designLoad', v)} />
+                 <div>
+                   <label style={labelStyle}>Wind Load</label>
+                   <select style={inputStyle} value={formData.windLoadTech || ''} onChange={e => handleChange('windLoadTech', e.target.value)}>
+                     <option value="Low">Low</option>
+                     <option value="Medium">Medium</option>
+                     <option value="High">High</option>
+                     <option value="Cyclone Zone">Cyclone Zone</option>
+                   </select>
+                 </div>
+                 <div>
+                   <label style={labelStyle}>Seismic Zone</label>
+                   <select style={inputStyle} value={formData.seismicZone || ''} onChange={e => handleChange('seismicZone', e.target.value)}>
+                     <option value="Zone II">Zone II</option>
+                     <option value="Zone III">Zone III</option>
+                     <option value="Zone IV">Zone IV</option>
+                     <option value="Zone V">Zone V</option>
+                   </select>
+                 </div>
+                 <UnitInput label="Live Load" placeholder="Enter live load" unit="kg/m²" value={formData.liveLoad || ''} onChange={v => handleChange('liveLoad', v)} />
+               </div>
+             </div>
+
+             <hr style={{ border: 'none', borderTop: '1px solid #E2E8F0', margin: '2.5rem 0' }} />
+
+             {/* SECTION 2 — Material Specifications */}
+             <div style={{ marginBottom: '2.5rem' }}>
+               <h4 style={{ fontSize: '0.85rem', fontWeight: '700', color: '#64748B', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>SECTION 2 — Material Specifications</h4>
+               
+               <div style={{ marginBottom: '1.5rem' }}>
+                 <label style={labelStyle}>Primary Material</label>
+                 <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+                   {['Mild Steel', 'Galvanized Steel', 'Stainless Steel', 'Aluminium'].map(t => {
+                     const selected = (formData.primaryMaterial || []).includes(t);
+                     return (
+                       <MultiSelectPill key={t} label={t} selected={selected} onClick={() => {
+                         let curr = formData.primaryMaterial || [];
+                         if (curr.includes(t)) handleChange('primaryMaterial', curr.filter(x => x !== t));
+                         else handleChange('primaryMaterial', [...curr, t]);
+                       }} />
+                     );
+                   })}
+                 </div>
+               </div>
+
+               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', marginBottom: '1.5rem' }}>
+                 <div>
+                   <label style={labelStyle}>Roof Material</label>
+                   <select style={inputStyle} value={formData.roofMaterialTech || ''} onChange={e => handleChange('roofMaterialTech', e.target.value)}>
+                     <option value="UPVC">UPVC</option>
+                     <option value="Polycarbonate">Polycarbonate</option>
+                     <option value="GI Sheet">GI Sheet</option>
+                     <option value="Glass">Glass</option>
+                     <option value="PVC Fabric">PVC Fabric</option>
+                     <option value="PTFE">PTFE</option>
+                     <option value="ETFE">ETFE</option>
+                     <option value="Shingles">Shingles</option>
+                   </select>
+                 </div>
+                 <div>
+                   <label style={labelStyle}>Material Thickness</label>
+                   <select style={inputStyle} value={formData.materialThickness || ''} onChange={e => handleChange('materialThickness', e.target.value)}>
+                     <option value="" disabled>Select thickness</option>
+                     <option value="0.45mm">0.45mm</option>
+                     <option value="0.50mm">0.50mm</option>
+                     <option value="0.80mm">0.80mm</option>
+                     <option value="1.00mm">1.00mm</option>
+                     <option value="2.00mm">2.00mm</option>
+                     <option value="Custom">Custom</option>
+                   </select>
+                 </div>
+               </div>
+
+               <div style={{ marginBottom: '1.5rem' }}>
+                 <label style={labelStyle}>Surface Finish</label>
+                 <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+                   {['Powder Coated', 'Painted', 'Hot Dip Galvanized', 'Anodized', 'Natural Finish'].map(t => {
+                     const selected = (formData.surfaceFinish || []).includes(t);
+                     return (
+                       <MultiSelectPill key={t} label={t} selected={selected} onClick={() => {
+                         let curr = formData.surfaceFinish || [];
+                         if (curr.includes(t)) handleChange('surfaceFinish', curr.filter(x => x !== t));
+                         else handleChange('surfaceFinish', [...curr, t]);
+                       }} />
+                     );
+                   })}
+                 </div>
+               </div>
+
+               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
+                 <div>
+                   <label style={labelStyle}>Color Preference</label>
+                   <select style={inputStyle} value={formData.colorPreference || ''} onChange={e => handleChange('colorPreference', e.target.value)}>
+                     <option value="White">White</option>
+                     <option value="Blue">Blue</option>
+                     <option value="Grey">Grey</option>
+                     <option value="Green">Green</option>
+                     <option value="Custom">Custom</option>
+                   </select>
+                 </div>
+                 {formData.colorPreference === 'Custom' && (
+                   <UnitInput label="Custom Color" placeholder="Enter hex code or color name" unit="" value={formData.customColor || ''} onChange={v => handleChange('customColor', v)} />
+                 )}
+               </div>
+             </div>
+
+             <hr style={{ border: 'none', borderTop: '1px solid #E2E8F0', margin: '2.5rem 0' }} />
+
+             {/* SECTION 3 — Roofing Specifications */}
+             <div style={{ marginBottom: '2.5rem' }}>
+               <h4 style={{ fontSize: '0.85rem', fontWeight: '700', color: '#64748B', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>SECTION 3 — Roofing Specifications</h4>
+               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
+                 <div>
+                   <label style={labelStyle}>Roof Profile</label>
+                   <select style={inputStyle} value={formData.roofProfile || ''} onChange={e => handleChange('roofProfile', e.target.value)}>
+                     <option value="Trapezoidal">Trapezoidal</option>
+                     <option value="Corrugated">Corrugated</option>
+                     <option value="Standing Seam">Standing Seam</option>
+                     <option value="Flat">Flat</option>
+                   </select>
+                 </div>
+                 <UnitInput label="Roof Pitch" placeholder="Enter degree" unit="°" value={formData.roofPitchTech || ''} onChange={v => handleChange('roofPitchTech', v)} />
+                 <div>
+                   <label style={labelStyle}>Roof Ventilator</label>
+                   <div style={{ display: 'inline-flex', backgroundColor: '#F8FAFC', borderRadius: '8px', padding: '0.25rem', border: '1px solid #E2E8F0' }}>
+                     <button type="button" onClick={() => handleChange('roofVentilator', true)} style={{ ...toggleBtnStyle, ...(formData.roofVentilator ? toggleBtnActiveStyle : {}) }}>Yes</button>
+                     <button type="button" onClick={() => handleChange('roofVentilator', false)} style={{ ...toggleBtnStyle, ...(!formData.roofVentilator ? toggleBtnActiveStyle : {}) }}>No</button>
+                   </div>
+                 </div>
+                 <div>
+                   <label style={labelStyle}>Skylight Required</label>
+                   <div style={{ display: 'inline-flex', backgroundColor: '#F8FAFC', borderRadius: '8px', padding: '0.25rem', border: '1px solid #E2E8F0' }}>
+                     <button type="button" onClick={() => handleChange('skylightRequired', true)} style={{ ...toggleBtnStyle, ...(formData.skylightRequired ? toggleBtnActiveStyle : {}) }}>Yes</button>
+                     <button type="button" onClick={() => handleChange('skylightRequired', false)} style={{ ...toggleBtnStyle, ...(!formData.skylightRequired ? toggleBtnActiveStyle : {}) }}>No</button>
+                   </div>
+                 </div>
+                 <div>
+                   <label style={labelStyle}>Insulation Required</label>
+                   <div style={{ display: 'inline-flex', backgroundColor: '#F8FAFC', borderRadius: '8px', padding: '0.25rem', border: '1px solid #E2E8F0' }}>
+                     <button type="button" onClick={() => handleChange('insulationRequired', true)} style={{ ...toggleBtnStyle, ...(formData.insulationRequired ? toggleBtnActiveStyle : {}) }}>Yes</button>
+                     <button type="button" onClick={() => handleChange('insulationRequired', false)} style={{ ...toggleBtnStyle, ...(!formData.insulationRequired ? toggleBtnActiveStyle : {}) }}>No</button>
+                   </div>
+                 </div>
+                 {formData.insulationRequired && (
+                   <div>
+                     <label style={labelStyle}>Thickness</label>
+                     <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+                       {['25mm', '50mm', '75mm', '100mm'].map(t => (
+                         <SelectPill key={t} label={t} selected={formData.insulationThickness === t} onClick={() => handleChange('insulationThickness', t)} />
+                       ))}
+                     </div>
+                   </div>
+                 )}
+               </div>
+             </div>
+
+             <hr style={{ border: 'none', borderTop: '1px solid #E2E8F0', margin: '2.5rem 0' }} />
+
+             {/* SECTION 4 — Accessories */}
+             <div style={{ marginBottom: '2.5rem' }}>
+               <h4 style={{ fontSize: '0.85rem', fontWeight: '700', color: '#64748B', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>SECTION 4 — Accessories</h4>
+               <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+                 {['Gutters', 'Downpipes', 'Ridge Cover', 'Turbo Ventilator', 'Roof Monitor', 'Sky Light', 'Louvers', 'Flashing', 'Insulation', 'Bird Mesh', 'Walkway', 'Solar Panel Provision', 'Lightning Arrestor', 'Rainwater Harvesting'].map(t => {
+                   const selected = (formData.accessories || []).includes(t);
+                   return (
+                     <MultiSelectPill key={t} label={t} selected={selected} onClick={() => {
+                       let curr = formData.accessories || [];
+                       if (curr.includes(t)) handleChange('accessories', curr.filter(x => x !== t));
+                       else handleChange('accessories', [...curr, t]);
+                     }} />
+                   );
+                 })}
+               </div>
+             </div>
+
+             <hr style={{ border: 'none', borderTop: '1px solid #E2E8F0', margin: '2.5rem 0' }} />
+
+             {/* SECTION 5 — Electrical & Mechanical */}
+             <div style={{ marginBottom: '2.5rem' }}>
+               <h4 style={{ fontSize: '0.85rem', fontWeight: '700', color: '#64748B', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>SECTION 5 — Electrical & Mechanical</h4>
+               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
+                 <div>
+                   <label style={labelStyle}>Lighting Provision</label>
+                   <div style={{ display: 'inline-flex', backgroundColor: '#F8FAFC', borderRadius: '8px', padding: '0.25rem', border: '1px solid #E2E8F0' }}>
+                     <button type="button" onClick={() => handleChange('lightingProvision', true)} style={{ ...toggleBtnStyle, ...(formData.lightingProvision ? toggleBtnActiveStyle : {}) }}>Yes</button>
+                     <button type="button" onClick={() => handleChange('lightingProvision', false)} style={{ ...toggleBtnStyle, ...(!formData.lightingProvision ? toggleBtnActiveStyle : {}) }}>No</button>
+                   </div>
+                 </div>
+                 <div>
+                   <label style={labelStyle}>Exhaust Fan</label>
+                   <div style={{ display: 'inline-flex', backgroundColor: '#F8FAFC', borderRadius: '8px', padding: '0.25rem', border: '1px solid #E2E8F0' }}>
+                     <button type="button" onClick={() => handleChange('exhaustFan', true)} style={{ ...toggleBtnStyle, ...(formData.exhaustFan ? toggleBtnActiveStyle : {}) }}>Yes</button>
+                     <button type="button" onClick={() => handleChange('exhaustFan', false)} style={{ ...toggleBtnStyle, ...(!formData.exhaustFan ? toggleBtnActiveStyle : {}) }}>No</button>
+                   </div>
+                 </div>
+                 {formData.projectType === 'Other roofing' && formData.customProjectType === 'Retractable Roofing' && (
+                   <div>
+                     <label style={labelStyle}>Motorized System</label>
+                     <div style={{ display: 'inline-flex', backgroundColor: '#F8FAFC', borderRadius: '8px', padding: '0.25rem', border: '1px solid #E2E8F0' }}>
+                       <button type="button" onClick={() => handleChange('motorizedSystem', true)} style={{ ...toggleBtnStyle, ...(formData.motorizedSystem ? toggleBtnActiveStyle : {}) }}>Yes</button>
+                       <button type="button" onClick={() => handleChange('motorizedSystem', false)} style={{ ...toggleBtnStyle, ...(!formData.motorizedSystem ? toggleBtnActiveStyle : {}) }}>No</button>
+                     </div>
+                   </div>
+                 )}
+                 <div>
+                   <label style={labelStyle}>Power Supply Available</label>
+                   <div style={{ display: 'inline-flex', backgroundColor: '#F8FAFC', borderRadius: '8px', padding: '0.25rem', border: '1px solid #E2E8F0' }}>
+                     <button type="button" onClick={() => handleChange('powerSupplyAvailable', true)} style={{ ...toggleBtnStyle, ...(formData.powerSupplyAvailable ? toggleBtnActiveStyle : {}) }}>Yes</button>
+                     <button type="button" onClick={() => handleChange('powerSupplyAvailable', false)} style={{ ...toggleBtnStyle, ...(!formData.powerSupplyAvailable ? toggleBtnActiveStyle : {}) }}>No</button>
+                   </div>
+                 </div>
+                 <div>
+                   <label style={labelStyle}>Cable Routing</label>
+                   <select style={inputStyle} value={formData.cableRouting || ''} onChange={e => handleChange('cableRouting', e.target.value)}>
+                     <option value="Internal">Internal</option>
+                     <option value="External">External</option>
+                     <option value="Client Scope">Client Scope</option>
+                   </select>
                  </div>
                </div>
              </div>
 
-             <div>
-               <h4 style={{ fontSize: '0.85rem', fontWeight: '700', color: '#64748B', marginBottom: '1rem', textTransform: 'uppercase' }}>STRUCTURE & MACHINERY</h4>
-               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
-                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', backgroundColor: '#F8FAFC', padding: '1rem', borderRadius: '8px', border: '1px solid #E2E8F0' }}>
-                   <span style={{ fontSize: '0.875rem', fontWeight: '600', color: '#334155' }}>Crane Required?</span>
-                   <ToggleSwitch checked={formData.craneRequired} onChange={() => handleChange('craneRequired', !formData.craneRequired)} />
+             <hr style={{ border: 'none', borderTop: '1px solid #E2E8F0', margin: '2.5rem 0' }} />
+
+             {/* SECTION 6 — Installation Requirements */}
+             <div style={{ marginBottom: '2.5rem' }}>
+               <h4 style={{ fontSize: '0.85rem', fontWeight: '700', color: '#64748B', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>SECTION 6 — Installation Requirements</h4>
+               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', marginBottom: '1.5rem' }}>
+                 <div>
+                   <label style={labelStyle}>Installation Priority</label>
+                   <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+                     {['Normal', 'Urgent', 'Immediate'].map(t => (
+                       <SelectPill key={t} label={t} selected={formData.installationPriority === t} onClick={() => handleChange('installationPriority', t)} />
+                     ))}
+                   </div>
                  </div>
-                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', backgroundColor: '#F8FAFC', padding: '1rem', borderRadius: '8px', border: '1px solid #E2E8F0' }}>
-                   <span style={{ fontSize: '0.875rem', fontWeight: '600', color: '#334155' }}>Heavy Equipment Access?</span>
-                   <ToggleSwitch checked={formData.heavyEquipmentAccess} onChange={() => handleChange('heavyEquipmentAccess', !formData.heavyEquipmentAccess)} />
+                 <div>
+                   <label style={labelStyle}>Working Hours</label>
+                   <select style={inputStyle} value={formData.workingHours || ''} onChange={e => handleChange('workingHours', e.target.value)}>
+                     <option value="Day">Day</option>
+                     <option value="Night">Night</option>
+                     <option value="24 Hours">24 Hours</option>
+                   </select>
+                 </div>
+               </div>
+               
+               <div style={{ marginBottom: '1.5rem' }}>
+                 <label style={labelStyle}>Safety Requirement</label>
+                 <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+                   {['Helmet', 'Safety Belt', 'Scaffolding', 'Crane', 'Boom Lift', 'Permit Required', 'Site Induction'].map(t => {
+                     const selected = (formData.safetyRequirement || []).includes(t);
+                     return (
+                       <MultiSelectPill key={t} label={t} selected={selected} onClick={() => {
+                         let curr = formData.safetyRequirement || [];
+                         if (curr.includes(t)) handleChange('safetyRequirement', curr.filter(x => x !== t));
+                         else handleChange('safetyRequirement', [...curr, t]);
+                       }} />
+                     );
+                   })}
+                 </div>
+               </div>
+
+               <div>
+                 <label style={labelStyle}>Site Constraints</label>
+                 <textarea 
+                   placeholder="Mention any installation restrictions or technical challenges."
+                   style={{ ...inputStyle, minHeight: '80px', resize: 'vertical' }}
+                   value={formData.siteConstraints || ''}
+                   onChange={e => handleChange('siteConstraints', e.target.value)}
+                 />
+               </div>
+             </div>
+
+             <hr style={{ border: 'none', borderTop: '1px solid #E2E8F0', margin: '2.5rem 0' }} />
+
+             {/* SECTION 7 — Warranty & Maintenance */}
+             <div style={{ marginBottom: '2.5rem' }}>
+               <h4 style={{ fontSize: '0.85rem', fontWeight: '700', color: '#64748B', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>SECTION 7 — Warranty & Maintenance</h4>
+               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '1.5rem' }}>
+                 <div>
+                   <label style={labelStyle}>Warranty Required</label>
+                   <div style={{ display: 'inline-flex', backgroundColor: '#F8FAFC', borderRadius: '8px', padding: '0.25rem', border: '1px solid #E2E8F0' }}>
+                     <button type="button" onClick={() => handleChange('warrantyRequired', true)} style={{ ...toggleBtnStyle, ...(formData.warrantyRequired ? toggleBtnActiveStyle : {}) }}>Yes</button>
+                     <button type="button" onClick={() => handleChange('warrantyRequired', false)} style={{ ...toggleBtnStyle, ...(!formData.warrantyRequired ? toggleBtnActiveStyle : {}) }}>No</button>
+                   </div>
+                 </div>
+                 {formData.warrantyRequired && (
+                   <div>
+                     <label style={labelStyle}>Warranty Period</label>
+                     <select style={inputStyle} value={formData.warrantyPeriod || ''} onChange={e => handleChange('warrantyPeriod', e.target.value)}>
+                       <option value="1 Year">1 Year</option>
+                       <option value="2 Years">2 Years</option>
+                       <option value="5 Years">5 Years</option>
+                       <option value="10 Years">10 Years</option>
+                     </select>
+                   </div>
+                 )}
+                 <div>
+                   <label style={labelStyle}>Annual Maintenance</label>
+                   <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+                     {['Yes', 'No', 'AMC Required'].map(t => (
+                       <SelectPill key={t} label={t} selected={formData.annualMaintenance === t} onClick={() => handleChange('annualMaintenance', t)} />
+                     ))}
+                   </div>
                  </div>
                </div>
              </div>
+
+             <hr style={{ border: 'none', borderTop: '1px solid #E2E8F0', margin: '2.5rem 0' }} />
+
+             {/* SECTION 8 — Technical Notes */}
+             <div style={{ marginBottom: '2.5rem' }}>
+               <h4 style={{ fontSize: '0.85rem', fontWeight: '700', color: '#64748B', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>SECTION 8 — Technical Notes</h4>
+               <textarea 
+                 placeholder="Enter technical remarks, engineering notes, client requirements, special fabrication instructions, or approval comments..."
+                 style={{ ...inputStyle, minHeight: '120px', resize: 'vertical' }}
+                 value={formData.technicalNotes || ''}
+                 onChange={e => handleChange('technicalNotes', e.target.value)}
+                 maxLength={500}
+               />
+               <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '0.5rem' }}>
+                 <span style={{ fontSize: '0.75rem', color: '#94A3B8', fontWeight: '500' }}>
+                   {(formData.technicalNotes || '').length} / 500
+                 </span>
+               </div>
+             </div>
+
+             <hr style={{ border: 'none', borderTop: '1px solid #E2E8F0', margin: '2.5rem 0' }} />
+
+             {/* Dynamic Sections Based on Service */}
+             {formData.projectType === 'PEB Building' && (
+               <div style={{ marginBottom: '2.5rem' }}>
+                 <h4 style={{ fontSize: '0.85rem', fontWeight: '700', color: '#64748B', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>PEB Specific Variables</h4>
+                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
+                   <UnitInput label="Crane Capacity" placeholder="Enter capacity" unit="Ton" value={formData.craneCapacity || ''} onChange={v => handleChange('craneCapacity', v)} />
+                   <div>
+                     <label style={labelStyle}>Mezzanine Floor</label>
+                     <div style={{ display: 'inline-flex', backgroundColor: '#F8FAFC', borderRadius: '8px', padding: '0.25rem', border: '1px solid #E2E8F0' }}>
+                       <button type="button" onClick={() => handleChange('mezzanineFloorTech', true)} style={{ ...toggleBtnStyle, ...(formData.mezzanineFloorTech ? toggleBtnActiveStyle : {}) }}>Yes</button>
+                       <button type="button" onClick={() => handleChange('mezzanineFloorTech', false)} style={{ ...toggleBtnStyle, ...(!formData.mezzanineFloorTech ? toggleBtnActiveStyle : {}) }}>No</button>
+                     </div>
+                   </div>
+                   <div>
+                     <label style={labelStyle}>Future Expansion</label>
+                     <div style={{ display: 'inline-flex', backgroundColor: '#F8FAFC', borderRadius: '8px', padding: '0.25rem', border: '1px solid #E2E8F0' }}>
+                       <button type="button" onClick={() => handleChange('futureExpansion', true)} style={{ ...toggleBtnStyle, ...(formData.futureExpansion ? toggleBtnActiveStyle : {}) }}>Yes</button>
+                       <button type="button" onClick={() => handleChange('futureExpansion', false)} style={{ ...toggleBtnStyle, ...(!formData.futureExpansion ? toggleBtnActiveStyle : {}) }}>No</button>
+                     </div>
+                   </div>
+                   <UnitInput label="Column Type" placeholder="Enter type" unit="" value={formData.columnType || ''} onChange={v => handleChange('columnType', v)} />
+                   <UnitInput label="Bracing Type" placeholder="Enter type" unit="" value={formData.bracingType || ''} onChange={v => handleChange('bracingType', v)} />
+                   <div>
+                     <label style={labelStyle}>Roof Monitor</label>
+                     <div style={{ display: 'inline-flex', backgroundColor: '#F8FAFC', borderRadius: '8px', padding: '0.25rem', border: '1px solid #E2E8F0' }}>
+                       <button type="button" onClick={() => handleChange('roofMonitorTech', true)} style={{ ...toggleBtnStyle, ...(formData.roofMonitorTech ? toggleBtnActiveStyle : {}) }}>Yes</button>
+                       <button type="button" onClick={() => handleChange('roofMonitorTech', false)} style={{ ...toggleBtnStyle, ...(!formData.roofMonitorTech ? toggleBtnActiveStyle : {}) }}>No</button>
+                     </div>
+                   </div>
+                   <div>
+                     <label style={labelStyle}>Wall Cladding</label>
+                     <div style={{ display: 'inline-flex', backgroundColor: '#F8FAFC', borderRadius: '8px', padding: '0.25rem', border: '1px solid #E2E8F0' }}>
+                       <button type="button" onClick={() => handleChange('wallCladdingTech', true)} style={{ ...toggleBtnStyle, ...(formData.wallCladdingTech ? toggleBtnActiveStyle : {}) }}>Yes</button>
+                       <button type="button" onClick={() => handleChange('wallCladdingTech', false)} style={{ ...toggleBtnStyle, ...(!formData.wallCladdingTech ? toggleBtnActiveStyle : {}) }}>No</button>
+                     </div>
+                   </div>
+                   <div>
+                     <label style={labelStyle}>Sandwich Panel</label>
+                     <div style={{ display: 'inline-flex', backgroundColor: '#F8FAFC', borderRadius: '8px', padding: '0.25rem', border: '1px solid #E2E8F0' }}>
+                       <button type="button" onClick={() => handleChange('sandwichPanel', true)} style={{ ...toggleBtnStyle, ...(formData.sandwichPanel ? toggleBtnActiveStyle : {}) }}>Yes</button>
+                       <button type="button" onClick={() => handleChange('sandwichPanel', false)} style={{ ...toggleBtnStyle, ...(!formData.sandwichPanel ? toggleBtnActiveStyle : {}) }}>No</button>
+                     </div>
+                   </div>
+                 </div>
+               </div>
+             )}
+
+             {formData.projectType === 'Tensile' && (
+               <div style={{ marginBottom: '2.5rem' }}>
+                 <h4 style={{ fontSize: '0.85rem', fontWeight: '700', color: '#64748B', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Tensile Specific Variables</h4>
+                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
+                   <UnitInput label="Fabric Type" placeholder="Enter type" unit="" value={formData.fabricTypeTech || ''} onChange={v => handleChange('fabricTypeTech', v)} />
+                   <UnitInput label="Membrane Thickness" placeholder="Enter thickness" unit="mm" value={formData.membraneThickness || ''} onChange={v => handleChange('membraneThickness', v)} />
+                   <UnitInput label="Edge Cable" placeholder="Enter spec" unit="" value={formData.edgeCable || ''} onChange={v => handleChange('edgeCable', v)} />
+                   <UnitInput label="Mast Height" placeholder="Enter height" unit="ft" value={formData.mastHeight || ''} onChange={v => handleChange('mastHeight', v)} />
+                   <UnitInput label="Cable Diameter" placeholder="Enter diameter" unit="mm" value={formData.cableDiameter || ''} onChange={v => handleChange('cableDiameter', v)} />
+                   <UnitInput label="Fabric Color" placeholder="Enter color" unit="" value={formData.fabricColor || ''} onChange={v => handleChange('fabricColor', v)} />
+                   <UnitInput label="Drainage System" placeholder="Specify drainage" unit="" value={formData.drainageSystem || ''} onChange={v => handleChange('drainageSystem', v)} />
+                   <div>
+                     <label style={labelStyle}>Lighting Integration</label>
+                     <div style={{ display: 'inline-flex', backgroundColor: '#F8FAFC', borderRadius: '8px', padding: '0.25rem', border: '1px solid #E2E8F0' }}>
+                       <button type="button" onClick={() => handleChange('lightingIntegration', true)} style={{ ...toggleBtnStyle, ...(formData.lightingIntegration ? toggleBtnActiveStyle : {}) }}>Yes</button>
+                       <button type="button" onClick={() => handleChange('lightingIntegration', false)} style={{ ...toggleBtnStyle, ...(!formData.lightingIntegration ? toggleBtnActiveStyle : {}) }}>No</button>
+                     </div>
+                   </div>
+                 </div>
+               </div>
+             )}
+
+             {formData.projectType === 'Other roofing' && (
+               <>
+                 {formData.customProjectType === 'UPVC Roofing in Chennai' && (
+                   <div style={{ marginBottom: '2.5rem' }}>
+                     <h4 style={{ fontSize: '0.85rem', fontWeight: '700', color: '#64748B', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>UPVC Specific Variables</h4>
+                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
+                       <UnitInput label="Sheet Thickness" placeholder="Enter thickness" unit="mm" value={formData.upvcSheetThickness || ''} onChange={v => handleChange('upvcSheetThickness', v)} />
+                       <div>
+                         <label style={labelStyle}>UV Protection</label>
+                         <div style={{ display: 'inline-flex', backgroundColor: '#F8FAFC', borderRadius: '8px', padding: '0.25rem', border: '1px solid #E2E8F0' }}>
+                           <button type="button" onClick={() => handleChange('uvProtection', true)} style={{ ...toggleBtnStyle, ...(formData.uvProtection ? toggleBtnActiveStyle : {}) }}>Yes</button>
+                           <button type="button" onClick={() => handleChange('uvProtection', false)} style={{ ...toggleBtnStyle, ...(!formData.uvProtection ? toggleBtnActiveStyle : {}) }}>No</button>
+                         </div>
+                       </div>
+                       <UnitInput label="Sheet Color" placeholder="Enter color" unit="" value={formData.sheetColor || ''} onChange={v => handleChange('sheetColor', v)} />
+                       <UnitInput label="Overlap Type" placeholder="Enter type" unit="" value={formData.overlapType || ''} onChange={v => handleChange('overlapType', v)} />
+                     </div>
+                   </div>
+                 )}
+                 {formData.customProjectType === 'Polycarbonate Roofing' && (
+                   <div style={{ marginBottom: '2.5rem' }}>
+                     <h4 style={{ fontSize: '0.85rem', fontWeight: '700', color: '#64748B', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Polycarbonate Specific Variables</h4>
+                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
+                       <div>
+                         <label style={labelStyle}>Solid / Multiwall</label>
+                         <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+                           {['Solid', 'Multiwall'].map(t => (
+                             <SelectPill key={t} label={t} selected={formData.solidMultiwall === t} onClick={() => handleChange('solidMultiwall', t)} />
+                           ))}
+                         </div>
+                       </div>
+                       <div>
+                         <label style={labelStyle}>UV Coating</label>
+                         <div style={{ display: 'inline-flex', backgroundColor: '#F8FAFC', borderRadius: '8px', padding: '0.25rem', border: '1px solid #E2E8F0' }}>
+                           <button type="button" onClick={() => handleChange('uvCoating', true)} style={{ ...toggleBtnStyle, ...(formData.uvCoating ? toggleBtnActiveStyle : {}) }}>Yes</button>
+                           <button type="button" onClick={() => handleChange('uvCoating', false)} style={{ ...toggleBtnStyle, ...(!formData.uvCoating ? toggleBtnActiveStyle : {}) }}>No</button>
+                         </div>
+                       </div>
+                       <UnitInput label="Transparency Level" placeholder="Enter level" unit="" value={formData.transparencyLevel || ''} onChange={v => handleChange('transparencyLevel', v)} />
+                       <UnitInput label="Panel Thickness" placeholder="Enter thickness" unit="mm" value={formData.polycarbonateThickness || ''} onChange={v => handleChange('polycarbonateThickness', v)} />
+                     </div>
+                   </div>
+                 )}
+                 {formData.customProjectType === 'Glass Roofing' && (
+                   <div style={{ marginBottom: '2.5rem' }}>
+                     <h4 style={{ fontSize: '0.85rem', fontWeight: '700', color: '#64748B', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Glass Specific Variables</h4>
+                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
+                       <UnitInput label="Glass Type" placeholder="Enter type" unit="" value={formData.glassTypeTech || ''} onChange={v => handleChange('glassTypeTech', v)} />
+                       <div>
+                         <label style={labelStyle}>Toughened Glass</label>
+                         <div style={{ display: 'inline-flex', backgroundColor: '#F8FAFC', borderRadius: '8px', padding: '0.25rem', border: '1px solid #E2E8F0' }}>
+                           <button type="button" onClick={() => handleChange('toughenedGlass', true)} style={{ ...toggleBtnStyle, ...(formData.toughenedGlass ? toggleBtnActiveStyle : {}) }}>Yes</button>
+                           <button type="button" onClick={() => handleChange('toughenedGlass', false)} style={{ ...toggleBtnStyle, ...(!formData.toughenedGlass ? toggleBtnActiveStyle : {}) }}>No</button>
+                         </div>
+                       </div>
+                       <div>
+                         <label style={labelStyle}>Laminated Glass</label>
+                         <div style={{ display: 'inline-flex', backgroundColor: '#F8FAFC', borderRadius: '8px', padding: '0.25rem', border: '1px solid #E2E8F0' }}>
+                           <button type="button" onClick={() => handleChange('laminatedGlass', true)} style={{ ...toggleBtnStyle, ...(formData.laminatedGlass ? toggleBtnActiveStyle : {}) }}>Yes</button>
+                           <button type="button" onClick={() => handleChange('laminatedGlass', false)} style={{ ...toggleBtnStyle, ...(!formData.laminatedGlass ? toggleBtnActiveStyle : {}) }}>No</button>
+                         </div>
+                       </div>
+                       <UnitInput label="Glass Thickness" placeholder="Enter thickness" unit="mm" value={formData.glassTechThickness || ''} onChange={v => handleChange('glassTechThickness', v)} />
+                       <UnitInput label="Frame Type" placeholder="Enter type" unit="" value={formData.frameType || ''} onChange={v => handleChange('frameType', v)} />
+                       <UnitInput label="Silicone Seal" placeholder="Enter spec" unit="" value={formData.siliconeSeal || ''} onChange={v => handleChange('siliconeSeal', v)} />
+                     </div>
+                   </div>
+                 )}
+                 {formData.customProjectType === 'Mangalore Tile Roofing' && (
+                   <div style={{ marginBottom: '2.5rem' }}>
+                     <h4 style={{ fontSize: '0.85rem', fontWeight: '700', color: '#64748B', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Mangalore Tile Specific Variables</h4>
+                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
+                       <UnitInput label="Tile Brand" placeholder="Enter brand" unit="" value={formData.tileBrand || ''} onChange={v => handleChange('tileBrand', v)} />
+                       <UnitInput label="Tile Color" placeholder="Enter color" unit="" value={formData.tileColor || ''} onChange={v => handleChange('tileColor', v)} />
+                       <div>
+                         <label style={labelStyle}>Underlay Required</label>
+                         <div style={{ display: 'inline-flex', backgroundColor: '#F8FAFC', borderRadius: '8px', padding: '0.25rem', border: '1px solid #E2E8F0' }}>
+                           <button type="button" onClick={() => handleChange('underlayRequired', true)} style={{ ...toggleBtnStyle, ...(formData.underlayRequired ? toggleBtnActiveStyle : {}) }}>Yes</button>
+                           <button type="button" onClick={() => handleChange('underlayRequired', false)} style={{ ...toggleBtnStyle, ...(!formData.underlayRequired ? toggleBtnActiveStyle : {}) }}>No</button>
+                         </div>
+                       </div>
+                       <div>
+                         <label style={labelStyle}>Ridge Tile</label>
+                         <div style={{ display: 'inline-flex', backgroundColor: '#F8FAFC', borderRadius: '8px', padding: '0.25rem', border: '1px solid #E2E8F0' }}>
+                           <button type="button" onClick={() => handleChange('ridgeTile', true)} style={{ ...toggleBtnStyle, ...(formData.ridgeTile ? toggleBtnActiveStyle : {}) }}>Yes</button>
+                           <button type="button" onClick={() => handleChange('ridgeTile', false)} style={{ ...toggleBtnStyle, ...(!formData.ridgeTile ? toggleBtnActiveStyle : {}) }}>No</button>
+                         </div>
+                       </div>
+                     </div>
+                   </div>
+                 )}
+                 {formData.customProjectType === 'Shingles Roofing' && (
+                   <div style={{ marginBottom: '2.5rem' }}>
+                     <h4 style={{ fontSize: '0.85rem', fontWeight: '700', color: '#64748B', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Shingles Specific Variables</h4>
+                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
+                       <UnitInput label="Shingle Type" placeholder="Enter type" unit="" value={formData.shingleTypeTech || ''} onChange={v => handleChange('shingleTypeTech', v)} />
+                       <UnitInput label="Warranty" placeholder="Enter warranty" unit="Years" value={formData.shingleWarranty || ''} onChange={v => handleChange('shingleWarranty', v)} />
+                       <div>
+                         <label style={labelStyle}>Underlayment</label>
+                         <div style={{ display: 'inline-flex', backgroundColor: '#F8FAFC', borderRadius: '8px', padding: '0.25rem', border: '1px solid #E2E8F0' }}>
+                           <button type="button" onClick={() => handleChange('underlayment', true)} style={{ ...toggleBtnStyle, ...(formData.underlayment ? toggleBtnActiveStyle : {}) }}>Yes</button>
+                           <button type="button" onClick={() => handleChange('underlayment', false)} style={{ ...toggleBtnStyle, ...(!formData.underlayment ? toggleBtnActiveStyle : {}) }}>No</button>
+                         </div>
+                       </div>
+                       <div>
+                         <label style={labelStyle}>Starter Strip</label>
+                         <div style={{ display: 'inline-flex', backgroundColor: '#F8FAFC', borderRadius: '8px', padding: '0.25rem', border: '1px solid #E2E8F0' }}>
+                           <button type="button" onClick={() => handleChange('starterStrip', true)} style={{ ...toggleBtnStyle, ...(formData.starterStrip ? toggleBtnActiveStyle : {}) }}>Yes</button>
+                           <button type="button" onClick={() => handleChange('starterStrip', false)} style={{ ...toggleBtnStyle, ...(!formData.starterStrip ? toggleBtnActiveStyle : {}) }}>No</button>
+                         </div>
+                       </div>
+                     </div>
+                   </div>
+                 )}
+                 {formData.customProjectType === 'GI Roofing in Chennai' && (
+                   <div style={{ marginBottom: '2.5rem' }}>
+                     <h4 style={{ fontSize: '0.85rem', fontWeight: '700', color: '#64748B', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>GI Roofing Specific Variables</h4>
+                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
+                       <UnitInput label="Sheet Gauge" placeholder="Enter gauge" unit="" value={formData.sheetGauge || ''} onChange={v => handleChange('sheetGauge', v)} />
+                       <UnitInput label="Zinc Coating" placeholder="Enter coating" unit="" value={formData.zincCoating || ''} onChange={v => handleChange('zincCoating', v)} />
+                       <UnitInput label="Profile Type" placeholder="Enter profile" unit="" value={formData.profileTypeTech || ''} onChange={v => handleChange('profileTypeTech', v)} />
+                       <UnitInput label="Fastener Type" placeholder="Enter fastener" unit="" value={formData.fastenerType || ''} onChange={v => handleChange('fastenerType', v)} />
+                     </div>
+                   </div>
+                 )}
+                 {formData.customProjectType === 'Retractable Roofing' && (
+                   <div style={{ marginBottom: '2.5rem' }}>
+                     <h4 style={{ fontSize: '0.85rem', fontWeight: '700', color: '#64748B', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Retractable Specific Variables</h4>
+                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
+                       <UnitInput label="Motor Brand" placeholder="Enter brand" unit="" value={formData.motorBrand || ''} onChange={v => handleChange('motorBrand', v)} />
+                       <div>
+                         <label style={labelStyle}>Remote Control</label>
+                         <div style={{ display: 'inline-flex', backgroundColor: '#F8FAFC', borderRadius: '8px', padding: '0.25rem', border: '1px solid #E2E8F0' }}>
+                           <button type="button" onClick={() => handleChange('remoteControl', true)} style={{ ...toggleBtnStyle, ...(formData.remoteControl ? toggleBtnActiveStyle : {}) }}>Yes</button>
+                           <button type="button" onClick={() => handleChange('remoteControl', false)} style={{ ...toggleBtnStyle, ...(!formData.remoteControl ? toggleBtnActiveStyle : {}) }}>No</button>
+                         </div>
+                       </div>
+                       <div>
+                         <label style={labelStyle}>Automation</label>
+                         <div style={{ display: 'inline-flex', backgroundColor: '#F8FAFC', borderRadius: '8px', padding: '0.25rem', border: '1px solid #E2E8F0' }}>
+                           <button type="button" onClick={() => handleChange('automation', true)} style={{ ...toggleBtnStyle, ...(formData.automation ? toggleBtnActiveStyle : {}) }}>Yes</button>
+                           <button type="button" onClick={() => handleChange('automation', false)} style={{ ...toggleBtnStyle, ...(!formData.automation ? toggleBtnActiveStyle : {}) }}>No</button>
+                         </div>
+                       </div>
+                       <div>
+                         <label style={labelStyle}>Manual Override</label>
+                         <div style={{ display: 'inline-flex', backgroundColor: '#F8FAFC', borderRadius: '8px', padding: '0.25rem', border: '1px solid #E2E8F0' }}>
+                           <button type="button" onClick={() => handleChange('manualOverride', true)} style={{ ...toggleBtnStyle, ...(formData.manualOverride ? toggleBtnActiveStyle : {}) }}>Yes</button>
+                           <button type="button" onClick={() => handleChange('manualOverride', false)} style={{ ...toggleBtnStyle, ...(!formData.manualOverride ? toggleBtnActiveStyle : {}) }}>No</button>
+                         </div>
+                       </div>
+                       <UnitInput label="Track System" placeholder="Enter system type" unit="" value={formData.trackSystem || ''} onChange={v => handleChange('trackSystem', v)} />
+                       <div>
+                         <label style={labelStyle}>Waterproof Seal</label>
+                         <div style={{ display: 'inline-flex', backgroundColor: '#F8FAFC', borderRadius: '8px', padding: '0.25rem', border: '1px solid #E2E8F0' }}>
+                           <button type="button" onClick={() => handleChange('waterproofSeal', true)} style={{ ...toggleBtnStyle, ...(formData.waterproofSeal ? toggleBtnActiveStyle : {}) }}>Yes</button>
+                           <button type="button" onClick={() => handleChange('waterproofSeal', false)} style={{ ...toggleBtnStyle, ...(!formData.waterproofSeal ? toggleBtnActiveStyle : {}) }}>No</button>
+                         </div>
+                       </div>
+                     </div>
+                   </div>
+                 )}
+               </>
+             )}
+
           </div>
         );
       case 5:
