@@ -9,7 +9,6 @@ import Appointments from './views/Appointments';
 import Quotations from './views/Quotations';
 import ProjectFiling from './views/ProjectFiling';
 import Payments from './views/Payments';
-import Reports from './views/Reports';
 import Notifications from './views/Notifications';
 import Settings from './views/Settings';
 import Login from './views/Login';
@@ -37,7 +36,6 @@ function App() {
             <Route path="quotations" element={<Quotations />} />
             <Route path="projects" element={<ProjectFiling />} />
             <Route path="payments" element={<Payments />} />
-            <Route path="reports" element={<Reports />} />
             <Route path="notifications" element={<Notifications />} />
             <Route path="settings" element={<Settings />} />
           </Route>
