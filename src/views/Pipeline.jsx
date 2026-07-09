@@ -155,19 +155,19 @@ export default function Pipeline() {
           <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', minWidth: '1400px' }}>
             <thead style={{ position: 'sticky', top: 0, backgroundColor: '#F8FAFC', zIndex: 10 }}>
               <tr>
-                <th style={{ padding: '1rem', borderBottom: '1px solid #E2E8F0', color: '#64748B', fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase' }}>Opportunity ID</th>
-                <th style={{ padding: '1rem', borderBottom: '1px solid #E2E8F0', color: '#64748B', fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase' }}>Customer</th>
-                <th style={{ padding: '1rem', borderBottom: '1px solid #E2E8F0', color: '#64748B', fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase' }}>Company</th>
-                <th style={{ padding: '1rem', borderBottom: '1px solid #E2E8F0', color: '#64748B', fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase' }}>Service</th>
-                <th style={{ padding: '1rem', borderBottom: '1px solid #E2E8F0', color: '#64748B', fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase' }}>Stage</th>
-                <th style={{ padding: '1rem', borderBottom: '1px solid #E2E8F0', color: '#64748B', fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase' }}>Pipeline Status</th>
-                <th style={{ padding: '1rem', borderBottom: '1px solid #E2E8F0', color: '#64748B', fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase' }}>Assigned To</th>
-                <th style={{ padding: '1rem', borderBottom: '1px solid #E2E8F0', color: '#64748B', fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase' }}>Expected Close</th>
-                <th style={{ padding: '1rem', borderBottom: '1px solid #E2E8F0', color: '#64748B', fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase', cursor: 'pointer' }}><div style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}>Project Value <ArrowUpDown size={14} /></div></th>
-                <th style={{ padding: '1rem', borderBottom: '1px solid #E2E8F0', color: '#64748B', fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase' }}>Probability</th>
-                <th style={{ padding: '1rem', borderBottom: '1px solid #E2E8F0', color: '#64748B', fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase' }}>Last Activity</th>
-                <th style={{ padding: '1rem', borderBottom: '1px solid #E2E8F0', color: '#64748B', fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase' }}>Follow-up</th>
-                <th style={{ padding: '1rem', borderBottom: '1px solid #E2E8F0', color: '#64748B', fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase' }}>Actions</th>
+                <th style={{ padding: '1rem', borderBottom: '1px solid #E2E8F0', color: '#64748B', fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase', whiteSpace: 'nowrap' }}>Opportunity ID</th>
+                <th style={{ padding: '1rem', borderBottom: '1px solid #E2E8F0', color: '#64748B', fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase', whiteSpace: 'nowrap' }}>Customer</th>
+                <th style={{ padding: '1rem', borderBottom: '1px solid #E2E8F0', color: '#64748B', fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase', whiteSpace: 'nowrap' }}>Company</th>
+                <th style={{ padding: '1rem', borderBottom: '1px solid #E2E8F0', color: '#64748B', fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase', whiteSpace: 'nowrap' }}>Service</th>
+                <th style={{ padding: '1rem', borderBottom: '1px solid #E2E8F0', color: '#64748B', fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase', whiteSpace: 'nowrap' }}>Stage</th>
+                <th style={{ padding: '1rem', borderBottom: '1px solid #E2E8F0', color: '#64748B', fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase', whiteSpace: 'nowrap' }}>Pipeline Status</th>
+                <th style={{ padding: '1rem', borderBottom: '1px solid #E2E8F0', color: '#64748B', fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase', whiteSpace: 'nowrap' }}>Assigned To</th>
+                <th style={{ padding: '1rem', borderBottom: '1px solid #E2E8F0', color: '#64748B', fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase', whiteSpace: 'nowrap' }}>Expected Close</th>
+                <th style={{ padding: '1rem', borderBottom: '1px solid #E2E8F0', color: '#64748B', fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase', whiteSpace: 'nowrap', cursor: 'pointer' }}><div style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}>Project Value <ArrowUpDown size={14} /></div></th>
+                <th style={{ padding: '1rem', borderBottom: '1px solid #E2E8F0', color: '#64748B', fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase', whiteSpace: 'nowrap' }}>Probability</th>
+                <th style={{ padding: '1rem', borderBottom: '1px solid #E2E8F0', color: '#64748B', fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase', whiteSpace: 'nowrap' }}>Last Activity</th>
+                <th style={{ padding: '1rem', borderBottom: '1px solid #E2E8F0', color: '#64748B', fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase', whiteSpace: 'nowrap' }}>Follow-up</th>
+                <th style={{ padding: '1rem', borderBottom: '1px solid #E2E8F0', color: '#64748B', fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase', whiteSpace: 'nowrap' }}>Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -181,11 +181,11 @@ export default function Pipeline() {
                     onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#FFFFFF'}
                     onClick={() => setSelectedOpp(opp)}
                   >
-                    <td style={{ padding: '1rem', fontSize: '0.875rem', fontWeight: '600', color: '#4F46E5' }}>{opp.id}</td>
-                    <td style={{ padding: '1rem', fontSize: '0.875rem', fontWeight: '600', color: '#1E293B' }}>{opp.customer}</td>
-                    <td style={{ padding: '1rem', fontSize: '0.875rem', color: '#475569' }}>{opp.company}</td>
-                    <td style={{ padding: '1rem', fontSize: '0.875rem', color: '#475569' }}>{opp.service}</td>
-                    <td style={{ padding: '1rem' }} onClick={(e) => e.stopPropagation()}>
+                    <td style={{ padding: '1rem', fontSize: '0.875rem', whiteSpace: 'nowrap', fontWeight: '600', color: '#4F46E5' }}>{opp.id}</td>
+                    <td style={{ padding: '1rem', fontSize: '0.875rem', whiteSpace: 'nowrap', fontWeight: '600', color: '#1E293B' }}>{opp.customer}</td>
+                    <td style={{ padding: '1rem', fontSize: '0.875rem', whiteSpace: 'nowrap', color: '#475569' }}>{opp.company}</td>
+                    <td style={{ padding: '1rem', fontSize: '0.875rem', whiteSpace: 'nowrap', color: '#475569' }}>{opp.service}</td>
+                    <td style={{ padding: '1rem', whiteSpace: 'nowrap' }} onClick={(e) => e.stopPropagation()}>
                       <select style={{ backgroundColor: sStyle.bg, color: sStyle.color, border: 'none', padding: '0.25rem 0.5rem', borderRadius: '6px', fontSize: '0.75rem', fontWeight: '700', outline: 'none', cursor: 'pointer' }} value={opp.stage} onChange={() => {}}>
                         <option>New Lead</option>
                         <option>Qualified</option>
@@ -196,11 +196,11 @@ export default function Pipeline() {
                         <option>Lost</option>
                       </select>
                     </td>
-                    <td style={{ padding: '1rem' }}>{getStatusBadge(opp.pipelineStatus)}</td>
-                    <td style={{ padding: '1rem', fontSize: '0.875rem', color: '#475569' }}>{opp.assigned}</td>
-                    <td style={{ padding: '1rem', fontSize: '0.875rem', color: '#475569' }}>{opp.expectedClose}</td>
-                    <td style={{ padding: '1rem', fontSize: '0.875rem', fontWeight: '700', color: '#10B981' }}>{opp.value}</td>
-                    <td style={{ padding: '1rem' }}>
+                    <td style={{ padding: '1rem', whiteSpace: 'nowrap' }}>{getStatusBadge(opp.pipelineStatus)}</td>
+                    <td style={{ padding: '1rem', fontSize: '0.875rem', whiteSpace: 'nowrap', color: '#475569' }}>{opp.assigned}</td>
+                    <td style={{ padding: '1rem', fontSize: '0.875rem', whiteSpace: 'nowrap', color: '#475569' }}>{opp.expectedClose}</td>
+                    <td style={{ padding: '1rem', fontSize: '0.875rem', whiteSpace: 'nowrap', fontWeight: '700', color: '#10B981' }}>{opp.value}</td>
+                    <td style={{ padding: '1rem', whiteSpace: 'nowrap' }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                         <div style={{ width: '60px', height: '6px', backgroundColor: '#E2E8F0', borderRadius: '3px', overflow: 'hidden' }}>
                           <div style={{ height: '100%', width: opp.probability, backgroundColor: getProbabilityColor(opp.probability) }}></div>
@@ -208,9 +208,9 @@ export default function Pipeline() {
                         <span style={{ fontSize: '0.75rem', fontWeight: '700', color: '#1E293B' }}>{opp.probability}</span>
                       </div>
                     </td>
-                    <td style={{ padding: '1rem', fontSize: '0.875rem', color: '#475569' }}>{opp.lastActivity}</td>
-                    <td style={{ padding: '1rem', fontSize: '0.875rem', color: '#475569' }}>{opp.followUp}</td>
-                    <td style={{ padding: '1rem' }} onClick={(e) => e.stopPropagation()}>
+                    <td style={{ padding: '1rem', fontSize: '0.875rem', whiteSpace: 'nowrap', color: '#475569' }}>{opp.lastActivity}</td>
+                    <td style={{ padding: '1rem', fontSize: '0.875rem', whiteSpace: 'nowrap', color: '#475569' }}>{opp.followUp}</td>
+                    <td style={{ padding: '1rem', whiteSpace: 'nowrap' }} onClick={(e) => e.stopPropagation()}>
                       <div style={{ display: 'flex', gap: '0.5rem' }}>
                         <button style={{ padding: '0.4rem', border: 'none', backgroundColor: '#F1F5F9', color: '#64748B', borderRadius: '6px', cursor: 'pointer' }} title="View"><Eye size={14} /></button>
                         <button style={{ padding: '0.4rem', border: 'none', backgroundColor: '#F1F5F9', color: '#64748B', borderRadius: '6px', cursor: 'pointer' }} title="Edit"><Edit2 size={14} /></button>
