@@ -2075,6 +2075,22 @@ export default function AddNewLeadWizard({ isOpen, onClose, onSave, initialData 
                    {SERVICES.map(s => <option key={s} value={s}>{s}</option>)}
                  </select>
                </div>
+               {formData.projectType === 'Other roofing' && (
+                 <div>
+                   <label style={labelStyle}>Select Roofing Type</label>
+                   <select style={inputStyle} value={formData.customProjectType || ''} onChange={e => handleChange('customProjectType', e.target.value)}>
+                     <option value="" disabled>Select Roofing Type</option>
+                     <option value="Tensile Roofing">Tensile Roofing</option>
+                     <option value="UPVC Roofing in Chennai">UPVC Roofing in Chennai</option>
+                     <option value="Polycarbonate Roofing">Polycarbonate Roofing</option>
+                     <option value="Glass Roofing">Glass Roofing</option>
+                     <option value="Mangalore Tile Roofing">Mangalore Tile Roofing</option>
+                     <option value="Shingles Roofing">Shingles Roofing</option>
+                     <option value="GI Roofing in Chennai">GI Roofing in Chennai</option>
+                     <option value="Retractable Roofing">Retractable Roofing</option>
+                   </select>
+                 </div>
+               )}
                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
                  <div>
                    <label style={labelStyle}>Quotation Type</label>
