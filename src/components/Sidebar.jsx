@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { 
   LayoutDashboard, 
   Users, 
+  KanbanSquare, 
   Calendar, 
   FileText, 
   FolderOpen, 
@@ -16,7 +17,7 @@ import {
 const menuItems = [
   { path: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
   { path: '/leads', label: 'Lead Management', icon: Users },
-  { path: '/pipeline', label: 'Sales Pipeline', icon: Trello },
+  { path: '/pipeline', label: 'Sales Pipeline', icon: KanbanSquare },
   { path: '/appointments', label: 'Appointments', icon: Calendar },
   { path: '/quotations', label: 'Quotations', icon: FileText },
   { path: '/projects', label: 'Project Filing', icon: FolderOpen },
