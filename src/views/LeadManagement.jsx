@@ -118,7 +118,7 @@ const initialLeadsData = [
     phone: '+91 96543 21098',
     source: 'Organic Leads',
     budget: '₹300k',
-    status: 'Quotation Send',
+    status: 'Quotation Sent',
     manager: 'Jane Smith',
     followUp: 'Tomorrow',
     priority: 'Medium',
@@ -756,7 +756,7 @@ const LeadManagement = () => {
           message: `Updated status to: QUOTATION SEND`,
           remark: historyMessage
         }];
-        const updatedLead = { ...l, status: 'Quotation Send', history: newHistory };
+        const updatedLead = { ...l, status: 'Quotation Sent', history: newHistory };
         if (selectedLeadForTimeline && selectedLeadForTimeline.id === genQuoteLeadId) {
           setSelectedLeadForTimeline(updatedLead);
         }
@@ -1421,16 +1421,16 @@ const LeadManagement = () => {
                       backgroundSize: '0.65rem auto'
                     }}
                   >
-                    <option value="NEW">NEW LEAD</option>
-                    <option value="HOT">HOT</option>
-                    <option value="WARM">WARM</option>
-                    <option value="COLD">COLD</option>
-                    <option value="APPT FIXED">APPT FIXED</option>
-                    <option value="QUOTATION SEND">QUOTATION SEND</option>
+                    <option value="New Lead">NEW LEAD</option>
+                    <option value="Hot">HOT</option>
+                    <option value="Warm">WARM</option>
+                    <option value="Cold">COLD</option>
+                    <option value="Appointment Fixed">APPT FIXED</option>
+                    <option value="Quotation Sent">QUOTATION SEND</option>
                     
-                    <option value="ORDER CONFIRMED">ORDER CONFIRMED</option>
-                    <option value="PROJECT FILING">PROJECT FILING</option>
-                    <option value="JUNK">JUNK</option>
+                    <option value="Order Confirmed">ORDER CONFIRMED</option>
+                    <option value="Project Filing">PROJECT FILING</option>
+                    <option value="Junk">JUNK</option>
                   </select>
                 </td>
                 <td style={{ padding: '0.75rem 1rem', textAlign: 'center', whiteSpace: 'nowrap' }} onClick={(e) => e.stopPropagation()}>

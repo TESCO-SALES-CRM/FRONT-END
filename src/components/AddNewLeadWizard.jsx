@@ -229,16 +229,16 @@ export default function AddNewLeadWizard({ isOpen, onClose, onSave, initialData 
               <div>
                 <label style={labelStyle}>Status <span style={{ color: 'red' }}>*</span></label>
                 <select style={inputStyle} value={formData.status} onChange={e => handleChange('status', e.target.value)}>
-                  <option value="NEW">NEW</option>
-                  <option value="HOT">HOT</option>
-                  <option value="WARM">WARM</option>
-                  <option value="COLD">COLD</option>
-                  <option value="APPOINTMENT FIXED">APPOINTMENT FIXED</option>
-                  <option value="QUOTATION SEND">QUOTATION SEND</option>
+                  <option value="New Lead">NEW</option>
+                  <option value="Hot">HOT</option>
+                  <option value="Warm">WARM</option>
+                  <option value="Cold">COLD</option>
+                  <option value="Appointment Fixed">APPOINTMENT FIXED</option>
+                  <option value="Quotation Sent">QUOTATION SEND</option>
                   
-                  <option value="ORDER CONFIRMED">ORDER CONFIRMED</option>
-                  <option value="PROJECT FILING">PROJECT FILING</option>
-                  <option value="JUNK">JUNK</option>
+                  <option value="Order Confirmed">ORDER CONFIRMED</option>
+                  <option value="Project Filing">PROJECT FILING</option>
+                  <option value="Junk">JUNK</option>
                 </select>
               </div>
             </div>
