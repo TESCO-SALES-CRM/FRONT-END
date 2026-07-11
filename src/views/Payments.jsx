@@ -4,6 +4,8 @@ import {
   X, AlertCircle, Clock, ChevronLeft, ChevronRight, Eye, Edit2, CreditCard
 } from 'lucide-react';
 import PaymentDetailsDrawer from '../components/PaymentDetailsDrawer';
+import RecordPaymentModal from '../components/RecordPaymentModal';
+
 
 const SUMMARY_CARDS = [
   { title: 'Total Collected', value: '₹2.4Cr', bg: '#ECFDF5', color: '#10B981', icon: <CheckCircle2 size={20} /> },
@@ -35,6 +37,11 @@ export default function Payments() {
   const [payments, setPayments] = useState(INITIAL_PAYMENTS);
   const [search, setSearch] = useState('');
   const [selectedPayment, setSelectedPayment] = useState(null);
+  const [isRecordModalOpen, setIsRecordModalOpen] = useState(false);
+
+  const handleSavePayment = (newPayment) => {
+    setPayments([newPayment, ...payments]);
+  };
 
   return (
     <div style={{ padding: '2rem', minHeight: '100vh', backgroundColor: '#F8FAFC' }}>
@@ -46,7 +53,7 @@ export default function Payments() {
           <h2 style={{ fontSize: '1.875rem', fontWeight: '800', color: '#1E293B', margin: '0.5rem 0 0 0', letterSpacing: '-0.5px' }}>Payment Collection</h2>
         </div>
         <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
-          <button style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.75rem 1.25rem', backgroundColor: '#4F46E5', color: '#FFFFFF', border: 'none', borderRadius: '12px', fontWeight: '600', cursor: 'pointer', boxShadow: '0 4px 6px -1px rgba(79, 70, 229, 0.2)' }}>
+          <button onClick={() => setIsRecordModalOpen(true)} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.75rem 1.25rem', backgroundColor: '#4F46E5', color: '#FFFFFF', border: 'none', borderRadius: '12px', fontWeight: '600', cursor: 'pointer', boxShadow: '0 4px 6px -1px rgba(79, 70, 229, 0.2)' }}>
             <Plus size={18} /> Record Payment
           </button>
         </div>
@@ -131,7 +138,7 @@ export default function Payments() {
                   <td style={{ padding: '1rem', whiteSpace: 'nowrap' }} onClick={(e) => e.stopPropagation()}>
                     <div style={{ display: 'flex', gap: '0.5rem' }}>
                       <button style={{ padding: '0.4rem', border: 'none', backgroundColor: '#F1F5F9', color: '#64748B', borderRadius: '6px', cursor: 'pointer' }} title="View Details"><Eye size={14} /></button>
-                      <button style={{ padding: '0.4rem', border: 'none', backgroundColor: '#EEF2FF', color: '#4F46E5', borderRadius: '6px', cursor: 'pointer' }} title="Record Payment"><CreditCard size={14} /></button>
+                      <button onClick={(e) => { e.stopPropagation(); setIsRecordModalOpen(true); }} style={{ padding: '0.4rem', border: 'none', backgroundColor: '#EEF2FF', color: '#4F46E5', borderRadius: '6px', cursor: 'pointer' }} title="Record Payment"><CreditCard size={14} /></button>
                       <button style={{ padding: '0.4rem', border: 'none', backgroundColor: '#F1F5F9', color: '#64748B', borderRadius: '6px', cursor: 'pointer' }} title="Download Invoice"><Download size={14} /></button>
                     </div>
                   </td>
@@ -154,6 +161,7 @@ export default function Payments() {
       </div>
 
       <PaymentDetailsDrawer payment={selectedPayment} isOpen={!!selectedPayment} onClose={() => setSelectedPayment(null)} />
+      <RecordPaymentModal isOpen={isRecordModalOpen} onClose={() => setIsRecordModalOpen(false)} onSave={handleSavePayment} />
     </div>
   );
 }
