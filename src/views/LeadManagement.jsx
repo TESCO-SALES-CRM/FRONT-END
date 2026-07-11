@@ -804,6 +804,35 @@ const LeadManagement = () => {
     });
   };
 
+  const handleProjectFileSubmit = (e) => {
+    e.preventDefault();
+    if (projectFileLeadId) {
+      const formattedTime = getFormattedTimestamp();
+      setLeads(leads.map(l => {
+        if (l.id === projectFileLeadId) {
+          return { 
+            ...l, 
+            status: 'Project Filing',
+            history: [...(l.history || []), {
+              timestamp: formattedTime,
+              message: `Initiated Project Filing: ${projectFileDetails.clientName}`,
+              remark: ''
+            }]
+          };
+        }
+        return l;
+      }));
+      addToast('Handover Form Initiated successfully!', 'success');
+    }
+    setIsProjectFileModalOpen(false);
+    setProjectFileLeadId(null);
+  };
+
+  const cancelProjectFileModal = () => {
+    setIsProjectFileModalOpen(false);
+    setProjectFileLeadId(null);
+  };
+
   const updateLeadFollowUp = (id, newFollowUp) => {
     const formattedTime = getFormattedTimestamp();
     setLeads(leads.map(l => {
