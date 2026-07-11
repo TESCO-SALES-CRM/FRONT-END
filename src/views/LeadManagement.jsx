@@ -1990,6 +1990,77 @@ const LeadManagement = () => {
         </div>
       )}
 
+      {/* --- NEW PROJECT FILE MODAL --- */}
+      {isProjectFileModalOpen && (
+        <div style={{
+          position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
+          backgroundColor: 'rgba(15, 23, 42, 0.4)', zIndex: 1000,
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          backdropFilter: 'blur(4px)',
+          WebkitBackdropFilter: 'blur(4px)',
+          animation: 'fadeInBackdrop 0.25s ease-out'
+        }}>
+          <div className="card" style={{ 
+            width: '100%', 
+            maxWidth: '560px', 
+            padding: '2rem', 
+            animation: 'scaleIn 0.25s ease-out',
+            backgroundColor: 'var(--surface-color)',
+            boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+            borderRadius: 'var(--radius-lg)'
+          }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.75rem' }}>
+              <h3 style={{ margin: 0, fontSize: '1.5rem', fontFamily: 'Poppins, sans-serif', color: '#1E293B', fontWeight: '700' }}>
+                New <span style={{ color: '#3b82f6', backgroundColor: '#EFF6FF', padding: '0.2rem 0.5rem', borderRadius: '4px' }}>Handover Form</span>
+              </h3>
+              <button 
+                onClick={cancelProjectFileModal} 
+                style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-muted)', padding: '0.25rem', borderRadius: '50%', transition: 'background-color 0.2s' }}
+                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#F1F5F9'}
+                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
+              >
+                <X size={20} />
+              </button>
+            </div>
+
+            <form onSubmit={handleProjectFileSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.25rem' }}>
+                <div>
+                  <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', marginBottom: '0.5rem', color: '#64748B' }}>Lead ID</label>
+                  <input readOnly value={projectFileDetails.leadId} type="text" style={{ width: '100%', padding: '0.625rem 0.875rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)', backgroundColor: '#F8FAFC', color: '#64748B', cursor: 'not-allowed', fontSize: '0.875rem' }} />
+                </div>
+                <div>
+                  <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', marginBottom: '0.5rem', color: '#64748B' }}>Client Name *</label>
+                  <input required value={projectFileDetails.clientName} onChange={(e) => setProjectFileDetails({...projectFileDetails, clientName: e.target.value})} type="text" style={{ width: '100%', padding: '0.625rem 0.875rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)', color: 'var(--text-main)', outline: 'none', fontSize: '0.875rem' }} />
+                </div>
+              </div>
+              <div>
+                <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', marginBottom: '0.5rem', color: '#64748B' }}>Project Location *</label>
+                <input required value={projectFileDetails.projectLocation} onChange={(e) => setProjectFileDetails({...projectFileDetails, projectLocation: e.target.value})} type="text" style={{ width: '100%', padding: '0.625rem 0.875rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)', color: 'var(--text-main)', outline: 'none', fontSize: '0.875rem' }} />
+              </div>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.25rem' }}>
+                <div>
+                  <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', marginBottom: '0.5rem', color: '#64748B' }}>Mobile Number *</label>
+                  <input required value={projectFileDetails.mobile} onChange={(e) => setProjectFileDetails({...projectFileDetails, mobile: e.target.value})} type="text" style={{ width: '100%', padding: '0.625rem 0.875rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)', color: 'var(--text-main)', outline: 'none', fontSize: '0.875rem' }} />
+                </div>
+                <div>
+                  <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', marginBottom: '0.5rem', color: '#64748B' }}>Project Type</label>
+                  <select required value={projectFileDetails.projectType} onChange={(e) => setProjectFileDetails({...projectFileDetails, projectType: e.target.value})} style={{ width: '100%', padding: '0.625rem 0.875rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)', backgroundColor: 'var(--surface-color)', color: 'var(--text-main)', outline: 'none', fontSize: '0.875rem' }}>
+                    <option value="PEB">PEB</option>
+                    <option value="Tensile">Tensile</option>
+                    <option value="Other roofing">Other roofing</option>
+                  </select>
+                </div>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '1rem', marginTop: '1rem' }}>
+                <button type="button" onClick={cancelProjectFileModal} style={{ padding: '0.625rem 1.25rem', borderRadius: 'var(--radius-md)', backgroundColor: 'transparent', border: '1px solid var(--border-color)', color: 'var(--text-main)', fontSize: '0.875rem', fontWeight: '600', cursor: 'pointer' }}>Cancel</button>
+                <button type="submit" style={{ padding: '0.625rem 1.25rem', borderRadius: 'var(--radius-md)', backgroundColor: 'var(--primary-color)', border: 'none', color: 'white', fontSize: '0.875rem', fontWeight: '600', cursor: 'pointer' }}>Create Handover</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
     </div>
   );
 };
