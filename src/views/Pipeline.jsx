@@ -4,6 +4,8 @@ import {
   ArrowUpDown, Download, CheckCircle2, ChevronLeft, ChevronRight, X 
 } from 'lucide-react';
 import PipelineDetailsDrawer from '../components/PipelineDetailsDrawer';
+import AddNewOpportunityModal from '../components/AddNewOpportunityModal';
+
 import AddNewLeadWizard from '../components/AddNewLeadWizard';
 
 const SUMMARY_CARDS = [
