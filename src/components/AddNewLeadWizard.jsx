@@ -347,6 +347,14 @@ export default function AddNewLeadWizard({ isOpen, onClose, onSave, initialData 
                      ))}
                    </div>
                  </div>
+                  <div style={{ marginBottom: '1.5rem' }}>
+                    <label style={labelStyle}>Fabric GSM</label>
+                    <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+                      {['450 GSM', '550 GSM', '650 GSM', '750 GSM', '900 GSM', '1050 GSM'].map(t => (
+                        <SelectPill key={t} label={t} selected={formData.fabricGsm === t} onClick={() => handleChange('fabricGsm', t)} />
+                      ))}
+                    </div>
+                  </div>
                  <div style={{ marginBottom: '1.5rem' }}>
                    <label style={labelStyle}>Frame Material</label>
                    <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
