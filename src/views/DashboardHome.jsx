@@ -152,6 +152,8 @@ const DashboardHome = () => {
 
       {/* 2. KPI Cards */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem' }}>
+        <KpiCard title="Sales Pipeline Value" value="₹4.5Cr" subtitle="Total Potential Revenue" icon={TrendingUp} color="var(--primary-color)" bg="#EEF4FF" borderColor="#C7D2FE" />
+        <KpiCard title="Expected Revenue" value="₹1.2Cr" subtitle="Weighted by Probability" icon={DollarSign} color="#10B981" bg="#ECFDF5" borderColor="#A7F3D0" />
         <KpiCard title="Received Leads" value={receivedLeadsCount} subtitle="+20 New Today" icon={FileText} color="var(--primary-color)" bg="#EEF4FF" borderColor="#C7D2FE" />
         <KpiCard title="Total Calls Made" value={callsMadeCount} subtitle="+12% from yesterday" icon={Phone} color="#7C3AED" bg="#F5F3FF" borderColor="#DDD6FE" />
         <KpiCard title="Hot Leads" value={hotLeadsCount} subtitle="High conversion chance" icon={Flame} color="#E11D48" bg="#FFF1F2" borderColor="#FECDD3" />
