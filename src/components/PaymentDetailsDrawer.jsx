@@ -57,7 +57,7 @@ const PaymentDetailsDrawer = ({ payment, isOpen, onClose }) => {
 
         {/* Tabs */}
         <div style={{ padding: '0 1.5rem', backgroundColor: '#FFFFFF', borderBottom: '1px solid #E2E8F0', display: 'flex', gap: '2rem' }}>
-          {['payment_overview', 'billing_details', 'timeline', 'notes'].map((tab) => (
+          {['payment_overview', 'billing_details', 'upload_invoice', 'timeline', 'notes'].map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
@@ -117,6 +117,27 @@ const PaymentDetailsDrawer = ({ payment, isOpen, onClose }) => {
                  <div><span style={{ display: 'block', fontSize: '0.65rem', fontWeight: '700', color: '#94A3B8', marginBottom: '0.25rem', textTransform: 'uppercase' }}>Company</span><span style={{ fontWeight: '600', color: '#1E293B', fontSize: '0.875rem' }}>{payment.company}</span></div>
                  <div><span style={{ display: 'block', fontSize: '0.65rem', fontWeight: '700', color: '#94A3B8', marginBottom: '0.25rem', textTransform: 'uppercase' }}>Phone</span><span style={{ fontWeight: '600', color: '#1E293B', fontSize: '0.875rem' }}>+91 98765 43210</span></div>
                  <div><span style={{ display: 'block', fontSize: '0.65rem', fontWeight: '700', color: '#94A3B8', marginBottom: '0.25rem', textTransform: 'uppercase' }}>Billing Email</span><span style={{ fontWeight: '600', color: '#1E293B', fontSize: '0.875rem' }}>accounts@company.com</span></div>
+               </div>
+             </div>
+          )}
+
+          {activeTab === 'upload_invoice' && (
+             <div style={{ backgroundColor: '#FFFFFF', padding: '1.5rem', borderRadius: '12px', border: '1px solid #E2E8F0' }}>
+               <h3 style={{ margin: '0 0 1rem 0', fontSize: '1rem', fontWeight: '700', color: '#1E293B', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                 <FileText size={18} color="var(--primary-color)" /> Upload Invoice
+               </h3>
+               <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '1.25rem' }}>
+                 <div>
+                   <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: '700', color: '#475569', marginBottom: '0.5rem', textTransform: 'uppercase' }}>Invoice Value</label>
+                   <input type="number" placeholder="Enter value" style={{ width: '100%', padding: '0.75rem 1rem', borderRadius: '8px', border: '1px solid #E2E8F0', fontSize: '0.875rem', outline: 'none' }} />
+                 </div>
+                 <div>
+                   <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: '700', color: '#475569', marginBottom: '0.5rem', textTransform: 'uppercase' }}>Upload Document</label>
+                   <input type="file" style={{ width: '100%', padding: '0.5rem', borderRadius: '8px', border: '1px solid #E2E8F0', fontSize: '0.875rem', outline: 'none', backgroundColor: '#F8FAFC' }} />
+                 </div>
+                 <div>
+                   <button style={{ backgroundColor: 'var(--primary-color)', color: '#FFFFFF', border: 'none', borderRadius: '8px', padding: '0.75rem 1.5rem', fontWeight: '600', cursor: 'pointer', marginTop: '0.5rem' }}>Submit</button>
+                 </div>
                </div>
              </div>
           )}
