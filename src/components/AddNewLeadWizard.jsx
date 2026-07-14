@@ -1365,10 +1365,7 @@ export default function AddNewLeadWizard({ isOpen, onClose, onSave, initialData 
                  <div style={{ marginBottom: '2.5rem' }}>
                    <h4 style={{ fontSize: '0.85rem', fontWeight: '700', color: '#64748B', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Structural Layout</h4>
                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
-                     <div>
-                       <label style={labelStyle}>Number of Bays</label>
-                       <StepperInput value={formData.numberOfBays || 0} onChange={v => handleChange('numberOfBays', v)} />
-                     </div>
+
                      <UnitInput label="Bay Spacing" placeholder="Enter spacing" unit="ft" value={formData.baySpacing || ''} onChange={v => handleChange('baySpacing', v)} />
                      <div>
                        <label style={labelStyle}>Number of Columns</label>
