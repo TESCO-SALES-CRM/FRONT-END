@@ -1,6 +1,6 @@
 import NewHandoverFormModal from '../components/NewHandoverFormModal';
 import React, { useState, useEffect } from 'react';
-import { Search, Filter, Phone, MoreVertical, X, Edit2, Mail, Trash2, Users, Flame, CalendarCheck, Clock, Calendar, ChevronDown, ChevronUp, MapPin, Activity, User, FileText, UserPlus, Sparkles, Thermometer, Snowflake, FileSignature, HandshakeIcon, CheckCircle2, Trash, Send, ArrowUpDown, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Search, Filter, Phone, MoreVertical, X, Edit2, Mail, Trash2, Users, Flame, CalendarCheck, Clock, Calendar, ChevronDown, ChevronUp, MapPin, Activity, User, FileText, UserPlus, Sparkles, Thermometer, Snowflake, FileSignature, HandshakeIcon, CheckCircle2, Trash, Send, ArrowUpDown, ChevronLeft, ChevronRight, XCircle } from 'lucide-react';
 import { useToast } from '../components/Toast';
 import AddNewLeadWizard from '../components/AddNewLeadWizard';
 import LeadDetailsDrawer from '../components/LeadDetailsDrawer';
@@ -1187,17 +1187,6 @@ const LeadManagement = () => {
             onClick={() => toggleFilter('Order Confirmed')}
           />
           <LeadOverviewCard 
-            title="Order Confirm" 
-            value={leadsInDateRange.filter(l => (l.status||'').toLowerCase() === 'order confirm').length} 
-            subtitle="Handed over to ops" 
-            icon={FileSignature} 
-            color="var(--primary-color)" 
-            bg="#EEF4FF" 
-            borderColor="#C7D2FE" 
-            isSelected={statusFilter === 'Order Confirm'}
-            onClick={() => toggleFilter('Order Confirm')}
-          />
-          <LeadOverviewCard 
             title="Junk" 
             value={leadsInDateRange.filter(l => (l.status||'').toLowerCase().includes('junk')).length} 
             subtitle="Unqualified leads" 
@@ -1207,6 +1196,17 @@ const LeadManagement = () => {
             borderColor="#E2E8F0" 
             isSelected={statusFilter === 'Junk'}
             onClick={() => toggleFilter('Junk')}
+          />
+          <LeadOverviewCard 
+            title="Lost" 
+            value={leadsInDateRange.filter(l => (l.status||'').toLowerCase().includes('lost')).length} 
+            subtitle="Unconverted leads" 
+            icon={XCircle} 
+            color="#EF4444" 
+            bg="#FEF2F2" 
+            borderColor="#FECACA" 
+            isSelected={statusFilter === 'Lost'}
+            onClick={() => toggleFilter('Lost')}
           />
         </div>
       </div>
