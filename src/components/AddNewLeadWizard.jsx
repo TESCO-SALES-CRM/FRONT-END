@@ -342,7 +342,7 @@ export default function AddNewLeadWizard({ isOpen, onClose, onSave, initialData 
                  <div style={{ marginBottom: '1.5rem' }}>
                    <label style={labelStyle}>Fabric Material</label>
                    <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-                     {['PVC', 'PTFE', 'ETFE', 'HDPE Shade Net'].map(t => (
+                     {['PVC', 'PVDF', 'PTFE', 'ETFE', 'HDPE Shade Net'].map(t => (
                        <SelectPill key={t} label={t} selected={formData.fabricMaterial === t} onClick={() => handleChange('fabricMaterial', t)} />
                      ))}
                    </div>
@@ -403,7 +403,7 @@ export default function AddNewLeadWizard({ isOpen, onClose, onSave, initialData 
                      <div style={{ marginBottom: '1.5rem' }}>
                        <label style={labelStyle}>Fabric Material</label>
                        <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-                         {['PVC', 'PTFE', 'ETFE', 'HDPE Shade Net'].map(t => (
+                         {['PVC', 'PVDF', 'PTFE', 'ETFE', 'HDPE Shade Net'].map(t => (
                            <SelectPill key={t} label={t} selected={formData.fabricMaterial === t} onClick={() => handleChange('fabricMaterial', t)} />
                          ))}
                        </div>
