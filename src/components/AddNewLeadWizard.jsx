@@ -1390,6 +1390,47 @@ export default function AddNewLeadWizard({ isOpen, onClose, onSave, initialData 
                  </div>
 
                  <div style={{ marginBottom: '2.5rem' }}>
+                    <h4 style={{ fontSize: '0.85rem', fontWeight: '700', color: '#64748B', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Site Photos</h4>
+                    <label
+                      htmlFor="sitePhotoUpload"
+                      style={{
+                        display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+                        gap: '0.75rem', padding: '2rem', borderRadius: '12px',
+                        border: '2px dashed #C7D2FE', backgroundColor: '#F8FAFF',
+                        cursor: 'pointer', transition: 'all 0.2s ease', textAlign: 'center',
+                      }}
+                      onMouseOver={e => { e.currentTarget.style.backgroundColor = '#EEF2FF'; e.currentTarget.style.borderColor = 'var(--primary-color)'; }}
+                      onMouseOut={e => { e.currentTarget.style.backgroundColor = '#F8FAFF'; e.currentTarget.style.borderColor = '#C7D2FE'; }}
+                    >
+                      <div style={{ width: '48px', height: '48px', borderRadius: '50%', backgroundColor: '#EEF2FF', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="var(--primary-color)" strokeWidth="2">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5V19a1 1 0 001 1h16a1 1 0 001-1v-2.5M16 9l-4-4m0 0L8 9m4-4v12" />
+                        </svg>
+                      </div>
+                      <div>
+                        <p style={{ margin: 0, fontWeight: '600', color: 'var(--primary-color)', fontSize: '0.9rem' }}>Click to upload site photos</p>
+                        <p style={{ margin: '0.25rem 0 0 0', color: '#94A3B8', fontSize: '0.8rem' }}>PNG, JPG, HEIC up to 10MB each · Multiple files allowed</p>
+                      </div>
+                      <input
+                        id="sitePhotoUpload"
+                        type="file"
+                        multiple
+                        accept="image/*"
+                        style={{ display: 'none' }}
+                        onChange={e => {
+                          const files = Array.from(e.target.files).map(f => f.name).join(', ');
+                          handleChange('sitePhotos', files);
+                        }}
+                      />
+                    </label>
+                    {formData.sitePhotos && (
+                      <p style={{ marginTop: '0.5rem', fontSize: '0.8rem', color: '#475569', fontWeight: '500' }}>
+                        📎 Selected: {formData.sitePhotos}
+                      </p>
+                    )}
+                  </div>
+
+                 <div style={{ marginBottom: '2.5rem' }}>
                    <h4 style={{ fontSize: '0.85rem', fontWeight: '700', color: '#64748B', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Site Condition</h4>
                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
                      <div>
@@ -2030,22 +2071,55 @@ export default function AddNewLeadWizard({ isOpen, onClose, onSave, initialData 
 
              <hr style={{ border: 'none', borderTop: '1px solid #E2E8F0', margin: '2.5rem 0' }} />
 
-             {/* SECTION 4 — Accessories */}
-             <div style={{ marginBottom: '2.5rem' }}>
-               <h4 style={{ fontSize: '0.85rem', fontWeight: '700', color: '#64748B', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>SECTION 4 — Accessories</h4>
-               <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-                 {['Gutters', 'Downpipes', 'Ridge Cover', 'Turbo Ventilator', 'Roof Monitor', 'Sky Light', 'Louvers', 'Flashing', 'Insulation', 'Bird Mesh', 'Walkway', 'Solar Panel Provision', 'Lightning Arrestor', 'Rainwater Harvesting'].map(t => {
-                   const selected = (formData.accessories || []).includes(t);
-                   return (
-                     <MultiSelectPill key={t} label={t} selected={selected} onClick={() => {
-                       let curr = formData.accessories || [];
-                       if (curr.includes(t)) handleChange('accessories', curr.filter(x => x !== t));
-                       else handleChange('accessories', [...curr, t]);
-                     }} />
-                   );
-                 })}
-               </div>
-             </div>
+              {/* SECTION 4 — Accessories */}
+              <div style={{ marginBottom: '2.5rem' }}>
+                <h4 style={{ fontSize: '0.85rem', fontWeight: '700', color: '#64748B', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>SECTION 4 — Accessories</h4>
+                <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+                  {['Gutters', 'Downpipes', 'Ridge Cover', 'Turbo Ventilator', 'Roof Monitor', 'Sky Light', 'Louvers', 'Flashing', 'Insulation', 'Bird Mesh', 'Walkway', 'Solar Panel Provision', 'Lightning Arrestor', 'Rainwater Harvesting'].map(t => {
+                    const selected = (formData.accessories || []).includes(t);
+                    return (
+                      <MultiSelectPill key={t} label={t} selected={selected} onClick={() => {
+                        let curr = formData.accessories || [];
+                        if (curr.includes(t)) {
+                          handleChange('accessories', curr.filter(x => x !== t));
+                          // clear detail when deselected
+                          const key = `accessory_detail_${t.replace(/\s+/g, '_')}`;
+                          handleChange(key, '');
+                        } else {
+                          handleChange('accessories', [...curr, t]);
+                        }
+                      }} />
+                    );
+                  })}
+                </div>
+                {/* Detail inputs for selected accessories */}
+                {(formData.accessories || []).length > 0 && (
+                  <div style={{ marginTop: '1.25rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                    {(formData.accessories || []).map(acc => {
+                      const key = `accessory_detail_${acc.replace(/\s+/g, '_')}`;
+                      return (
+                        <div key={acc} style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                          <span style={{ minWidth: '160px', fontSize: '0.85rem', fontWeight: '600', color: '#475569' }}>{acc}</span>
+                          <input
+                            type="text"
+                            placeholder={`Enter details for ${acc}...`}
+                            value={formData[key] || ''}
+                            onChange={e => handleChange(key, e.target.value)}
+                            style={{
+                              flex: 1, padding: '0.6rem 1rem', borderRadius: '8px',
+                              border: '1px solid #C7D2FE', fontSize: '0.875rem',
+                              outline: 'none', backgroundColor: '#F8FAFF',
+                              transition: 'border-color 0.2s',
+                            }}
+                            onFocus={e => e.target.style.borderColor = 'var(--primary-color)'}
+                            onBlur={e => e.target.style.borderColor = '#C7D2FE'}
+                          />
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
 
              <hr style={{ border: 'none', borderTop: '1px solid #E2E8F0', margin: '2.5rem 0' }} />
 
