@@ -7,8 +7,8 @@ const steps = [
   { id: 3, label: 'Site Dimensions' },
   { id: 4, label: 'Technical Details' },
   { id: 5, label: 'Quotations' },
-  { id: 6, label: 'Project Filing' },
-  { id: 7, label: 'Order confirmed' },
+  { id: 6, label: 'Order confirmed' },
+  { id: 7, label: 'Project Filing' },
   { id: 8, label: 'Review' },
 ];
 
@@ -2521,6 +2521,31 @@ export default function AddNewLeadWizard({ isOpen, onClose, onSave, initialData 
       case 6:
         return (
           <div className="step-content animate-fade-in">
+            <h3 style={{ fontSize: '1.125rem', fontWeight: '700', marginBottom: '1.5rem', color: '#1E293B' }}>Project Attachments</h3>
+            <div style={{
+              border: '2px dashed #6366F1', borderRadius: '12px', padding: '4rem 2rem',
+              display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+              backgroundColor: '#F5F3FF', textAlign: 'center'
+            }}>
+              <UploadCloud size={48} color="#6366F1" style={{ marginBottom: '1rem' }} />
+              <h4 style={{ fontSize: '1.125rem', fontWeight: '700', color: '#1E293B', marginBottom: '0.5rem' }}>Drag and drop files here</h4>
+              <p style={{ fontSize: '0.875rem', color: '#64748B', marginBottom: '1.5rem', maxWidth: '400px' }}>
+                Supports Site Photos, CAD drawings, BOQ spreadsheets, Soil reports, and PDFs up to 50MB
+              </p>
+              <button type="button" style={{
+                backgroundColor: '#FFFFFF', border: '1px solid #E2E8F0', padding: '0.75rem 1.5rem',
+                borderRadius: '8px', fontWeight: '600', color: '#475569', cursor: 'pointer',
+                boxShadow: '0 1px 2px rgba(0,0,0,0.05)'
+              }}>Select Files (Simulate Upload)</button>
+            </div>
+            <p style={{ textAlign: 'center', fontSize: '0.875rem', color: '#94A3B8', marginTop: '1.5rem' }}>
+              No files uploaded yet. Click above to simulate an upload.
+            </p>
+          </div>
+        );
+      case 7:
+        return (
+          <div className="step-content animate-fade-in">
              <h3 style={{ fontSize: '1.125rem', fontWeight: '700', marginBottom: '1.5rem', color: '#1E293B' }}>Project Filing Form</h3>
              
             {/* 1. Client & Project Details */}
@@ -2731,31 +2756,6 @@ export default function AddNewLeadWizard({ isOpen, onClose, onSave, initialData 
 
           </div>
         );
-      case 7:
-        return (
-          <div className="step-content animate-fade-in">
-            <h3 style={{ fontSize: '1.125rem', fontWeight: '700', marginBottom: '1.5rem', color: '#1E293B' }}>Project Attachments</h3>
-            <div style={{
-              border: '2px dashed #6366F1', borderRadius: '12px', padding: '4rem 2rem',
-              display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
-              backgroundColor: '#F5F3FF', textAlign: 'center'
-            }}>
-              <UploadCloud size={48} color="#6366F1" style={{ marginBottom: '1rem' }} />
-              <h4 style={{ fontSize: '1.125rem', fontWeight: '700', color: '#1E293B', marginBottom: '0.5rem' }}>Drag and drop files here</h4>
-              <p style={{ fontSize: '0.875rem', color: '#64748B', marginBottom: '1.5rem', maxWidth: '400px' }}>
-                Supports Site Photos, CAD drawings, BOQ spreadsheets, Soil reports, and PDFs up to 50MB
-              </p>
-              <button type="button" style={{
-                backgroundColor: '#FFFFFF', border: '1px solid #E2E8F0', padding: '0.75rem 1.5rem',
-                borderRadius: '8px', fontWeight: '600', color: '#475569', cursor: 'pointer',
-                boxShadow: '0 1px 2px rgba(0,0,0,0.05)'
-              }}>Select Files (Simulate Upload)</button>
-            </div>
-            <p style={{ textAlign: 'center', fontSize: '0.875rem', color: '#94A3B8', marginTop: '1.5rem' }}>
-              No files uploaded yet. Click above to simulate an upload.
-            </p>
-          </div>
-        );
       case 8:
         return (
           <div className="step-content animate-fade-in">
@@ -2828,24 +2828,24 @@ export default function AddNewLeadWizard({ isOpen, onClose, onSave, initialData 
                  </div>
                </div>
 
-               {/* 6. Project Filing */}
+               {/* 6. Order Confirmed / Attachments */}
                <div style={{ border: '1px solid #E2E8F0', borderRadius: '8px', overflow: 'hidden' }}>
                  <div style={{ backgroundColor: '#F8FAFC', padding: '1rem 1.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #E2E8F0' }}>
-                   <h4 style={{ margin: 0, fontSize: '0.875rem', fontWeight: '700', color: '#334155' }}>6. Project Filing</h4>
+                   <h4 style={{ margin: 0, fontSize: '0.875rem', fontWeight: '700', color: '#334155' }}>6. Order Confirmed</h4>
+                 </div>
+                 <div style={{ padding: '1.5rem', backgroundColor: '#FFFFFF' }}>
+                   <span style={{ fontWeight: '600', color: '#1E293B', fontSize: '0.875rem' }}>Files uploaded in Step 6.</span>
+                 </div>
+               </div>
+
+               {/* 7. Project Filing */}
+               <div style={{ border: '1px solid #E2E8F0', borderRadius: '8px', overflow: 'hidden', marginTop: '1.5rem' }}>
+                 <div style={{ backgroundColor: '#F8FAFC', padding: '1rem 1.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #E2E8F0' }}>
+                   <h4 style={{ margin: 0, fontSize: '0.875rem', fontWeight: '700', color: '#334155' }}>7. Project Filing</h4>
                  </div>
                  <div style={{ padding: '1.5rem', backgroundColor: '#FFFFFF', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
                    <div><span style={{ display: 'block', fontSize: '0.75rem', color: '#64748B', marginBottom: '0.25rem' }}>Quoted Price:</span><span style={{ fontWeight: '600', color: '#1E293B', fontSize: '0.875rem' }}>{formData.quotedPrice || 'N/A'}</span></div>
                    <div><span style={{ display: 'block', fontSize: '0.75rem', color: '#64748B', marginBottom: '0.25rem' }}>Completion Date:</span><span style={{ fontWeight: '600', color: '#1E293B', fontSize: '0.875rem' }}>{formData.completionDate || 'N/A'}</span></div>
-                 </div>
-               </div>
-
-               {/* 7. Attachments */}
-               <div style={{ border: '1px solid #E2E8F0', borderRadius: '8px', overflow: 'hidden' }}>
-                 <div style={{ backgroundColor: '#F8FAFC', padding: '1rem 1.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #E2E8F0' }}>
-                   <h4 style={{ margin: 0, fontSize: '0.875rem', fontWeight: '700', color: '#334155' }}>7. Attachments</h4>
-                 </div>
-                 <div style={{ padding: '1.5rem', backgroundColor: '#FFFFFF' }}>
-                   <span style={{ fontWeight: '600', color: '#1E293B', fontSize: '0.875rem' }}>Files uploaded in Step 7.</span>
                  </div>
                </div>
 
