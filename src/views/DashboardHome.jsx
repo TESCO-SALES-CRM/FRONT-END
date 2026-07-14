@@ -26,13 +26,13 @@ const paymentsData = [
 
 // --- SUB-COMPONENTS ---
 const KpiCard = ({ title, value, subtitle, icon: Icon, color, bg, borderColor, showChart }) => (
-  <div className="card" style={{ display: 'flex', flexDirection: 'column', position: 'relative', overflow: 'hidden', padding: '1.25rem', backgroundColor: bg || 'var(--surface-color)', border: `1px solid ${borderColor || 'var(--border-color)'}`, boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>
-    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-      <p style={{ color: 'var(--text-muted)', fontSize: '0.875rem', fontWeight: '500', margin: 0 }}>{title}</p>
-      <Icon size={18} color={color} />
+  <div className="card" style={{ display: 'flex', flexDirection: 'column', minHeight: '160px', position: 'relative', overflow: 'hidden', padding: '1.5rem', backgroundColor: bg || 'var(--surface-color)', border: `1px solid ${borderColor || 'var(--border-color)'}`, borderRadius: '12px', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.05)' }}>
+    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 'auto' }}>
+      <p style={{ color: 'var(--text-muted)', fontSize: '0.875rem', fontWeight: '600', margin: 0, lineHeight: '1.25', flex: 1, paddingRight: '0.5rem' }}>{title}</p>
+      <Icon size={20} color={color} style={{ flexShrink: 0 }} />
     </div>
-    <div style={{ zIndex: 1 }}>
-      <h3 style={{ fontSize: '2rem', fontWeight: '700', color: 'var(--text-main)', margin: '0 0 0.5rem 0', letterSpacing: '-0.5px' }}>{value}</h3>
+    <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', zIndex: 1, marginTop: '1.25rem' }}>
+      <h3 style={{ fontSize: '2.25rem', fontWeight: '700', color: 'var(--text-main)', margin: '0 0 0.5rem 0', letterSpacing: '-1px' }}>{value}</h3>
       <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', fontWeight: '500' }}>{subtitle}</span>
     </div>
     {showChart && (
