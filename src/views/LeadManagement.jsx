@@ -922,23 +922,7 @@ const LeadManagement = () => {
         <h2 style={{ margin: 0, fontSize: '1.5rem', fontWeight: '700' }}>Lead Management</h2>
         
         <div style={{ display: 'flex', gap: '1rem' }}>
-          <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
-            <Search size={16} style={{ position: 'absolute', left: '12px', color: 'var(--text-muted)' }} />
-            <input 
-              type="text" 
-              placeholder="Search leads..." 
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              style={{
-                padding: '0.5rem 1rem 0.5rem 2.5rem',
-                borderRadius: 'var(--radius-md)',
-                border: '1px solid var(--border-color)',
-                backgroundColor: 'var(--surface-color)',
-                outline: 'none',
-                width: '250px'
-              }}
-            />
-          </div>
+
           <button className="btn btn-primary" onClick={() => setIsModalOpen(true)}>Add New Lead</button>
         </div>
       </div>
