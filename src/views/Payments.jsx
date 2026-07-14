@@ -81,23 +81,12 @@ export default function Payments() {
         
         {/* Table Filters Header */}
         <div style={{ padding: '1.5rem', borderBottom: '1px solid #E2E8F0', display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center' }}>
-           <div style={{ position: 'relative' }}>
-             <Search style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)', color: '#94A3B8' }} size={16} />
-             <input 
-               type="text" 
-               placeholder="Search Invoice..." 
-               value={search}
-               onChange={(e) => setSearch(e.target.value)}
-               style={{ padding: '0.6rem 1rem 0.6rem 2.5rem', borderRadius: '8px', border: '1px solid #E2E8F0', fontSize: '0.875rem', outline: 'none', width: '240px' }}
-             />
-           </div>
            <select style={{ padding: '0.6rem 2rem 0.6rem 1rem', borderRadius: '8px', border: '1px solid #E2E8F0', fontSize: '0.875rem', outline: 'none', backgroundColor: '#F8FAFC' }}>
              <option>Filter by Status</option>
            </select>
            <button style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.6rem 1rem', backgroundColor: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: '8px', color: '#475569', fontWeight: '600', cursor: 'pointer', fontSize: '0.875rem' }}>
              <Calendar size={16} /> Date Range
            </button>
-           <button style={{ padding: '0.6rem 1rem', color: '#64748B', backgroundColor: 'transparent', border: 'none', fontWeight: '600', cursor: 'pointer', fontSize: '0.875rem' }}>Reset Filters</button>
         </div>
 
         {/* The Data Table */}
