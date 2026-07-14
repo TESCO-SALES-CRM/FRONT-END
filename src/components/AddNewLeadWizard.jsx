@@ -8,7 +8,7 @@ const steps = [
   { id: 4, label: 'Technical Details' },
   { id: 5, label: 'Quotations' },
   { id: 6, label: 'Order confirmed' },
-  { id: 7, label: 'Project Filing' },
+  { id: 7, label: 'Order Confirm' },
   { id: 8, label: 'Review' },
 ];
 
@@ -251,7 +251,7 @@ export default function AddNewLeadWizard({ isOpen, onClose, onSave, initialData 
                   <option value="Quotation Sent">QUOTATION SEND</option>
                   
                   <option value="Order Confirmed">ORDER CONFIRMED</option>
-                  <option value="Project Filing">PROJECT FILING</option>
+                  <option value="Order Confirm">ORDER CONFIRM</option>
                   <option value="Junk">JUNK</option>
                   <option value="Lost">LOST</option>
                 </select>
@@ -2547,7 +2547,7 @@ export default function AddNewLeadWizard({ isOpen, onClose, onSave, initialData 
       case 7:
         return (
           <div className="step-content animate-fade-in">
-             <h3 style={{ fontSize: '1.125rem', fontWeight: '700', marginBottom: '1.5rem', color: '#1E293B' }}>Project Filing Form</h3>
+             <h3 style={{ fontSize: '1.125rem', fontWeight: '700', marginBottom: '1.5rem', color: '#1E293B' }}>Order Confirm Form</h3>
              
             {/* 1. Client & Project Details */}
             <div style={sectionStyle}>
@@ -2897,10 +2897,10 @@ export default function AddNewLeadWizard({ isOpen, onClose, onSave, initialData 
                  </div>
                </div>
 
-               {/* 7. Project Filing */}
+               {/* 7. Order Confirm */}
                <div style={{ border: '1px solid #E2E8F0', borderRadius: '8px', overflow: 'hidden' }}>
                  <div style={{ backgroundColor: '#F8FAFC', padding: '1rem 1.5rem', borderBottom: '1px solid #E2E8F0' }}>
-                   <h4 style={{ margin: 0, fontSize: '0.875rem', fontWeight: '700', color: '#334155' }}>7. Project Filing</h4>
+                   <h4 style={{ margin: 0, fontSize: '0.875rem', fontWeight: '700', color: '#334155' }}>7. Order Confirm</h4>
                  </div>
                  <div style={{ padding: '1.5rem', backgroundColor: '#FFFFFF', display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '1.5rem' }}>
                    {[

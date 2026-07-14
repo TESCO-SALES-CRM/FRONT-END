@@ -611,7 +611,7 @@ const LeadManagement = () => {
         file: null
       });
       setIsGenQuoteModalOpen(true);
-    } else if (newStatus === 'Project Filing') {
+    } else if (newStatus === 'Order Confirm') {
       setProjectFileLeadId(id);
       setIsProjectFileModalOpen(true);
     } else if (newStatus === 'New Lead') {
@@ -1186,15 +1186,15 @@ const LeadManagement = () => {
             onClick={() => toggleFilter('Order Confirmed')}
           />
           <LeadOverviewCard 
-            title="Project Filing" 
-            value={leadsInDateRange.filter(l => (l.status||'').toLowerCase() === 'project filing').length} 
+            title="Order Confirm" 
+            value={leadsInDateRange.filter(l => (l.status||'').toLowerCase() === 'order confirm').length} 
             subtitle="Handed over to ops" 
             icon={FileSignature} 
             color="var(--primary-color)" 
             bg="#EEF4FF" 
             borderColor="#C7D2FE" 
-            isSelected={statusFilter === 'Project Filing'}
-            onClick={() => toggleFilter('Project Filing')}
+            isSelected={statusFilter === 'Order Confirm'}
+            onClick={() => toggleFilter('Order Confirm')}
           />
           <LeadOverviewCard 
             title="Junk" 
@@ -1312,7 +1312,7 @@ const LeadManagement = () => {
                     <option value="Quotation Send" style={{ color: 'var(--text-main)' }}>QUOTATION SEND</option>
                     
                     <option value="Order Confirmed" style={{ color: 'var(--text-main)' }}>ORDER CONFIRMED</option>
-                    <option value="Project Filing" style={{ color: 'var(--text-main)' }}>PROJECT FILING</option>
+                    <option value="Order Confirm" style={{ color: 'var(--text-main)' }}>ORDER CONFIRM</option>
                     <option value="Junk" style={{ color: 'var(--text-main)' }}>JUNK</option>
                     <option value="Lost" style={{ color: 'var(--text-main)' }}>LOST</option>
                   </select>
@@ -1448,7 +1448,7 @@ const LeadManagement = () => {
                     <option value="Quotation Sent">QUOTATION SEND</option>
                     
                     <option value="Order Confirmed">ORDER CONFIRMED</option>
-                    <option value="Project Filing">PROJECT FILING</option>
+                    <option value="Order Confirm">ORDER CONFIRM</option>
                     <option value="Junk">JUNK</option>
                     <option value="Lost">LOST</option>
                   </select>
@@ -2022,7 +2022,7 @@ const LeadManagement = () => {
             if (l.id === projectFileLeadId) {
               return { 
                 ...l, 
-                status: 'Project Filing',
+                status: 'Order Confirm',
                 history: [...(l.history || []), {
                   timestamp: formattedTime,
                   message: `Project Handover Submitted`,
