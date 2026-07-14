@@ -60,8 +60,34 @@ const getProbabilityColor = (prob) => {
 export default function Pipeline() {
   const [opportunities, setOpportunities] = useState(INITIAL_PIPELINE);
   const [search, setSearch] = useState('');
+  const [stageFilter, setStageFilter] = useState('');
+  const [execFilter, setExecFilter] = useState('');
+  const [serviceFilter, setServiceFilter] = useState('');
   const [isAddOpen, setIsAddOpen] = useState(false);
   const [selectedOpp, setSelectedOpp] = useState(null);
+
+
+  const uniqueStages = [...new Set(opportunities.map(o => o.stage))].filter(Boolean);
+  const uniqueExecs = [...new Set(opportunities.map(o => o.assigned))].filter(Boolean);
+  const uniqueServices = [...new Set(opportunities.map(o => o.service))].filter(Boolean);
+
+  const filteredOpportunities = opportunities.filter(opp => {
+    const matchSearch = !search || 
+      opp.customer.toLowerCase().includes(search.toLowerCase()) || 
+      opp.company.toLowerCase().includes(search.toLowerCase()) ||
+      opp.id.toLowerCase().includes(search.toLowerCase());
+    const matchStage = !stageFilter || opp.stage === stageFilter;
+    const matchExec = !execFilter || opp.assigned === execFilter;
+    const matchService = !serviceFilter || opp.service === serviceFilter;
+    return matchSearch && matchStage && matchExec && matchService;
+  });
+
+  const handleResetFilters = () => {
+    setSearch('');
+    setStageFilter('');
+    setExecFilter('');
+    setServiceFilter('');
+  };
 
   return (
     <div style={{ padding: '2rem', minHeight: '100vh', backgroundColor: '#F8FAFC' }}>
@@ -116,21 +142,35 @@ export default function Pipeline() {
         
         {/* Table Filters Header */}
         <div style={{ padding: '1.5rem', borderBottom: '1px solid #E2E8F0', display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center' }}>
-           <input 
+                      <input 
              type="text" 
              placeholder="Search Opportunity..." 
+             value={search}
+             onChange={(e) => setSearch(e.target.value)}
              style={{ padding: '0.6rem 1rem', borderRadius: '8px', border: '1px solid #E2E8F0', fontSize: '0.875rem', outline: 'none' }}
            />
-           <select style={{ padding: '0.6rem 2rem 0.6rem 1rem', borderRadius: '8px', border: '1px solid #E2E8F0', fontSize: '0.875rem', outline: 'none', backgroundColor: '#F8FAFC' }}>
-             <option>Filter by Stage</option>
+           <select 
+             value={stageFilter}
+             onChange={(e) => setStageFilter(e.target.value)}
+             style={{ padding: '0.6rem 2rem 0.6rem 1rem', borderRadius: '8px', border: '1px solid #E2E8F0', fontSize: '0.875rem', outline: 'none', backgroundColor: '#F8FAFC' }}>
+             <option value="">Filter by Stage</option>
+             {uniqueStages.map(s => <option key={s} value={s}>{s}</option>)}
            </select>
-           <select style={{ padding: '0.6rem 2rem 0.6rem 1rem', borderRadius: '8px', border: '1px solid #E2E8F0', fontSize: '0.875rem', outline: 'none', backgroundColor: '#F8FAFC' }}>
-             <option>Filter by Sales Executive</option>
+           <select 
+             value={execFilter}
+             onChange={(e) => setExecFilter(e.target.value)}
+             style={{ padding: '0.6rem 2rem 0.6rem 1rem', borderRadius: '8px', border: '1px solid #E2E8F0', fontSize: '0.875rem', outline: 'none', backgroundColor: '#F8FAFC' }}>
+             <option value="">Filter by Sales Executive</option>
+             {uniqueExecs.map(e => <option key={e} value={e}>{e}</option>)}
            </select>
-           <select style={{ padding: '0.6rem 2rem 0.6rem 1rem', borderRadius: '8px', border: '1px solid #E2E8F0', fontSize: '0.875rem', outline: 'none', backgroundColor: '#F8FAFC' }}>
-             <option>Filter by Service</option>
+           <select 
+             value={serviceFilter}
+             onChange={(e) => setServiceFilter(e.target.value)}
+             style={{ padding: '0.6rem 2rem 0.6rem 1rem', borderRadius: '8px', border: '1px solid #E2E8F0', fontSize: '0.875rem', outline: 'none', backgroundColor: '#F8FAFC' }}>
+             <option value="">Filter by Service</option>
+             {uniqueServices.map(s => <option key={s} value={s}>{s}</option>)}
            </select>
-           <button style={{ padding: '0.6rem 1rem', color: '#64748B', backgroundColor: 'transparent', border: 'none', fontWeight: '600', cursor: 'pointer', fontSize: '0.875rem' }}>Reset Filters</button>
+           <button onClick={handleResetFilters} style={{ padding: '0.6rem 1rem', color: '#64748B', backgroundColor: 'transparent', border: 'none', fontWeight: '600', cursor: 'pointer', fontSize: '0.875rem' }}>Reset Filters</button>
         </div>
 
         {/* The Data Table */}
@@ -154,9 +194,32 @@ export default function Pipeline() {
               </tr>
             </thead>
             <tbody>
-              {opportunities.map((opp, idx) => {
+              {filteredOpportunities.map((opp, idx) => {
                 const sStyle = getStageStyle(opp.stage);
-                return (
+              
+  const uniqueStages = [...new Set(opportunities.map(o => o.stage))].filter(Boolean);
+  const uniqueExecs = [...new Set(opportunities.map(o => o.assigned))].filter(Boolean);
+  const uniqueServices = [...new Set(opportunities.map(o => o.service))].filter(Boolean);
+
+  const filteredOpportunities = opportunities.filter(opp => {
+    const matchSearch = !search || 
+      opp.customer.toLowerCase().includes(search.toLowerCase()) || 
+      opp.company.toLowerCase().includes(search.toLowerCase()) ||
+      opp.id.toLowerCase().includes(search.toLowerCase());
+    const matchStage = !stageFilter || opp.stage === stageFilter;
+    const matchExec = !execFilter || opp.assigned === execFilter;
+    const matchService = !serviceFilter || opp.service === serviceFilter;
+    return matchSearch && matchStage && matchExec && matchService;
+  });
+
+  const handleResetFilters = () => {
+    setSearch('');
+    setStageFilter('');
+    setExecFilter('');
+    setServiceFilter('');
+  };
+
+  return (
                   <tr 
                     key={opp.id} 
                     style={{ borderBottom: '1px solid #E2E8F0', backgroundColor: '#FFFFFF', transition: 'background-color 0.2s', cursor: 'pointer' }}
