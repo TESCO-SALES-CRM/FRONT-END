@@ -221,13 +221,6 @@ export default function AddNewLeadWizard({ isOpen, onClose, onSave, initialData 
                 <input type="text" placeholder="Enter executive name" style={inputStyle} value={formData.assignedExecutive} onChange={e => handleChange('assignedExecutive', e.target.value)} />
               </div>
               <div>
-                <label style={labelStyle}>Project Value</label>
-                <div style={{ display: 'flex', alignItems: 'center', position: 'relative' }}>
-                  <span style={{ position: 'absolute', left: '1rem', color: '#64748B', fontWeight: '500' }}>₹</span>
-                  <input type="number" placeholder="Enter project value" style={{ ...inputStyle, paddingLeft: '2rem' }} value={formData.projectValue || ''} onChange={e => handleChange('projectValue', e.target.value ? parseInt(e.target.value, 10) : '')} />
-                </div>
-              </div>
-              <div>
                 <label style={labelStyle}>Expected Timeline</label>
                 <select style={inputStyle} value={formData.expectedTimeline || ''} onChange={e => handleChange('expectedTimeline', e.target.value)}>
                   <option value="" disabled>Select Expected Timeline</option>
