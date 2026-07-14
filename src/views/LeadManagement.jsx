@@ -6,6 +6,7 @@ import AddNewLeadWizard from '../components/AddNewLeadWizard';
 import LeadDetailsDrawer from '../components/LeadDetailsDrawer';
 import { useNavigate } from 'react-router-dom';
 import GlobalFilterBar from '../components/GlobalFilterBar';
+import DesignRequirementModal from '../components/DesignRequirementModal';
 
 const LEAD_SOURCES = [
   'Referral',
@@ -426,6 +427,7 @@ const LeadManagement = () => {
 
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [editLead, setEditLead] = useState(null);
+  const [designReqModal, setDesignReqModal] = useState({ open: false, lead: null, designType: '' });
 
   const openEditModal = (lead) => {
     setEditLead({ ...lead });
@@ -2067,6 +2069,18 @@ const LeadManagement = () => {
           setProjectFileLeadId(null);
         }}
       />
+
+      {/* Design Requirement Modal */}
+      {designReqModal.open && (
+        <DesignRequirementModal
+          lead={designReqModal.lead}
+          designType={designReqModal.designType}
+          onClose={() => setDesignReqModal({ open: false, lead: null, designType: '' })}
+          onSave={(formData) => {
+            setLeads(leads.map(l => l.id === designReqModal.lead?.id ? { ...l, designFormData: formData } : l));
+          }}
+        />
+      )}
 
     </div>
   );
