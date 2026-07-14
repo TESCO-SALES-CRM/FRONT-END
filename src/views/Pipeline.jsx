@@ -21,23 +21,21 @@ const SUMMARY_CARDS = [
 ];
 
 const INITIAL_PIPELINE = [
-  { id: 'OP-1001', customer: 'Akash Kumar', company: 'ABC Builders', service: 'PEB Structure', stage: 'New Lead', pipelineStatus: 'On Track', assigned: 'John Smith', expectedClose: '25 Jul 2026', value: '₹8,50,000', probability: '25%', lastActivity: 'Today', followUp: '2026-07-15' },
-  { id: 'OP-1002', customer: 'Sarah Jenkins', company: 'Nexus Retail', service: 'Tensile Roofing', stage: 'Qualified', pipelineStatus: 'Follow Up', assigned: 'Mike Johnson', expectedClose: '12 Aug 2026', value: '₹12,00,000', probability: '40%', lastActivity: 'Yesterday', followUp: '2026-07-14' },
-  { id: 'OP-1003', customer: 'Ramesh Patel', company: 'Patel Logistics', service: 'PEB Structure', stage: 'Quotation Sent', pipelineStatus: 'Delayed', assigned: 'Sarah Lee', expectedClose: '30 Jul 2026', value: '₹45,00,000', probability: '60%', lastActivity: '2 Days Ago', followUp: '2026-07-21' },
-  { id: 'OP-1004', customer: 'Emma Watson', company: 'Watson Industries', service: 'Other roofing', stage: 'Negotiation', pipelineStatus: 'On Track', assigned: 'John Smith', expectedClose: '05 Aug 2026', value: '₹3,25,000', probability: '85%', lastActivity: 'Today', followUp: '2026-07-15' },
-  { id: 'OP-1005', customer: 'David Chen', company: 'Oriental Tech', service: 'Tensile Roofing', stage: 'Won', pipelineStatus: 'On Track', assigned: 'Mike Johnson', expectedClose: '10 Jul 2026', value: '₹22,50,000', probability: '100%', lastActivity: '1 Week Ago', followUp: '' },
-  { id: 'OP-1006', customer: 'Anita Desai', company: 'Desai Properties', service: 'PEB Structure', stage: 'Lost', pipelineStatus: 'Delayed', assigned: 'Sarah Lee', expectedClose: '01 Jul 2026', value: '₹5,00,000', probability: '0%', lastActivity: '1 Month Ago', followUp: '' },
+  { id: 'OP-1001', customer: 'Akash Kumar', company: 'ABC Builders', service: 'PEB Structure', stage: 'New', pipelineStatus: 'On Track', assigned: 'John Smith', expectedClose: '25 Jul 2026', value: '₹8,50,000', probability: '25%', lastActivity: 'Today', followUp: '2026-07-15' },
+  { id: 'OP-1002', customer: 'Sarah Jenkins', company: 'Nexus Retail', service: 'Tensile Roofing', stage: 'Hot', pipelineStatus: 'Follow Up', assigned: 'Mike Johnson', expectedClose: '12 Aug 2026', value: '₹12,00,000', probability: '40%', lastActivity: 'Yesterday', followUp: '2026-07-14' },
+  { id: 'OP-1003', customer: 'Ramesh Patel', company: 'Patel Logistics', service: 'PEB Structure', stage: 'Warm', pipelineStatus: 'Delayed', assigned: 'Sarah Lee', expectedClose: '30 Jul 2026', value: '₹45,00,000', probability: '60%', lastActivity: '2 Days Ago', followUp: '2026-07-21' },
+  { id: 'OP-1004', customer: 'Emma Watson', company: 'Watson Industries', service: 'Other roofing', stage: 'Cold', pipelineStatus: 'On Track', assigned: 'John Smith', expectedClose: '05 Aug 2026', value: '₹3,25,000', probability: '85%', lastActivity: 'Today', followUp: '2026-07-15' },
+  { id: 'OP-1005', customer: 'David Chen', company: 'Oriental Tech', service: 'Tensile Roofing', stage: 'Appointment Fixed', pipelineStatus: 'On Track', assigned: 'Mike Johnson', expectedClose: '10 Jul 2026', value: '₹22,50,000', probability: '100%', lastActivity: '1 Week Ago', followUp: '' },
+  { id: 'OP-1006', customer: 'Anita Desai', company: 'Desai Properties', service: 'PEB Structure', stage: 'Cold', pipelineStatus: 'Delayed', assigned: 'Sarah Lee', expectedClose: '01 Jul 2026', value: '₹5,00,000', probability: '0%', lastActivity: '1 Month Ago', followUp: '' },
 ];
 
 const getStageStyle = (stage) => {
   switch ((stage || '').toLowerCase()) {
-    case 'new lead': return { bg: '#DBEAFE', color: '#1D4ED8' }; // Blue
-    case 'qualified': return { bg: '#CFFAFE', color: '#0891B2' }; // Cyan
-    case 'site visit': return { bg: '#FCE7F3', color: '#DB2777' }; // Pink
-    case 'quotation sent': return { bg: '#FFEDD5', color: '#C2410C' }; // Orange
-    case 'negotiation': return { bg: '#FEF08A', color: '#A16207' }; // Yellow
-    case 'won': return { bg: '#D1FAE5', color: '#047857' }; // Green
-    case 'lost': return { bg: '#FEE2E2', color: '#B91C1C' }; // Red
+    case 'new': return { bg: '#DBEAFE', color: '#1D4ED8' };           // Blue
+    case 'hot': return { bg: '#FEE2E2', color: '#B91C1C' };           // Red
+    case 'warm': return { bg: '#FFEDD5', color: '#C2410C' };          // Orange
+    case 'cold': return { bg: '#E2E8F0', color: '#475569' };          // Grey
+    case 'appointment fixed': return { bg: '#D1FAE5', color: '#047857' }; // Green
     default: return { bg: '#F1F5F9', color: '#475569' };
   }
 };
@@ -240,13 +238,11 @@ export default function Pipeline() {
                     <td style={{ padding: '1rem', fontSize: '0.875rem', whiteSpace: 'nowrap', color: '#475569' }}>{opp.service}</td>
                     <td style={{ padding: '1rem', whiteSpace: 'nowrap' }} onClick={(e) => e.stopPropagation()}>
                       <select style={{ backgroundColor: sStyle.bg, color: sStyle.color, border: 'none', padding: '0.25rem 0.5rem', borderRadius: '6px', fontSize: '0.75rem', fontWeight: '700', outline: 'none', cursor: 'pointer' }} value={opp.stage} onChange={() => {}}>
-                        <option>New Lead</option>
-                        <option>Qualified</option>
-                        <option>Site Visit</option>
-                        <option>Quotation Sent</option>
-                        <option>Negotiation</option>
-                        <option>Won</option>
-                        <option>Lost</option>
+                        <option>New</option>
+                        <option>Hot</option>
+                        <option>Warm</option>
+                        <option>Cold</option>
+                        <option>Appointment Fixed</option>
                       </select>
                     </td>
                     <td style={{ padding: '1rem', fontSize: '0.875rem', whiteSpace: 'nowrap', color: '#475569' }}>{opp.assigned}</td>
