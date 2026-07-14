@@ -128,7 +128,18 @@ export default function AddNewOpportunityModal({ isOpen, onClose, onSave }) {
                   <option value="Tensile Roofing">Tensile Roofing</option>
                   <option value="Civil Work">Civil Work</option>
                   <option value="Other roofing">Other roofing</option>
+                  <option value="Other Service">Other Service</option>
                 </select>
+                {formData.service === 'Other Service' && (
+                  <input 
+                    type="text" 
+                    name="customService"
+                    placeholder="Enter Custom Service Type" 
+                    style={{ ...inputStyle, marginTop: '0.5rem' }} 
+                    value={formData.customService || ''} 
+                    onChange={handleChange}
+                  />
+                )}
               </div>
             </div>
           </div>

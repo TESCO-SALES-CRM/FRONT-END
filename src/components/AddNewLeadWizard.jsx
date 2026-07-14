@@ -21,7 +21,7 @@ const LEAD_SOURCES = [
   'ORGANIC LEADS',
 ];
 
-const SERVICES = ['PEB Building', 'Tensile', 'Other roofing'];
+const SERVICES = ['PEB Building', 'Tensile', 'Other roofing', 'Other Service'];
 
 export default function AddNewLeadWizard({ isOpen, onClose, onSave, initialData = null }) {
   const [currentStep, setCurrentStep] = useState(1);
@@ -185,6 +185,15 @@ export default function AddNewLeadWizard({ isOpen, onClose, onSave, initialData 
                 <select style={inputStyle} value={formData.projectType} onChange={e => handleChange('projectType', e.target.value)}>
                   {SERVICES.map(s => <option key={s} value={s}>{s}</option>)}
                 </select>
+                {formData.projectType === 'Other Service' && (
+                  <input 
+                    type="text" 
+                    placeholder="Enter Custom Service Type" 
+                    style={inputStyle} 
+                    value={formData.customProjectType || ''} 
+                    onChange={e => handleChange('customProjectType', e.target.value)}
+                  />
+                )}
                 {formData.projectType === 'Other roofing' && (
                   <select 
                     style={inputStyle} 
