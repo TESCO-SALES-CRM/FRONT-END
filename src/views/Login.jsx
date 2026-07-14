@@ -183,7 +183,7 @@ const Login = () => {
                 width: '32px',
                 height: '32px',
                 borderRadius: '8px',
-                backgroundColor: '#4F46E5',
+                backgroundColor: 'var(--primary-color)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -388,7 +388,7 @@ const Login = () => {
                             color: '#0F172A',
                             transition: 'border-color 0.2s'
                           }}
-                          onFocus={(e) => e.target.style.borderColor = '#4F46E5'}
+                          onFocus={(e) => e.target.style.borderColor = 'var(--primary-color)'}
                           onBlur={(e) => e.target.style.borderColor = '#CBD5E1'}
                         />
                         <AtSign size={16} color="#94A3B8" style={{ position: 'absolute', right: '12px', pointerEvents: 'none' }} />
@@ -423,7 +423,7 @@ const Login = () => {
                             color: '#0F172A',
                             transition: 'border-color 0.2s'
                           }}
-                          onFocus={(e) => e.target.style.borderColor = '#4F46E5'}
+                          onFocus={(e) => e.target.style.borderColor = 'var(--primary-color)'}
                           onBlur={(e) => e.target.style.borderColor = '#CBD5E1'}
                         />
                         <button
@@ -453,7 +453,7 @@ const Login = () => {
                           type="checkbox" 
                           checked={rememberMe} 
                           onChange={(e) => setRememberMe(e.target.checked)} 
-                          style={{ accentColor: '#4F46E5' }} 
+                          style={{ accentColor: 'var(--primary-color)' }} 
                         />
                         Remember Me
                       </label>
@@ -464,7 +464,7 @@ const Login = () => {
                           setForgotEmail(email);
                           setForgotStep(1); 
                         }}
-                        style={{ color: '#4F46E5', textDecoration: 'none', fontWeight: '600' }}
+                        style={{ color: 'var(--primary-color)', textDecoration: 'none', fontWeight: '600' }}
                       >
                         Forgot Password?
                       </a>
@@ -474,7 +474,7 @@ const Login = () => {
                     <button
                       type="submit"
                       style={{
-                        backgroundColor: '#4F46E5',
+                        backgroundColor: 'var(--primary-color)',
                         color: '#FFFFFF',
                         border: 'none',
                         borderRadius: '0.5rem',
@@ -487,7 +487,7 @@ const Login = () => {
                         marginTop: '0.5rem'
                       }}
                       onMouseEnter={(e) => e.target.style.backgroundColor = '#4338CA'}
-                      onMouseLeave={(e) => e.target.style.backgroundColor = '#4F46E5'}
+                      onMouseLeave={(e) => e.target.style.backgroundColor = 'var(--primary-color)'}
                     >
                       Login to Dashboard
                     </button>
@@ -547,7 +547,7 @@ const Login = () => {
                             color: '#0F172A',
                             transition: 'border-color 0.2s'
                           }}
-                          onFocus={(e) => e.target.style.borderColor = '#4F46E5'}
+                          onFocus={(e) => e.target.style.borderColor = 'var(--primary-color)'}
                           onBlur={(e) => e.target.style.borderColor = '#CBD5E1'}
                         />
                         <AtSign size={16} color="#94A3B8" style={{ position: 'absolute', right: '12px', pointerEvents: 'none' }} />
@@ -557,7 +557,7 @@ const Login = () => {
                     <button
                       type="submit"
                       style={{
-                        backgroundColor: '#4F46E5',
+                        backgroundColor: 'var(--primary-color)',
                         color: '#FFFFFF',
                         border: 'none',
                         borderRadius: '0.5rem',
@@ -570,7 +570,7 @@ const Login = () => {
                         marginTop: '0.5rem'
                       }}
                       onMouseEnter={(e) => e.target.style.backgroundColor = '#4338CA'}
-                      onMouseLeave={(e) => e.target.style.backgroundColor = '#4F46E5'}
+                      onMouseLeave={(e) => e.target.style.backgroundColor = 'var(--primary-color)'}
                     >
                       Send OTP
                     </button>
@@ -643,7 +643,7 @@ const Login = () => {
                             fontWeight: otpCode ? '700' : 'normal',
                             transition: 'border-color 0.2s'
                           }}
-                          onFocus={(e) => e.target.style.borderColor = '#4F46E5'}
+                          onFocus={(e) => e.target.style.borderColor = 'var(--primary-color)'}
                           onBlur={(e) => e.target.style.borderColor = '#CBD5E1'}
                         />
                         <Key size={16} color="#94A3B8" style={{ position: 'absolute', right: '12px', pointerEvents: 'none' }} />
@@ -653,7 +653,7 @@ const Login = () => {
                     <button
                       type="submit"
                       style={{
-                        backgroundColor: '#4F46E5',
+                        backgroundColor: 'var(--primary-color)',
                         color: '#FFFFFF',
                         border: 'none',
                         borderRadius: '0.5rem',
@@ -666,7 +666,7 @@ const Login = () => {
                         marginTop: '0.5rem'
                       }}
                       onMouseEnter={(e) => e.target.style.backgroundColor = '#4338CA'}
-                      onMouseLeave={(e) => e.target.style.backgroundColor = '#4F46E5'}
+                      onMouseLeave={(e) => e.target.style.backgroundColor = 'var(--primary-color)'}
                     >
                       Verify OTP
                     </button>
@@ -675,7 +675,7 @@ const Login = () => {
                       <a 
                         href="#resend" 
                         onClick={(e) => { e.preventDefault(); handleSendOTP(e); }}
-                        style={{ color: '#4F46E5', textDecoration: 'none', fontWeight: '600' }}
+                        style={{ color: 'var(--primary-color)', textDecoration: 'none', fontWeight: '600' }}
                       >
                         Resend Code
                       </a>
@@ -744,7 +744,7 @@ const Login = () => {
                             color: '#0F172A',
                             transition: 'border-color 0.2s'
                           }}
-                          onFocus={(e) => e.target.style.borderColor = '#4F46E5'}
+                          onFocus={(e) => e.target.style.borderColor = 'var(--primary-color)'}
                           onBlur={(e) => e.target.style.borderColor = '#CBD5E1'}
                         />
                         <button
@@ -795,7 +795,7 @@ const Login = () => {
                             color: '#0F172A',
                             transition: 'border-color 0.2s'
                           }}
-                          onFocus={(e) => e.target.style.borderColor = '#4F46E5'}
+                          onFocus={(e) => e.target.style.borderColor = 'var(--primary-color)'}
                           onBlur={(e) => e.target.style.borderColor = '#CBD5E1'}
                         />
                         <button
@@ -821,7 +821,7 @@ const Login = () => {
                     <button
                       type="submit"
                       style={{
-                        backgroundColor: '#4F46E5',
+                        backgroundColor: 'var(--primary-color)',
                         color: '#FFFFFF',
                         border: 'none',
                         borderRadius: '0.5rem',
@@ -834,7 +834,7 @@ const Login = () => {
                         marginTop: '0.5rem'
                       }}
                       onMouseEnter={(e) => e.target.style.backgroundColor = '#4338CA'}
-                      onMouseLeave={(e) => e.target.style.backgroundColor = '#4F46E5'}
+                      onMouseLeave={(e) => e.target.style.backgroundColor = 'var(--primary-color)'}
                     >
                       Reset Password
                     </button>

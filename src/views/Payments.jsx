@@ -9,7 +9,7 @@ import RecordPaymentModal from '../components/RecordPaymentModal';
 
 const SUMMARY_CARDS = [
   { title: 'Total Collected', value: '₹2.4Cr', bg: '#ECFDF5', color: '#10B981', icon: <CheckCircle2 size={20} /> },
-  { title: 'Upcoming Dues', value: '₹45L', bg: '#EFF6FF', color: '#3B82F6', icon: <Clock size={20} /> },
+  { title: 'Upcoming Dues', value: '₹45L', bg: '#EFF6FF', color: 'var(--primary-color)', icon: <Clock size={20} /> },
   { title: 'Pending Payments', value: '₹12L', bg: '#FFF7ED', color: '#F97316', icon: <AlertCircle size={20} /> },
   { title: 'Overdue Payments', value: '₹8.5L', bg: '#FEF2F2', color: '#EF4444', icon: <X size={20} /> },
 ];
@@ -26,7 +26,7 @@ const INITIAL_PAYMENTS = [
 const getStatusBadge = (status) => {
   switch ((status || '').toLowerCase()) {
     case 'paid': return <span style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', fontSize: '0.75rem', fontWeight: '600', color: '#047857', backgroundColor: '#ECFDF5', padding: '0.25rem 0.5rem', borderRadius: '1rem' }}><div style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#10B981' }}></div> Paid</span>;
-    case 'pending': return <span style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', fontSize: '0.75rem', fontWeight: '600', color: '#1D4ED8', backgroundColor: '#DBEAFE', padding: '0.25rem 0.5rem', borderRadius: '1rem' }}><div style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#3B82F6' }}></div> Pending</span>;
+    case 'pending': return <span style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', fontSize: '0.75rem', fontWeight: '600', color: '#1D4ED8', backgroundColor: '#DBEAFE', padding: '0.25rem 0.5rem', borderRadius: '1rem' }}><div style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: 'var(--primary-color)' }}></div> Pending</span>;
     case 'partially paid': return <span style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', fontSize: '0.75rem', fontWeight: '600', color: '#A16207', backgroundColor: '#FEFCE8', padding: '0.25rem 0.5rem', borderRadius: '1rem' }}><div style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#EAB308' }}></div> Partial</span>;
     case 'overdue': return <span style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', fontSize: '0.75rem', fontWeight: '600', color: '#B91C1C', backgroundColor: '#FEF2F2', padding: '0.25rem 0.5rem', borderRadius: '1rem' }}><div style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#EF4444' }}></div> Overdue</span>;
     default: return null;
@@ -53,7 +53,7 @@ export default function Payments() {
           <h2 style={{ fontSize: '1.875rem', fontWeight: '800', color: '#1E293B', margin: '0.5rem 0 0 0', letterSpacing: '-0.5px' }}>Payment Collection</h2>
         </div>
         <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
-          <button onClick={() => setIsRecordModalOpen(true)} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.75rem 1.25rem', backgroundColor: '#4F46E5', color: '#FFFFFF', border: 'none', borderRadius: '12px', fontWeight: '600', cursor: 'pointer', boxShadow: '0 4px 6px -1px rgba(79, 70, 229, 0.2)' }}>
+          <button onClick={() => setIsRecordModalOpen(true)} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.75rem 1.25rem', backgroundColor: 'var(--primary-color)', color: '#FFFFFF', border: 'none', borderRadius: '12px', fontWeight: '600', cursor: 'pointer', boxShadow: '0 4px 6px -1px rgba(79, 70, 229, 0.2)' }}>
             <Plus size={18} /> Record Payment
           </button>
         </div>
@@ -115,7 +115,7 @@ export default function Payments() {
                   onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#FFFFFF'}
                   onClick={() => setSelectedPayment(payment)}
                 >
-                  <td style={{ padding: '1rem', fontSize: '0.875rem', fontWeight: '600', color: '#4F46E5', whiteSpace: 'nowrap' }}>{payment.id}</td>
+                  <td style={{ padding: '1rem', fontSize: '0.875rem', fontWeight: '600', color: 'var(--primary-color)', whiteSpace: 'nowrap' }}>{payment.id}</td>
                   <td style={{ padding: '1rem', fontSize: '0.875rem', fontWeight: '600', color: '#1E293B', whiteSpace: 'nowrap' }}>{payment.customer}</td>
                   <td style={{ padding: '1rem', fontSize: '0.875rem', color: '#475569', whiteSpace: 'nowrap' }}>{payment.company}</td>
                   <td style={{ padding: '1rem', fontSize: '0.875rem', color: '#475569', whiteSpace: 'nowrap' }}>{payment.milestone}</td>
@@ -127,7 +127,7 @@ export default function Payments() {
                   <td style={{ padding: '1rem', whiteSpace: 'nowrap' }} onClick={(e) => e.stopPropagation()}>
                     <div style={{ display: 'flex', gap: '0.5rem' }}>
                       <button style={{ padding: '0.4rem', border: 'none', backgroundColor: '#F1F5F9', color: '#64748B', borderRadius: '6px', cursor: 'pointer' }} title="View Details"><Eye size={14} /></button>
-                      <button onClick={(e) => { e.stopPropagation(); setIsRecordModalOpen(true); }} style={{ padding: '0.4rem', border: 'none', backgroundColor: '#EEF2FF', color: '#4F46E5', borderRadius: '6px', cursor: 'pointer' }} title="Record Payment"><CreditCard size={14} /></button>
+                      <button onClick={(e) => { e.stopPropagation(); setIsRecordModalOpen(true); }} style={{ padding: '0.4rem', border: 'none', backgroundColor: '#EEF2FF', color: 'var(--primary-color)', borderRadius: '6px', cursor: 'pointer' }} title="Record Payment"><CreditCard size={14} /></button>
                       <button style={{ padding: '0.4rem', border: 'none', backgroundColor: '#F1F5F9', color: '#64748B', borderRadius: '6px', cursor: 'pointer' }} title="Download Invoice"><Download size={14} /></button>
                     </div>
                   </td>
@@ -142,7 +142,7 @@ export default function Payments() {
           <span style={{ fontSize: '0.875rem', color: '#64748B' }}>Showing 1 to 6 of 45 invoices</span>
           <div style={{ display: 'flex', gap: '0.5rem' }}>
             <button style={{ padding: '0.4rem 0.8rem', border: '1px solid #E2E8F0', backgroundColor: '#FFFFFF', borderRadius: '6px', cursor: 'pointer', display: 'flex', alignItems: 'center' }}><ChevronLeft size={16} /></button>
-            <button style={{ padding: '0.4rem 0.8rem', border: '1px solid #4F46E5', backgroundColor: '#4F46E5', color: '#FFF', borderRadius: '6px', cursor: 'pointer' }}>1</button>
+            <button style={{ padding: '0.4rem 0.8rem', border: '1px solid var(--primary-color)', backgroundColor: 'var(--primary-color)', color: '#FFF', borderRadius: '6px', cursor: 'pointer' }}>1</button>
             <button style={{ padding: '0.4rem 0.8rem', border: '1px solid #E2E8F0', backgroundColor: '#FFFFFF', borderRadius: '6px', cursor: 'pointer' }}>2</button>
             <button style={{ padding: '0.4rem 0.8rem', border: '1px solid #E2E8F0', backgroundColor: '#FFFFFF', borderRadius: '6px', cursor: 'pointer', display: 'flex', alignItems: 'center' }}><ChevronRight size={16} /></button>
           </div>

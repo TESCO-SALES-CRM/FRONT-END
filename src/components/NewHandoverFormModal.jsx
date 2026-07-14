@@ -132,7 +132,7 @@ const NewHandoverFormModal = ({ isOpen, onClose, lead, onSubmit }) => {
           <form onSubmit={handleSubmitForm}>
             {/* 1. Client & Project Details */}
             <div style={sectionStyle}>
-              <h3 style={headerStyle}><Building size={20} color="#3b82f6" /> 1. Client & Project Details</h3>
+              <h3 style={headerStyle}><Building size={20} color="var(--primary-color)" /> 1. Client & Project Details</h3>
               <div style={grid3Col}>
                 <div style={inputGroupStyle}>
                   <label style={labelStyle}>Client Name *</label>
@@ -283,7 +283,7 @@ const NewHandoverFormModal = ({ isOpen, onClose, lead, onSubmit }) => {
               <div style={{ marginTop: '1.5rem', marginBottom: '1.5rem' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
                   <label style={labelStyle}>Payment Terms Schedule</label>
-                  <button type="button" onClick={addPaymentTerm} style={{ backgroundColor: '#EEF2FF', color: '#4F46E5', border: 'none', padding: '0.4rem 0.75rem', borderRadius: '6px', fontSize: '0.75rem', fontWeight: '600', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
+                  <button type="button" onClick={addPaymentTerm} style={{ backgroundColor: '#EEF2FF', color: 'var(--primary-color)', border: 'none', padding: '0.4rem 0.75rem', borderRadius: '6px', fontSize: '0.75rem', fontWeight: '600', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
                     <Plus size={14} /> Add Milestone
                   </button>
                 </div>
@@ -324,7 +324,7 @@ const NewHandoverFormModal = ({ isOpen, onClose, lead, onSubmit }) => {
                   <h4 style={{ fontSize: '1.05rem', fontWeight: '700', color: '#1e293b', margin: '0 0 1rem 0' }}>5. Site Engineer Visit Completed</h4>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
                     <label style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', cursor: 'pointer', fontWeight: '500', color: '#0f172a' }}>
-                      <input type="checkbox" name="engineerVisit" checked={formData.engineerVisit} onChange={handleChange} style={{ width: '20px', height: '20px', accentColor: '#3b82f6' }} />
+                      <input type="checkbox" name="engineerVisit" checked={formData.engineerVisit} onChange={handleChange} style={{ width: '20px', height: '20px', accentColor: 'var(--primary-color)' }} />
                       Visit Completed
                     </label>
                     <div style={{ flex: 1, display: formData.engineerVisit ? 'block' : 'none' }}>

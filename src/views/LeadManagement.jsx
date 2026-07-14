@@ -18,7 +18,7 @@ const LEAD_SOURCES = [
 const getSourceStyles = (source) => {
   switch ((source || '').toLowerCase()) {
     case 'referral':         return { bg: '#EDE9FE', color: '#5B21B6', dot: '#7C3AED' };
-    case 'website enquiry': return { bg: '#DBEAFE', color: '#1D4ED8', dot: '#3B82F6' };
+    case 'website enquiry': return { bg: '#DBEAFE', color: '#1D4ED8', dot: 'var(--primary-color)' };
     case 'cold calling':    return { bg: '#FEF3C7', color: '#92400E', dot: '#F59E0B' };
     case 'meta leads':      return { bg: '#FCE7F3', color: '#9D174D', dot: '#EC4899' };
     case 'linkedin leads':  return { bg: '#E0F2FE', color: '#075985', dot: '#0EA5E9' };
@@ -1094,7 +1094,7 @@ const LeadManagement = () => {
             value={leadsInDateRange.length} 
             subtitle="All leads in system" 
             icon={Users} 
-            color="#4F46E5" 
+            color="var(--primary-color)" 
             bg="#EEF4FF" 
             borderColor="#C7D2FE" 
             isSelected={statusFilter === 'All'}

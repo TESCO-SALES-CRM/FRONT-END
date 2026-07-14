@@ -23,7 +23,7 @@ const LeadDetailsDrawer = ({ lead, isOpen, onClose }) => {
       case 'high': return { bg: '#FEE2E2', color: '#DC2626' };
       case 'medium': return { bg: '#FEF3C7', color: '#D97706' };
       case 'low': return { bg: '#F1F5F9', color: '#475569' };
-      case 'quotation send': return { bg: '#E0E7FF', color: '#4F46E5' };
+      case 'quotation send': return { bg: '#E0E7FF', color: 'var(--primary-color)' };
       default: return { bg: '#F1F5F9', color: '#475569' };
     }
   };
@@ -104,8 +104,8 @@ const LeadDetailsDrawer = ({ lead, isOpen, onClose }) => {
             style={{
               flex: 1, padding: '1rem', border: 'none', background: 'none', cursor: 'pointer',
               fontWeight: '600', fontSize: '0.875rem',
-              color: activeTab === 'specifications' ? '#4F46E5' : '#64748B',
-              borderBottom: activeTab === 'specifications' ? '2px solid #4F46E5' : '2px solid transparent',
+              color: activeTab === 'specifications' ? 'var(--primary-color)' : '#64748B',
+              borderBottom: activeTab === 'specifications' ? '2px solid var(--primary-color)' : '2px solid transparent',
               transition: 'all 0.2s'
             }}
           >
@@ -116,8 +116,8 @@ const LeadDetailsDrawer = ({ lead, isOpen, onClose }) => {
             style={{
               flex: 1, padding: '1rem', border: 'none', background: 'none', cursor: 'pointer',
               fontWeight: '600', fontSize: '0.875rem',
-              color: activeTab === 'timeline' ? '#4F46E5' : '#64748B',
-              borderBottom: activeTab === 'timeline' ? '2px solid #4F46E5' : '2px solid transparent',
+              color: activeTab === 'timeline' ? 'var(--primary-color)' : '#64748B',
+              borderBottom: activeTab === 'timeline' ? '2px solid var(--primary-color)' : '2px solid transparent',
               transition: 'all 0.2s'
             }}
           >
@@ -139,7 +139,7 @@ const LeadDetailsDrawer = ({ lead, isOpen, onClose }) => {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               {/* Basic Information */}
               <div style={{ backgroundColor: '#FFFFFF', borderRadius: '12px', padding: '1.5rem', border: '1px solid #E2E8F0' }}>
-                <h4 style={{ margin: '0 0 1.25rem 0', fontSize: '0.875rem', fontWeight: '700', color: '#1E293B', borderLeft: '3px solid #4F46E5', paddingLeft: '0.5rem' }}>Basic Information</h4>
+                <h4 style={{ margin: '0 0 1.25rem 0', fontSize: '0.875rem', fontWeight: '700', color: '#1E293B', borderLeft: '3px solid var(--primary-color)', paddingLeft: '0.5rem' }}>Basic Information</h4>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.25rem' }}>
                   <div><span style={{ display: 'block', fontSize: '0.65rem', fontWeight: '700', color: '#94A3B8', marginBottom: '0.25rem', textTransform: 'uppercase' }}>Customer Name</span><span style={{ fontWeight: '600', color: '#1E293B', fontSize: '0.875rem' }}>{lead.name || '-'}</span></div>
                   <div><span style={{ display: 'block', fontSize: '0.65rem', fontWeight: '700', color: '#94A3B8', marginBottom: '0.25rem', textTransform: 'uppercase' }}>Company Name</span><span style={{ fontWeight: '600', color: '#1E293B', fontSize: '0.875rem' }}>{lead.companyName || '-'}</span></div>
@@ -147,7 +147,7 @@ const LeadDetailsDrawer = ({ lead, isOpen, onClose }) => {
                   <div><span style={{ display: 'block', fontSize: '0.65rem', fontWeight: '700', color: '#94A3B8', marginBottom: '0.25rem', textTransform: 'uppercase' }}>Email Address</span><span style={{ fontWeight: '600', color: '#1E293B', fontSize: '0.875rem' }}>{lead.email || '-'}</span></div>
                   
                   <div><span style={{ display: 'block', fontSize: '0.65rem', fontWeight: '700', color: '#94A3B8', marginBottom: '0.25rem', textTransform: 'uppercase' }}>Service Segment</span>
-                    <span style={{ display: 'inline-block', padding: '0.25rem 0.5rem', borderRadius: '4px', backgroundColor: '#EEF2FF', color: '#4F46E5', fontSize: '0.75rem', fontWeight: '600' }}>{lead.projectType || 'PEB Building'}</span>
+                    <span style={{ display: 'inline-block', padding: '0.25rem 0.5rem', borderRadius: '4px', backgroundColor: '#EEF2FF', color: 'var(--primary-color)', fontSize: '0.75rem', fontWeight: '600' }}>{lead.projectType || 'PEB Building'}</span>
                   </div>
                   <div><span style={{ display: 'block', fontSize: '0.65rem', fontWeight: '700', color: '#94A3B8', marginBottom: '0.25rem', textTransform: 'uppercase' }}>Lead Source</span><span style={{ fontWeight: '600', color: '#1E293B', fontSize: '0.875rem' }}>{lead.source || '-'}</span></div>
                   
@@ -165,7 +165,7 @@ const LeadDetailsDrawer = ({ lead, isOpen, onClose }) => {
 
               {/* PEB Building Details */}
               <div style={{ backgroundColor: '#FFFFFF', borderRadius: '12px', padding: '1.5rem', border: '1px solid #E2E8F0' }}>
-                <h4 style={{ margin: '0 0 1.25rem 0', fontSize: '0.875rem', fontWeight: '700', color: '#1E293B', borderLeft: '3px solid #4F46E5', paddingLeft: '0.5rem' }}>PEB Building Details</h4>
+                <h4 style={{ margin: '0 0 1.25rem 0', fontSize: '0.875rem', fontWeight: '700', color: '#1E293B', borderLeft: '3px solid var(--primary-color)', paddingLeft: '0.5rem' }}>PEB Building Details</h4>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.25rem' }}>
                   <div><span style={{ display: 'block', fontSize: '0.65rem', fontWeight: '700', color: '#94A3B8', marginBottom: '0.25rem', textTransform: 'uppercase' }}>Project Type</span><span style={{ fontWeight: '600', color: '#1E293B', fontSize: '0.875rem' }}>{lead.projectTypeDetails || 'Warehouse'}</span></div>
                   <div><span style={{ display: 'block', fontSize: '0.65rem', fontWeight: '700', color: '#94A3B8', marginBottom: '0.25rem', textTransform: 'uppercase' }}>Structure Type</span><span style={{ fontWeight: '600', color: '#1E293B', fontSize: '0.875rem' }}>{lead.structureType || '-'}</span></div>
@@ -176,7 +176,7 @@ const LeadDetailsDrawer = ({ lead, isOpen, onClose }) => {
 
               {/* Site Dimensions */}
               <div style={{ backgroundColor: '#FFFFFF', borderRadius: '12px', padding: '1.5rem', border: '1px solid #E2E8F0' }}>
-                <h4 style={{ margin: '0 0 1.25rem 0', fontSize: '0.875rem', fontWeight: '700', color: '#1E293B', borderLeft: '3px solid #4F46E5', paddingLeft: '0.5rem' }}>Site Dimensions</h4>
+                <h4 style={{ margin: '0 0 1.25rem 0', fontSize: '0.875rem', fontWeight: '700', color: '#1E293B', borderLeft: '3px solid var(--primary-color)', paddingLeft: '0.5rem' }}>Site Dimensions</h4>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.25rem' }}>
                   <div><span style={{ display: 'block', fontSize: '0.65rem', fontWeight: '700', color: '#94A3B8', marginBottom: '0.25rem', textTransform: 'uppercase' }}>Length</span><span style={{ fontWeight: '600', color: '#1E293B', fontSize: '0.875rem' }}>{lead.length || '-'}</span></div>
                   <div><span style={{ display: 'block', fontSize: '0.65rem', fontWeight: '700', color: '#94A3B8', marginBottom: '0.25rem', textTransform: 'uppercase' }}>Width</span><span style={{ fontWeight: '600', color: '#1E293B', fontSize: '0.875rem' }}>{lead.width || '-'}</span></div>
@@ -191,7 +191,7 @@ const LeadDetailsDrawer = ({ lead, isOpen, onClose }) => {
 
               {/* Technical & Scope */}
               <div style={{ backgroundColor: '#FFFFFF', borderRadius: '12px', padding: '1.5rem', border: '1px solid #E2E8F0' }}>
-                <h4 style={{ margin: '0 0 1.25rem 0', fontSize: '0.875rem', fontWeight: '700', color: '#1E293B', borderLeft: '3px solid #4F46E5', paddingLeft: '0.5rem' }}>Technical & Scope</h4>
+                <h4 style={{ margin: '0 0 1.25rem 0', fontSize: '0.875rem', fontWeight: '700', color: '#1E293B', borderLeft: '3px solid var(--primary-color)', paddingLeft: '0.5rem' }}>Technical & Scope</h4>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.25rem' }}>
                   <div><span style={{ display: 'block', fontSize: '0.65rem', fontWeight: '700', color: '#94A3B8', marginBottom: '0.25rem', textTransform: 'uppercase' }}>Roof Covering</span><span style={{ fontWeight: '600', color: '#1E293B', fontSize: '0.875rem' }}>{lead.roofType || 'GI'}</span></div>
                   <div><span style={{ display: 'block', fontSize: '0.65rem', fontWeight: '700', color: '#94A3B8', marginBottom: '0.25rem', textTransform: 'uppercase' }}>Cladding Material</span><span style={{ fontWeight: '600', color: '#1E293B', fontSize: '0.875rem' }}>{lead.cladding || 'GI'}</span></div>
@@ -204,7 +204,7 @@ const LeadDetailsDrawer = ({ lead, isOpen, onClose }) => {
 
               {/* Commercial Terms */}
               <div style={{ backgroundColor: '#FFFFFF', borderRadius: '12px', padding: '1.5rem', border: '1px solid #E2E8F0' }}>
-                <h4 style={{ margin: '0 0 1.25rem 0', fontSize: '0.875rem', fontWeight: '700', color: '#1E293B', borderLeft: '3px solid #4F46E5', paddingLeft: '0.5rem' }}>Commercial Terms</h4>
+                <h4 style={{ margin: '0 0 1.25rem 0', fontSize: '0.875rem', fontWeight: '700', color: '#1E293B', borderLeft: '3px solid var(--primary-color)', paddingLeft: '0.5rem' }}>Commercial Terms</h4>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.25rem' }}>
                   <div><span style={{ display: 'block', fontSize: '0.65rem', fontWeight: '700', color: '#94A3B8', marginBottom: '0.25rem', textTransform: 'uppercase' }}>Estimated Revenue</span><span style={{ fontWeight: '700', color: '#10B981', fontSize: '0.875rem' }}>₹{lead.estimatedRevenue ? Number(lead.estimatedRevenue).toLocaleString() : '-'}</span></div>
                   <div><span style={{ display: 'block', fontSize: '0.65rem', fontWeight: '700', color: '#94A3B8', marginBottom: '0.25rem', textTransform: 'uppercase' }}>Sales Probability</span><span style={{ fontWeight: '600', color: '#1E293B', fontSize: '0.875rem' }}>{lead.salesProbability || '-'}%</span></div>
@@ -216,7 +216,7 @@ const LeadDetailsDrawer = ({ lead, isOpen, onClose }) => {
 
               {/* Attached Files */}
               <div style={{ backgroundColor: '#FFFFFF', borderRadius: '12px', padding: '1.5rem', border: '1px solid #E2E8F0' }}>
-                <h4 style={{ margin: '0 0 1.25rem 0', fontSize: '0.875rem', fontWeight: '700', color: '#1E293B', borderLeft: '3px solid #4F46E5', paddingLeft: '0.5rem' }}>Attached Files</h4>
+                <h4 style={{ margin: '0 0 1.25rem 0', fontSize: '0.875rem', fontWeight: '700', color: '#1E293B', borderLeft: '3px solid var(--primary-color)', paddingLeft: '0.5rem' }}>Attached Files</h4>
                 <p style={{ margin: 0, fontSize: '0.875rem', color: '#94A3B8', fontStyle: 'italic' }}>
                   No files attached to this lead
                 </p>
@@ -258,7 +258,7 @@ const LeadDetailsDrawer = ({ lead, isOpen, onClose }) => {
                     } else if (msg.includes('appointment') || msg.includes('appt')) {
                       Icon = CalendarCheck; iconBg = '#ECFDF5'; iconColor = '#10B981';
                     } else if (msg.includes('quotation') || msg.includes('quot')) {
-                      Icon = FileText; iconBg = '#E0E7FF'; iconColor = '#4F46E5';
+                      Icon = FileText; iconBg = '#E0E7FF'; iconColor = 'var(--primary-color)';
                     } else if (msg.includes('negotiation') || msg.includes('negot')) {
                       Icon = FileSignature; iconBg = '#FFFBEB'; iconColor = '#D97706';
                     } else if (msg.includes('order confirmed') || msg.includes('confirmed') || msg.includes('order')) {
@@ -266,7 +266,7 @@ const LeadDetailsDrawer = ({ lead, isOpen, onClose }) => {
                     } else if (msg.includes('junk')) {
                       Icon = Trash2; iconBg = '#F3F4F6'; iconColor = '#4B5563';
                     } else if (msg.includes('status')) {
-                      Icon = Activity; iconBg = '#EEF2FF'; iconColor = '#4F46E5';
+                      Icon = Activity; iconBg = '#EEF2FF'; iconColor = 'var(--primary-color)';
                     }
 
                     return (

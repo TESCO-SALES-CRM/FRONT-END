@@ -221,14 +221,14 @@ const ProjectFiling = () => {
                 <tbody>
                   {projects.map((project, idx) => (
                     <tr key={project.id} style={{ borderBottom: '1px solid #f1f5f9', backgroundColor: idx % 2 === 0 ? 'white' : '#fafaf9', transition: 'background-color 0.2s ease' }} onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#f1f5f9'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = idx % 2 === 0 ? 'white' : '#fafaf9'}>
-                      <td style={{ padding: '1rem 1.5rem', fontWeight: '600', color: '#3b82f6', fontSize: '0.875rem' }}>{project.id}</td>
+                      <td style={{ padding: '1rem 1.5rem', fontWeight: '600', color: 'var(--primary-color)', fontSize: '0.875rem' }}>{project.id}</td>
                       <td style={{ padding: '1rem 1.5rem', fontWeight: '600', color: '#1e293b' }}>{project.clientName}</td>
                       <td style={{ padding: '1rem 1.5rem', color: '#475569', fontSize: '0.875rem', maxWidth: '200px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }} title={project.projectType}>{project.projectType}</td>
                       <td style={{ padding: '1rem 1.5rem', color: '#475569', fontSize: '0.875rem' }}>{project.projectLocation}</td>
                       <td style={{ padding: '1rem 1.5rem', color: '#475569', fontSize: '0.875rem' }}>{project.salesperson}</td>
                       <td style={{ padding: '1rem 1.5rem', fontWeight: '700', color: '#10b981', fontSize: '0.875rem' }}>{project.quotedPrice}</td>
                       <td style={{ padding: '1rem 1.5rem', textAlign: 'center' }}>
-                        <button onClick={() => handleEdit(project)} style={{ background: '#e0e7ff', border: 'none', color: '#4f46e5', width: '32px', height: '32px', borderRadius: '50%', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', transition: 'transform 0.1s ease' }} title="View / Edit">
+                        <button onClick={() => handleEdit(project)} style={{ background: '#e0e7ff', border: 'none', color: 'var(--primary-color)', width: '32px', height: '32px', borderRadius: '50%', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', transition: 'transform 0.1s ease' }} title="View / Edit">
                           <Edit2 size={14} />
                         </button>
                       </td>
@@ -270,7 +270,7 @@ const ProjectFiling = () => {
             
             {/* 1. Client & Project Details */}
             <div style={sectionStyle}>
-              <h3 style={headerStyle}><Building size={20} color="#3b82f6" /> 1. Client & Project Details</h3>
+              <h3 style={headerStyle}><Building size={20} color="var(--primary-color)" /> 1. Client & Project Details</h3>
               <div style={grid3Col}>
                 <div style={inputGroupStyle}>
                   <label style={labelStyle}>Client Name *</label>
@@ -421,7 +421,7 @@ const ProjectFiling = () => {
               <div style={{ marginTop: '1.5rem', marginBottom: '1.5rem' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
                   <label style={labelStyle}>Payment Terms Schedule</label>
-                  <button type="button" onClick={addPaymentTerm} style={{ backgroundColor: '#EEF2FF', color: '#4F46E5', border: 'none', padding: '0.4rem 0.75rem', borderRadius: '6px', fontSize: '0.75rem', fontWeight: '600', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
+                  <button type="button" onClick={addPaymentTerm} style={{ backgroundColor: '#EEF2FF', color: 'var(--primary-color)', border: 'none', padding: '0.4rem 0.75rem', borderRadius: '6px', fontSize: '0.75rem', fontWeight: '600', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
                     <Plus size={14} /> Add Milestone
                   </button>
                 </div>
@@ -462,7 +462,7 @@ const ProjectFiling = () => {
                   <h4 style={{ fontSize: '1.05rem', fontWeight: '700', color: '#1e293b', margin: '0 0 1rem 0' }}>5. Site Engineer Visit Completed</h4>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
                     <label style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', cursor: 'pointer', fontWeight: '500', color: '#0f172a' }}>
-                      <input type="checkbox" name="engineerVisit" checked={formData.engineerVisit} onChange={handleChange} style={{ width: '20px', height: '20px', accentColor: '#3b82f6' }} />
+                      <input type="checkbox" name="engineerVisit" checked={formData.engineerVisit} onChange={handleChange} style={{ width: '20px', height: '20px', accentColor: 'var(--primary-color)' }} />
                       Visit Completed
                     </label>
                     <div style={{ flex: 1, display: formData.engineerVisit ? 'block' : 'none' }}>

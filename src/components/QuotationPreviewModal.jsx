@@ -89,7 +89,7 @@ const QuotationPreviewModal = ({ quotation, onClose }) => {
               {/* Cards Row */}
               <div style={{ display: 'flex', gap: '20px', marginBottom: '40px' }}>
                 <div style={{ flex: 1, padding: '20px', borderRadius: '6px', border: '1px solid #e2e8f0', backgroundColor: '#f8fafc' }}>
-                  <div style={{ fontSize: '10px', fontWeight: '700', color: '#3b82f6', textTransform: 'uppercase', marginBottom: '10px' }}>QUOTATION PREPARED FOR</div>
+                  <div style={{ fontSize: '10px', fontWeight: '700', color: 'var(--primary-color)', textTransform: 'uppercase', marginBottom: '10px' }}>QUOTATION PREPARED FOR</div>
                   <div style={{ fontSize: '16px', fontWeight: '700', color: '#1e293b', marginBottom: '8px' }}>{quotation.client || 'Client Name'}</div>
                   <div style={{ fontSize: '11px', color: '#64748b', lineHeight: '1.6' }}>
                     Phone: +91 87654 32109<br/>
@@ -98,7 +98,7 @@ const QuotationPreviewModal = ({ quotation, onClose }) => {
                   </div>
                 </div>
                 <div style={{ flex: 1, padding: '20px', borderRadius: '6px', border: '1px solid #e2e8f0', backgroundColor: '#f8fafc' }}>
-                  <div style={{ fontSize: '10px', fontWeight: '700', color: '#3b82f6', textTransform: 'uppercase', marginBottom: '10px' }}>ASSIGNED REPRESENTATIVE</div>
+                  <div style={{ fontSize: '10px', fontWeight: '700', color: 'var(--primary-color)', textTransform: 'uppercase', marginBottom: '10px' }}>ASSIGNED REPRESENTATIVE</div>
                   <div style={{ fontSize: '16px', fontWeight: '700', color: '#1e293b', marginBottom: '8px' }}>Alex Wong</div>
                   <div style={{ fontSize: '12px', color: '#64748b', marginBottom: '12px' }}>Tesco Structures Sales Division</div>
                   <div style={{ fontSize: '10px', color: '#64748b' }}>

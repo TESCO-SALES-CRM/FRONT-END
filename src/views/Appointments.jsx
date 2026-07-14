@@ -204,7 +204,7 @@ const Appointments = () => {
       {/* ── 4 Stat Cards ── */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1.25rem' }}>
         {[
-          { label: 'Total Appointments', value: totalAppointments, Icon: CalendarCheck2, color: '#4F46E5', bg: '#EEF4FF', border: '#C7D2FE', sub: 'All scheduled appointments' },
+          { label: 'Total Appointments', value: totalAppointments, Icon: CalendarCheck2, color: 'var(--primary-color)', bg: '#EEF4FF', border: '#C7D2FE', sub: 'All scheduled appointments' },
           { label: 'Total Visit Planned', value: visitPlanned,     Icon: CalendarClock,  color: '#0EA5E9', bg: '#F0F9FF', border: '#BAE6FD', sub: 'Upcoming & pending visits' },
           { label: 'Completed Appointments', value: completedAppt, Icon: CheckCircle2,   color: '#22C55E', bg: '#ECFDF5', border: '#BBF7D0', sub: 'Successfully completed' },
           { label: 'Total Visit Complete',  value: visitComplete,  Icon: Flag,           color: '#F97316', bg: '#FFF7ED', border: '#FED7AA', sub: 'Site visits wrapped up' },

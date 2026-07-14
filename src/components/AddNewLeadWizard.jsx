@@ -1404,12 +1404,12 @@ export default function AddNewLeadWizard({ isOpen, onClose, onSave, initialData 
              <div style={{ marginBottom: '2.5rem' }}>
                <h4 style={{ fontSize: '0.85rem', fontWeight: '700', color: '#64748B', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Reference Drawings</h4>
                
-               <div style={{ border: '2px dashed #CBD5E1', borderRadius: '12px', padding: '3rem 2rem', textAlign: 'center', backgroundColor: '#F8FAFC', cursor: 'pointer', transition: 'all 0.2s', marginBottom: '1.5rem' }} onMouseOver={e => e.currentTarget.style.borderColor = '#4F46E5'} onMouseOut={e => e.currentTarget.style.borderColor = '#CBD5E1'}>
+               <div style={{ border: '2px dashed #CBD5E1', borderRadius: '12px', padding: '3rem 2rem', textAlign: 'center', backgroundColor: '#F8FAFC', cursor: 'pointer', transition: 'all 0.2s', marginBottom: '1.5rem' }} onMouseOver={e => e.currentTarget.style.borderColor = 'var(--primary-color)'} onMouseOut={e => e.currentTarget.style.borderColor = '#CBD5E1'}>
                  <div style={{ backgroundColor: '#EEF2FF', width: '64px', height: '64px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.5rem auto' }}>
-                   <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                   <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--primary-color)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
                  </div>
                  <p style={{ fontSize: '1rem', fontWeight: '600', color: '#1E293B', marginBottom: '0.5rem' }}>Drag & Drop Drawings</p>
-                 <p style={{ color: '#64748B', fontSize: '0.875rem', marginBottom: '1rem' }}>or <span style={{ color: '#4F46E5', fontWeight: '600' }}>Browse Files</span></p>
+                 <p style={{ color: '#64748B', fontSize: '0.875rem', marginBottom: '1rem' }}>or <span style={{ color: 'var(--primary-color)', fontWeight: '600' }}>Browse Files</span></p>
                  <p style={{ fontSize: '0.75rem', color: '#94A3B8' }}>Upload PDF, DWG, Image • Maximum 25 MB</p>
                </div>
 
@@ -2114,7 +2114,7 @@ export default function AddNewLeadWizard({ isOpen, onClose, onSave, initialData 
              
             {/* 1. Client & Project Details */}
             <div style={sectionStyle}>
-              <h3 style={headerStyle}><Building size={20} color="#3b82f6" /> 1. Client & Project Details</h3>
+              <h3 style={headerStyle}><Building size={20} color="var(--primary-color)" /> 1. Client & Project Details</h3>
               <div style={grid3Col}>
                 <div style={inputGroupStyle}>
                   <label style={labelStyle}>Client Name *</label>
@@ -2265,7 +2265,7 @@ export default function AddNewLeadWizard({ isOpen, onClose, onSave, initialData 
               <div style={{ marginTop: '1.5rem', marginBottom: '1.5rem' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
                   <label style={labelStyle}>Payment Terms Schedule</label>
-                  <button type="button" onClick={addPaymentTerm} style={{ backgroundColor: '#EEF2FF', color: '#4F46E5', border: 'none', padding: '0.4rem 0.75rem', borderRadius: '6px', fontSize: '0.75rem', fontWeight: '600', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
+                  <button type="button" onClick={addPaymentTerm} style={{ backgroundColor: '#EEF2FF', color: 'var(--primary-color)', border: 'none', padding: '0.4rem 0.75rem', borderRadius: '6px', fontSize: '0.75rem', fontWeight: '600', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
                     <Plus size={14} /> Add Milestone
                   </button>
                 </div>
@@ -2306,7 +2306,7 @@ export default function AddNewLeadWizard({ isOpen, onClose, onSave, initialData 
                   <h4 style={{ fontSize: '1.05rem', fontWeight: '700', color: '#1e293b', margin: '0 0 1rem 0' }}>5. Site Engineer Visit Completed</h4>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
                     <label style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', cursor: 'pointer', fontWeight: '500', color: '#0f172a' }}>
-                      <input type="checkbox" name="engineerVisit" checked={formData.engineerVisit || false} onChange={e => handleChange('engineerVisit', e.target.checked)} style={{ width: '20px', height: '20px', accentColor: '#3b82f6' }} />
+                      <input type="checkbox" name="engineerVisit" checked={formData.engineerVisit || false} onChange={e => handleChange('engineerVisit', e.target.checked)} style={{ width: '20px', height: '20px', accentColor: 'var(--primary-color)' }} />
                       Visit Completed
                     </label>
                     <div style={{ flex: 1, display: formData.engineerVisit ? 'block' : 'none' }}>
@@ -2529,7 +2529,7 @@ export default function AddNewLeadWizard({ isOpen, onClose, onSave, initialData 
               };
 
               if (isActive) {
-                style = { ...style, backgroundColor: '#FFFFFF', border: '1px solid #4F46E5', color: '#1E293B', boxShadow: '0 1px 2px rgba(0,0,0,0.05)' };
+                style = { ...style, backgroundColor: '#FFFFFF', border: '1px solid var(--primary-color)', color: '#1E293B', boxShadow: '0 1px 2px rgba(0,0,0,0.05)' };
               } else if (isCompleted) {
                 style = { ...style, backgroundColor: '#FFFFFF', border: '1px solid #10B981', color: '#1E293B' };
               } else {
@@ -2544,7 +2544,7 @@ export default function AddNewLeadWizard({ isOpen, onClose, onSave, initialData 
                     <div style={{ 
                       width: '20px', height: '20px', borderRadius: '50%', 
                       display: 'flex', alignItems: 'center', justifyContent: 'center', 
-                      backgroundColor: isActive ? '#4F46E5' : '#F1F5F9',
+                      backgroundColor: isActive ? 'var(--primary-color)' : '#F1F5F9',
                       color: isActive ? '#FFF' : '#94A3B8',
                       fontSize: '0.75rem'
                     }}>
@@ -2572,7 +2572,7 @@ export default function AddNewLeadWizard({ isOpen, onClose, onSave, initialData 
               <div style={{ position: 'relative', width: '56px', height: '56px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <svg width="56" height="56" viewBox="0 0 56 56" style={{ position: 'absolute', transform: 'rotate(-90deg)' }}>
                   <circle cx="28" cy="28" r="24" fill="none" stroke="#F1F5F9" strokeWidth="5" />
-                  <circle cx="28" cy="28" r="24" fill="none" stroke="#4F46E5" strokeWidth="5" 
+                  <circle cx="28" cy="28" r="24" fill="none" stroke="var(--primary-color)" strokeWidth="5" 
                     strokeDasharray={`${2 * Math.PI * 24}`} 
                     strokeDashoffset={`${2 * Math.PI * 24 * (1 - leadScore / 100)}`} 
                     strokeLinecap="round" 
@@ -2621,7 +2621,7 @@ export default function AddNewLeadWizard({ isOpen, onClose, onSave, initialData 
               <div style={{ position: 'relative', paddingLeft: '1rem' }}>
                 <div style={{ position: 'absolute', left: '0.25rem', top: '0.5rem', bottom: 0, width: '2px', backgroundColor: '#E2E8F0' }}></div>
                 <div style={{ position: 'relative', marginBottom: '1rem' }}>
-                  <div style={{ position: 'absolute', left: '-1rem', top: '0.25rem', width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#4F46E5', border: '2px solid #EEF2FF' }}></div>
+                  <div style={{ position: 'absolute', left: '-1rem', top: '0.25rem', width: '8px', height: '8px', borderRadius: '50%', backgroundColor: 'var(--primary-color)', border: '2px solid #EEF2FF' }}></div>
                   <p style={{ margin: 0, fontSize: '0.8125rem', fontWeight: '600', color: '#1E293B' }}>Lead Form initialized</p>
                   <p style={{ margin: '0.25rem 0 0 0', fontSize: '0.7rem', color: '#94A3B8' }}>Just Now</p>
                 </div>
@@ -2651,7 +2651,7 @@ export default function AddNewLeadWizard({ isOpen, onClose, onSave, initialData 
                 <button onClick={handleFinish} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.6rem 1.5rem', borderRadius: '8px', border: 'none', backgroundColor: '#2E1065', color: '#FFFFFF', fontWeight: '600', fontSize: '0.875rem', cursor: 'pointer', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)' }}>
                   Save Lead
                 </button>
-                <button onClick={handleFinish} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.6rem 1.5rem', borderRadius: '8px', border: 'none', backgroundColor: '#4F46E5', color: '#FFFFFF', fontWeight: '600', fontSize: '0.875rem', cursor: 'pointer', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)' }}>
+                <button onClick={handleFinish} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.6rem 1.5rem', borderRadius: '8px', border: 'none', backgroundColor: 'var(--primary-color)', color: '#FFFFFF', fontWeight: '600', fontSize: '0.875rem', cursor: 'pointer', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)' }}>
                   Save & Create Quotation
                 </button>
               </>
@@ -2697,10 +2697,10 @@ const PriorityPill = ({ type, selected, onClick }) => {
 const SelectPill = ({ label, selected, onClick }) => (
   <button type="button" onClick={onClick} style={{
     padding: '0.6rem 1.25rem', borderRadius: '8px',
-    border: `1px solid ${selected ? '#4F46E5' : '#E2E8F0'}`,
-    backgroundColor: '#FFFFFF', color: selected ? '#4F46E5' : '#475569',
+    border: `1px solid ${selected ? 'var(--primary-color)' : '#E2E8F0'}`,
+    backgroundColor: '#FFFFFF', color: selected ? 'var(--primary-color)' : '#475569',
     fontWeight: '600', fontSize: '0.8125rem', cursor: 'pointer', outline: 'none',
-    boxShadow: selected ? '0 0 0 1px #4F46E5' : 'none',
+    boxShadow: selected ? '0 0 0 1px var(--primary-color)' : 'none',
     transition: 'all 0.2s'
   }}>
     {label}
@@ -2720,7 +2720,7 @@ const UnitInput = ({ label, unit, value, onChange, placeholder }) => (
 const ToggleSwitch = ({ checked, onChange }) => (
   <button type="button" onClick={onChange} style={{
     width: '44px', height: '24px', borderRadius: '12px', border: 'none',
-    backgroundColor: checked ? '#4F46E5' : '#CBD5E1', cursor: 'pointer', position: 'relative',
+    backgroundColor: checked ? 'var(--primary-color)' : '#CBD5E1', cursor: 'pointer', position: 'relative',
     transition: 'background-color 0.2s', outline: 'none'
   }}>
     <span style={{
@@ -2752,8 +2752,8 @@ const StepperInput = ({ value, onChange }) => (
 const MultiSelectPill = ({ label, selected, onClick }) => (
   <button type="button" onClick={onClick} style={{
     padding: '0.5rem 1rem', borderRadius: '8px',
-    border: `1px solid ${selected ? '#4F46E5' : '#E2E8F0'}`,
-    backgroundColor: selected ? '#EEF2FF' : '#FFFFFF', color: selected ? '#4F46E5' : '#475569',
+    border: `1px solid ${selected ? 'var(--primary-color)' : '#E2E8F0'}`,
+    backgroundColor: selected ? '#EEF2FF' : '#FFFFFF', color: selected ? 'var(--primary-color)' : '#475569',
     fontWeight: '600', fontSize: '0.8125rem', cursor: 'pointer', outline: 'none',
     transition: 'all 0.2s', display: 'flex', alignItems: 'center', gap: '0.5rem'
   }}>

@@ -91,7 +91,7 @@ export default function AddNewOpportunityModal({ isOpen, onClose, onSave }) {
         {/* Header */}
         <div style={{ padding: '1.5rem 2rem', backgroundColor: '#FFFFFF', borderBottom: '1px solid #E2E8F0', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-            <div style={{ width: '40px', height: '40px', borderRadius: '10px', backgroundColor: '#EEF2FF', color: '#4F46E5', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div style={{ width: '40px', height: '40px', borderRadius: '10px', backgroundColor: '#EEF2FF', color: 'var(--primary-color)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <Target size={20} />
             </div>
             <div>
@@ -110,7 +110,7 @@ export default function AddNewOpportunityModal({ isOpen, onClose, onSave }) {
           {/* Section 1: Customer Info */}
           <div style={{ backgroundColor: '#FFFFFF', padding: '1.5rem', borderRadius: '12px', border: '1px solid #E2E8F0' }}>
             <h3 style={{ margin: '0 0 1.25rem 0', fontSize: '1rem', fontWeight: '700', color: '#1E293B', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <User size={18} color="#4F46E5" /> Customer & Client Information
+              <User size={18} color="var(--primary-color)" /> Customer & Client Information
             </h3>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.25rem' }}>
               <div>
@@ -136,7 +136,7 @@ export default function AddNewOpportunityModal({ isOpen, onClose, onSave }) {
           {/* Section 2: Deal Specifics */}
           <div style={{ backgroundColor: '#FFFFFF', padding: '1.5rem', borderRadius: '12px', border: '1px solid #E2E8F0' }}>
             <h3 style={{ margin: '0 0 1.25rem 0', fontSize: '1rem', fontWeight: '700', color: '#1E293B', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <Briefcase size={18} color="#4F46E5" /> Pipeline Positioning
+              <Briefcase size={18} color="var(--primary-color)" /> Pipeline Positioning
             </h3>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '1.25rem' }}>
               <div>
@@ -170,7 +170,7 @@ export default function AddNewOpportunityModal({ isOpen, onClose, onSave }) {
           {/* Section 3: Value & Timeline */}
           <div style={{ backgroundColor: '#FFFFFF', padding: '1.5rem', borderRadius: '12px', border: '1px solid #E2E8F0' }}>
             <h3 style={{ margin: '0 0 1.25rem 0', fontSize: '1rem', fontWeight: '700', color: '#1E293B', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <IndianRupee size={18} color="#4F46E5" /> Value & Timeline
+              <IndianRupee size={18} color="var(--primary-color)" /> Value & Timeline
             </h3>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '1.25rem' }}>
               <div>
@@ -211,7 +211,7 @@ export default function AddNewOpportunityModal({ isOpen, onClose, onSave }) {
         {/* Footer Actions */}
         <div style={{ padding: '1.25rem 2rem', backgroundColor: '#FFFFFF', borderTop: '1px solid #E2E8F0', display: 'flex', justifyContent: 'flex-end', gap: '1rem' }}>
           <button onClick={onClose} style={{ padding: '0.75rem 1.5rem', backgroundColor: '#FFFFFF', border: '1px solid #E2E8F0', color: '#475569', borderRadius: '8px', fontWeight: '600', cursor: 'pointer' }}>Cancel</button>
-          <button onClick={handleSave} style={{ padding: '0.75rem 2rem', backgroundColor: '#4F46E5', color: '#FFFFFF', border: 'none', borderRadius: '8px', fontWeight: '600', cursor: 'pointer', boxShadow: '0 4px 6px -1px rgba(79, 70, 229, 0.2)' }}>Save Opportunity</button>
+          <button onClick={handleSave} style={{ padding: '0.75rem 2rem', backgroundColor: 'var(--primary-color)', color: '#FFFFFF', border: 'none', borderRadius: '8px', fontWeight: '600', cursor: 'pointer', boxShadow: '0 4px 6px -1px rgba(79, 70, 229, 0.2)' }}>Save Opportunity</button>
         </div>
 
       </div>

@@ -111,7 +111,7 @@ export default function RecordPaymentModal({ isOpen, onClose, onSave }) {
           {/* Section 1: Invoice & Client Info */}
           <div style={{ backgroundColor: '#FFFFFF', padding: '1.5rem', borderRadius: '12px', border: '1px solid #E2E8F0' }}>
             <h3 style={{ margin: '0 0 1.25rem 0', fontSize: '1rem', fontWeight: '700', color: '#1E293B', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <FileText size={18} color="#4F46E5" /> Invoice & Client Details
+              <FileText size={18} color="var(--primary-color)" /> Invoice & Client Details
             </h3>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.25rem' }}>
               <div style={{ gridColumn: 'span 2' }}>
@@ -132,7 +132,7 @@ export default function RecordPaymentModal({ isOpen, onClose, onSave }) {
           {/* Section 2: Transaction Details */}
           <div style={{ backgroundColor: '#FFFFFF', padding: '1.5rem', borderRadius: '12px', border: '1px solid #E2E8F0' }}>
             <h3 style={{ margin: '0 0 1.25rem 0', fontSize: '1rem', fontWeight: '700', color: '#1E293B', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <IndianRupee size={18} color="#4F46E5" /> Transaction Details
+              <IndianRupee size={18} color="var(--primary-color)" /> Transaction Details
             </h3>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.25rem' }}>
               <div>

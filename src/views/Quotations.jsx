@@ -150,7 +150,7 @@ const Quotations = () => {
       {/* ── 4 Stat Cards ── */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1.25rem' }}>
         {[
-          { label: 'Requested Quotations', value: requestedCount, Icon: FileText, color: '#4F46E5', bg: '#EEF4FF', border: '#C7D2FE', sub: 'Draft & initial requests' },
+          { label: 'Requested Quotations', value: requestedCount, Icon: FileText, color: 'var(--primary-color)', bg: '#EEF4FF', border: '#C7D2FE', sub: 'Draft & initial requests' },
           { label: 'Pending Quotations', value: pendingCount, Icon: Clock, color: '#D97706', bg: '#FFF7ED', border: '#FED7AA', sub: 'Awaiting client/mgr approval' },
           { label: 'Completed Quotations', value: completedCount, Icon: Send, color: '#0EA5E9', bg: '#F0F9FF', border: '#BAE6FD', sub: 'Prepared & sent to clients' },
           { label: 'Approved Quotations', value: approvedCount, Icon: ThumbsUp, color: '#16A34A', bg: '#ECFDF5', border: '#BBF7D0', sub: 'Accepted quotations' },

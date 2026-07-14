@@ -65,8 +65,8 @@ const PaymentDetailsDrawer = ({ payment, isOpen, onClose }) => {
                 padding: '1rem 0',
                 background: 'none',
                 border: 'none',
-                borderBottom: `2px solid ${activeTab === tab ? '#4F46E5' : 'transparent'}`,
-                color: activeTab === tab ? '#4F46E5' : '#64748B',
+                borderBottom: `2px solid ${activeTab === tab ? 'var(--primary-color)' : 'transparent'}`,
+                color: activeTab === tab ? 'var(--primary-color)' : '#64748B',
                 fontWeight: activeTab === tab ? '600' : '500',
                 fontSize: '0.875rem',
                 cursor: 'pointer',
@@ -85,7 +85,7 @@ const PaymentDetailsDrawer = ({ payment, isOpen, onClose }) => {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
               <div style={{ backgroundColor: '#FFFFFF', padding: '1.5rem', borderRadius: '12px', border: '1px solid #E2E8F0' }}>
                 <h3 style={{ margin: '0 0 1rem 0', fontSize: '1rem', fontWeight: '700', color: '#1E293B', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                  <CreditCard size={18} color="#4F46E5" /> Payment Status
+                  <CreditCard size={18} color="var(--primary-color)" /> Payment Status
                 </h3>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.25rem' }}>
                   <div><span style={{ display: 'block', fontSize: '0.65rem', fontWeight: '700', color: '#94A3B8', marginBottom: '0.25rem', textTransform: 'uppercase' }}>Amount Due</span><span style={{ fontWeight: '700', color: '#1E293B', fontSize: '1.125rem' }}>{payment.amountDue}</span></div>
@@ -97,7 +97,7 @@ const PaymentDetailsDrawer = ({ payment, isOpen, onClose }) => {
 
               <div style={{ backgroundColor: '#FFFFFF', padding: '1.5rem', borderRadius: '12px', border: '1px solid #E2E8F0' }}>
                 <h3 style={{ margin: '0 0 1rem 0', fontSize: '1rem', fontWeight: '700', color: '#1E293B', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                  <FileText size={18} color="#4F46E5" /> Project Reference
+                  <FileText size={18} color="var(--primary-color)" /> Project Reference
                 </h3>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '1.25rem' }}>
                   <div><span style={{ display: 'block', fontSize: '0.65rem', fontWeight: '700', color: '#94A3B8', marginBottom: '0.25rem', textTransform: 'uppercase' }}>Service Type</span><span style={{ fontWeight: '600', color: '#1E293B', fontSize: '0.875rem' }}>{payment.service}</span></div>
@@ -110,7 +110,7 @@ const PaymentDetailsDrawer = ({ payment, isOpen, onClose }) => {
           {activeTab === 'billing_details' && (
              <div style={{ backgroundColor: '#FFFFFF', padding: '1.5rem', borderRadius: '12px', border: '1px solid #E2E8F0' }}>
                <h3 style={{ margin: '0 0 1rem 0', fontSize: '1rem', fontWeight: '700', color: '#1E293B', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                 <UserPlus size={18} color="#4F46E5" /> Billing Contact
+                 <UserPlus size={18} color="var(--primary-color)" /> Billing Contact
                </h3>
                <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '1.25rem' }}>
                  <div><span style={{ display: 'block', fontSize: '0.65rem', fontWeight: '700', color: '#94A3B8', marginBottom: '0.25rem', textTransform: 'uppercase' }}>Customer Name</span><span style={{ fontWeight: '600', color: '#1E293B', fontSize: '0.875rem' }}>{payment.customer}</span></div>
@@ -127,12 +127,12 @@ const PaymentDetailsDrawer = ({ payment, isOpen, onClose }) => {
                 {timelineStages.map((stage, i) => (
                   <div key={i} style={{ display: 'flex', gap: '1rem', marginBottom: i === timelineStages.length - 1 ? 0 : '1.5rem', position: 'relative' }}>
                     {i !== timelineStages.length - 1 && (
-                      <div style={{ position: 'absolute', left: '11px', top: '24px', bottom: '-1.5rem', width: '2px', backgroundColor: stage.completed ? '#4F46E5' : '#E2E8F0' }}></div>
+                      <div style={{ position: 'absolute', left: '11px', top: '24px', bottom: '-1.5rem', width: '2px', backgroundColor: stage.completed ? 'var(--primary-color)' : '#E2E8F0' }}></div>
                     )}
                     <div style={{ 
                       width: '24px', height: '24px', borderRadius: '50%', flexShrink: 0,
-                      backgroundColor: stage.completed ? (stage.isTerminal ? (stage.terminalSuccess ? '#10B981' : '#EF4444') : '#4F46E5') : '#F1F5F9',
-                      border: `2px solid ${stage.completed ? (stage.isTerminal ? (stage.terminalSuccess ? '#10B981' : '#EF4444') : '#4F46E5') : '#E2E8F0'}`,
+                      backgroundColor: stage.completed ? (stage.isTerminal ? (stage.terminalSuccess ? '#10B981' : '#EF4444') : 'var(--primary-color)') : '#F1F5F9',
+                      border: `2px solid ${stage.completed ? (stage.isTerminal ? (stage.terminalSuccess ? '#10B981' : '#EF4444') : 'var(--primary-color)') : '#E2E8F0'}`,
                       display: 'flex', alignItems: 'center', justifyContent: 'center',
                       zIndex: 1
                     }}>
@@ -152,11 +152,11 @@ const PaymentDetailsDrawer = ({ payment, isOpen, onClose }) => {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               <div style={{ backgroundColor: '#FFFFFF', padding: '1.5rem', borderRadius: '12px', border: '1px solid #E2E8F0' }}>
                 <h3 style={{ margin: '0 0 1rem 0', fontSize: '1rem', fontWeight: '700', color: '#1E293B', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                  <MessageSquare size={18} color="#4F46E5" /> Add Note
+                  <MessageSquare size={18} color="var(--primary-color)" /> Add Note
                 </h3>
                 <textarea rows="3" placeholder="Type your accounts notes here..." style={{ width: '100%', padding: '0.75rem', borderRadius: '8px', border: '1px solid #E2E8F0', outline: 'none', resize: 'vertical', fontSize: '0.875rem' }}></textarea>
                 <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '1rem' }}>
-                  <button style={{ padding: '0.5rem 1rem', backgroundColor: '#4F46E5', color: '#FFF', border: 'none', borderRadius: '6px', fontWeight: '600', cursor: 'pointer' }}>Save Note</button>
+                  <button style={{ padding: '0.5rem 1rem', backgroundColor: 'var(--primary-color)', color: '#FFF', border: 'none', borderRadius: '6px', fontWeight: '600', cursor: 'pointer' }}>Save Note</button>
                 </div>
               </div>
             </div>
@@ -172,7 +172,7 @@ const PaymentDetailsDrawer = ({ payment, isOpen, onClose }) => {
           <button style={{ flex: 1, padding: '0.75rem', backgroundColor: '#F5F3FF', color: '#6D28D9', border: 'none', borderRadius: '8px', fontWeight: '600', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}>
             <Bell size={16} /> Reminder
           </button>
-          <button style={{ flex: 1, padding: '0.75rem', backgroundColor: '#4F46E5', color: '#FFFFFF', border: 'none', borderRadius: '8px', fontWeight: '600', cursor: 'pointer', boxShadow: '0 4px 6px -1px rgba(79, 70, 229, 0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}>
+          <button style={{ flex: 1, padding: '0.75rem', backgroundColor: 'var(--primary-color)', color: '#FFFFFF', border: 'none', borderRadius: '8px', fontWeight: '600', cursor: 'pointer', boxShadow: '0 4px 6px -1px rgba(79, 70, 229, 0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}>
             <IndianRupee size={16} /> Log Payment
           </button>
         </div>

@@ -9,7 +9,7 @@ import AddNewOpportunityModal from '../components/AddNewOpportunityModal';
 import AddNewLeadWizard from '../components/AddNewLeadWizard';
 
 const SUMMARY_CARDS = [
-  { title: 'Total Opportunities', value: '142', bg: '#EFF6FF', color: '#3B82F6', icon: <Filter size={20} /> },
+  { title: 'Total Opportunities', value: '142', bg: '#EFF6FF', color: 'var(--primary-color)', icon: <Filter size={20} /> },
   { title: 'Qualified Leads', value: '45', bg: '#ECFDF5', color: '#10B981', icon: <CheckCircle2 size={20} /> },
   { title: 'Proposal Sent', value: '28', bg: '#FFF7ED', color: '#F97316', icon: <Search size={20} /> },
   { title: 'Negotiation', value: '12', bg: '#FEF2F2', color: '#EF4444', icon: <Search size={20} /> },
@@ -99,7 +99,7 @@ export default function Pipeline() {
           <h2 style={{ fontSize: '1.875rem', fontWeight: '800', color: '#1E293B', margin: '0.5rem 0 0 0', letterSpacing: '-0.5px' }}>Sales Pipeline</h2>
         </div>
         <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
-          <button onClick={() => setIsAddOpen(true)} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.75rem 1.25rem', backgroundColor: '#4F46E5', color: '#FFFFFF', border: 'none', borderRadius: '12px', fontWeight: '600', cursor: 'pointer', boxShadow: '0 4px 6px -1px rgba(79, 70, 229, 0.2)' }}>
+          <button onClick={() => setIsAddOpen(true)} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.75rem 1.25rem', backgroundColor: 'var(--primary-color)', color: '#FFFFFF', border: 'none', borderRadius: '12px', fontWeight: '600', cursor: 'pointer', boxShadow: '0 4px 6px -1px rgba(79, 70, 229, 0.2)' }}>
             <Plus size={18} /> Add New Opportunity
           </button>
         </div>
@@ -227,7 +227,7 @@ export default function Pipeline() {
                     onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#FFFFFF'}
                     onClick={() => setSelectedOpp(opp)}
                   >
-                    <td style={{ padding: '1rem', fontSize: '0.875rem', whiteSpace: 'nowrap', fontWeight: '600', color: '#4F46E5' }}>{opp.id}</td>
+                    <td style={{ padding: '1rem', fontSize: '0.875rem', whiteSpace: 'nowrap', fontWeight: '600', color: 'var(--primary-color)' }}>{opp.id}</td>
                     <td style={{ padding: '1rem', fontSize: '0.875rem', whiteSpace: 'nowrap', fontWeight: '600', color: '#1E293B' }}>{opp.customer}</td>
                     <td style={{ padding: '1rem', fontSize: '0.875rem', whiteSpace: 'nowrap', color: '#475569' }}>{opp.company}</td>
                     <td style={{ padding: '1rem', fontSize: '0.875rem', whiteSpace: 'nowrap', color: '#475569' }}>{opp.service}</td>
@@ -275,7 +275,7 @@ export default function Pipeline() {
           <span style={{ fontSize: '0.875rem', color: '#64748B' }}>Showing 1 to 6 of 142 entries</span>
           <div style={{ display: 'flex', gap: '0.5rem' }}>
             <button style={{ padding: '0.4rem 0.8rem', border: '1px solid #E2E8F0', backgroundColor: '#FFFFFF', borderRadius: '6px', cursor: 'pointer', display: 'flex', alignItems: 'center' }}><ChevronLeft size={16} /></button>
-            <button style={{ padding: '0.4rem 0.8rem', border: '1px solid #4F46E5', backgroundColor: '#4F46E5', color: '#FFF', borderRadius: '6px', cursor: 'pointer' }}>1</button>
+            <button style={{ padding: '0.4rem 0.8rem', border: '1px solid var(--primary-color)', backgroundColor: 'var(--primary-color)', color: '#FFF', borderRadius: '6px', cursor: 'pointer' }}>1</button>
             <button style={{ padding: '0.4rem 0.8rem', border: '1px solid #E2E8F0', backgroundColor: '#FFFFFF', borderRadius: '6px', cursor: 'pointer' }}>2</button>
             <button style={{ padding: '0.4rem 0.8rem', border: '1px solid #E2E8F0', backgroundColor: '#FFFFFF', borderRadius: '6px', cursor: 'pointer' }}>3</button>
             <button style={{ padding: '0.4rem 0.8rem', border: '1px solid #E2E8F0', backgroundColor: '#FFFFFF', borderRadius: '6px', cursor: 'pointer', display: 'flex', alignItems: 'center' }}><ChevronRight size={16} /></button>
