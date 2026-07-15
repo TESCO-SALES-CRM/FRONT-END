@@ -100,11 +100,7 @@ const filteredOpportunities = opportunities.filter(opp => {
           <span style={{ fontSize: '0.875rem', color: '#64748B', fontWeight: '500' }}>Pages / Sales Pipeline</span>
           <h2 style={{ fontSize: '1.875rem', fontWeight: '800', color: '#1E293B', margin: '0.5rem 0 0 0', letterSpacing: '-0.5px' }}>Sales Pipeline</h2>
         </div>
-        <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
-          <button onClick={() => setIsAddOpen(true)} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.75rem 1.25rem', backgroundColor: 'var(--primary-color)', color: '#FFFFFF', border: 'none', borderRadius: '12px', fontWeight: '600', cursor: 'pointer', boxShadow: '0 4px 6px -1px rgba(79, 70, 229, 0.2)' }}>
-            <Plus size={18} /> Add New Opportunity
-          </button>
-        </div>
+
       </div>
 
             <GlobalFilterBar />
