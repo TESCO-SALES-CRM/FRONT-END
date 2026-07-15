@@ -217,7 +217,7 @@ export default function AddNewLeadWizard({ isOpen, onClose, onSave, initialData 
                 <input type="text" placeholder="Enter project location" style={inputStyle} value={formData.projectLocation} onChange={e => handleChange('projectLocation', e.target.value)} />
               </div>
               <div>
-                <label style={labelStyle}>Assigned Executive <span style={{ color: 'red' }}>*</span></label>
+                <label style={labelStyle}>Assigned Manager <span style={{ color: 'red' }}>*</span></label>
                 <input type="text" placeholder="Enter executive name" style={inputStyle} value={formData.assignedExecutive} onChange={e => handleChange('assignedExecutive', e.target.value)} />
               </div>
               <div>
@@ -2849,7 +2849,7 @@ export default function AddNewLeadWizard({ isOpen, onClose, onSave, initialData 
                      { label: 'Lead Source', value: formData.source },
                      { label: 'Service', value: formData.projectType },
                      { label: 'Project Location', value: formData.projectLocation },
-                     { label: 'Assigned Executive', value: formData.assignedExecutive },
+                     { label: 'Assigned Manager', value: formData.assignedExecutive },
                      { label: 'Expected Timeline', value: formData.expectedTimeline },
                      { label: 'Next Follow-up', value: formData.nextFollowUp },
                      { label: 'Status', value: formData.status },

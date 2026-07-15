@@ -151,7 +151,7 @@ const LeadDetailsDrawer = ({ lead, isOpen, onClose }) => {
                   </div>
                   <div><span style={{ display: 'block', fontSize: '0.65rem', fontWeight: '700', color: '#94A3B8', marginBottom: '0.25rem', textTransform: 'uppercase' }}>Lead Source</span><span style={{ fontWeight: '600', color: '#1E293B', fontSize: '0.875rem' }}>{lead.source || '-'}</span></div>
                   
-                  <div><span style={{ display: 'block', fontSize: '0.65rem', fontWeight: '700', color: '#94A3B8', marginBottom: '0.25rem', textTransform: 'uppercase' }}>Assigned Executive</span><span style={{ fontWeight: '600', color: '#1E293B', fontSize: '0.875rem' }}>{lead.assignedExecutive || lead.manager || '-'}</span></div>
+                  <div><span style={{ display: 'block', fontSize: '0.65rem', fontWeight: '700', color: '#94A3B8', marginBottom: '0.25rem', textTransform: 'uppercase' }}>Assigned Manager</span><span style={{ fontWeight: '600', color: '#1E293B', fontSize: '0.875rem' }}>{lead.assignedExecutive || lead.manager || '-'}</span></div>
                   <div><span style={{ display: 'block', fontSize: '0.65rem', fontWeight: '700', color: '#94A3B8', marginBottom: '0.25rem', textTransform: 'uppercase' }}>Project Location</span><span style={{ fontWeight: '600', color: '#1E293B', fontSize: '0.875rem' }}>{lead.projectLocation || '-'}</span></div>
                   
                   <div><span style={{ display: 'block', fontSize: '0.65rem', fontWeight: '700', color: '#94A3B8', marginBottom: '0.25rem', textTransform: 'uppercase' }}>Priority Level</span>

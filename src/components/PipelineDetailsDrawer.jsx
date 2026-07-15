@@ -101,7 +101,7 @@ const PipelineDetailsDrawer = ({ opportunity, isOpen, onClose }) => {
                       <span style={{ fontSize: '0.75rem', fontWeight: '700', color: '#1E293B' }}>{opportunity.probability}</span>
                     </div>
                   </div>
-                  <div><span style={{ display: 'block', fontSize: '0.65rem', fontWeight: '700', color: '#94A3B8', marginBottom: '0.25rem', textTransform: 'uppercase' }}>Assigned Executive</span><span style={{ fontWeight: '600', color: '#1E293B', fontSize: '0.875rem' }}>{opportunity.assigned}</span></div>
+                  <div><span style={{ display: 'block', fontSize: '0.65rem', fontWeight: '700', color: '#94A3B8', marginBottom: '0.25rem', textTransform: 'uppercase' }}>Assigned Manager</span><span style={{ fontWeight: '600', color: '#1E293B', fontSize: '0.875rem' }}>{opportunity.assigned}</span></div>
                 </div>
               </div>
 
