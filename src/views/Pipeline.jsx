@@ -9,16 +9,7 @@ import AddNewOpportunityModal from '../components/AddNewOpportunityModal';
 import AddNewLeadWizard from '../components/AddNewLeadWizard';
 import GlobalFilterBar from '../components/GlobalFilterBar';
 
-const SUMMARY_CARDS = [
-  { title: 'Total Opportunities', value: '142', bg: '#EFF6FF', color: 'var(--primary-color)', icon: <Filter size={20} /> },
-  { title: 'Qualified Leads', value: '45', bg: '#ECFDF5', color: '#10B981', icon: <CheckCircle2 size={20} /> },
-  { title: 'Proposal Sent', value: '28', bg: '#FFF7ED', color: '#F97316', icon: <Search size={20} /> },
-  { title: 'Negotiation', value: '12', bg: '#FEF2F2', color: '#EF4444', icon: <Search size={20} /> },
-  { title: 'Won Deals', value: '35', bg: '#ECFDF5', color: '#059669', icon: <CheckCircle2 size={20} /> },
-  { title: 'Lost Deals', value: '22', bg: '#F1F5F9', color: '#64748B', icon: <X size={20} /> },
-  { title: 'Pipeline Value', value: '₹4.5Cr', bg: '#F5F3FF', color: '#8B5CF6', icon: <Search size={20} /> },
-  { title: 'Expected Revenue', value: '₹1.2Cr', bg: '#F0FDFA', color: '#0D9488', icon: <Search size={20} /> },
-];
+
 
 const INITIAL_PIPELINE = [
   { id: 'OP-1001', customer: 'Akash Kumar', company: 'ABC Builders', service: 'PEB Structure', stage: 'New', pipelineStatus: 'On Track', assigned: 'John Smith', expectedClose: '25 Jul 2026', value: '₹8,50,000', probability: '25%', lastActivity: 'Today', followUp: '2026-07-15' },
@@ -70,7 +61,15 @@ export default function Pipeline() {
   const uniqueExecs = [...new Set(opportunities.map(o => o.assigned))].filter(Boolean);
   const uniqueServices = [...new Set(opportunities.map(o => o.service))].filter(Boolean);
 
-  const filteredOpportunities = opportunities.filter(opp => {
+  
+  const SUMMARY_CARDS = [
+    { title: 'Total Pipeline', value: opportunities.length, bg: '#EFF6FF', color: 'var(--primary-color)', icon: <Filter size={20} /> },
+    { title: 'Hot', value: opportunities.filter(o => (o.stage||'').toLowerCase() === 'hot').length, bg: '#FEF2F2', color: '#EF4444', icon: <Flame size={20} /> },
+    { title: 'Warm', value: opportunities.filter(o => (o.stage||'').toLowerCase() === 'warm').length, bg: '#FFF7ED', color: '#F97316', icon: <Activity size={20} /> },
+    { title: 'Cold', value: opportunities.filter(o => (o.stage||'').toLowerCase() === 'cold').length, bg: '#F1F5F9', color: '#64748B', icon: <Snowflake size={20} /> },
+    { title: 'Lost', value: opportunities.filter(o => (o.stage||'').toLowerCase() === 'lost').length, bg: '#FCE7F3', color: '#9D174D', icon: <XCircle size={20} /> },
+  ];
+const filteredOpportunities = opportunities.filter(opp => {
     const matchSearch = !search || 
       opp.customer.toLowerCase().includes(search.toLowerCase()) || 
       opp.company.toLowerCase().includes(search.toLowerCase()) ||
@@ -111,8 +110,8 @@ export default function Pipeline() {
             <GlobalFilterBar />
 
 {/* Summary Cards */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1rem', marginBottom: '1rem' }}>
-        {SUMMARY_CARDS.slice(0,4).map((card, idx) => (
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '1rem', marginBottom: '2rem' }}>
+        {SUMMARY_CARDS.map((card, idx) => (
           <div key={idx} style={{ backgroundColor: '#FFFFFF', padding: '1.25rem', borderRadius: '16px', border: '1px solid #E2E8F0', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.02)' }}>
              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                <div style={{ width: '48px', height: '48px', borderRadius: '12px', backgroundColor: card.bg, color: card.color, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -120,22 +119,7 @@ export default function Pipeline() {
                </div>
                <div>
                  <h3 style={{ fontSize: '1.5rem', fontWeight: '800', color: '#1E293B', margin: 0 }}>{card.value}</h3>
-                 <p style={{ color: '#64748B', fontSize: '0.875rem', fontWeight: '500', margin: '0.25rem 0 0 0' }}>{card.title}</p>
-               </div>
-             </div>
-          </div>
-        ))}
-      </div>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1rem', marginBottom: '2rem' }}>
-        {SUMMARY_CARDS.slice(4,8).map((card, idx) => (
-          <div key={idx} style={{ backgroundColor: '#FFFFFF', padding: '1.25rem', borderRadius: '16px', border: '1px solid #E2E8F0', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.02)' }}>
-             <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-               <div style={{ width: '48px', height: '48px', borderRadius: '12px', backgroundColor: card.bg, color: card.color, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                 {card.icon}
-               </div>
-               <div>
-                 <h3 style={{ fontSize: '1.5rem', fontWeight: '800', color: '#1E293B', margin: 0 }}>{card.value}</h3>
-                 <p style={{ color: '#64748B', fontSize: '0.875rem', fontWeight: '500', margin: '0.25rem 0 0 0' }}>{card.title}</p>
+                 <p style={{ color: '#64748B', fontSize: '0.875rem', fontWeight: '500', margin: '0.25rem 0 0 0', whiteSpace: 'nowrap' }}>{card.title}</p>
                </div>
              </div>
           </div>
