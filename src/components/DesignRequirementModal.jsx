@@ -265,7 +265,7 @@ function TechnicalDetailsStep({ form, set }) {
 
 // ─── Main Modal ──────────────────────────────────────────────────────────────
 export default function DesignRequirementModal({ lead, designType, onClose, onSave }) {
-  const [activeTab, setActiveTab] = useState(1);
+  const [activeTab, setActiveTab] = useState(3);
   const [form, setForm] = useState({});
   const [saved, setSaved] = useState(false);
 
@@ -278,8 +278,8 @@ export default function DesignRequirementModal({ lead, designType, onClose, onSa
   };
 
   const tabs = [
-    { id: 1, label: 'Site Dimensions', icon: Ruler },
-    { id: 2, label: 'Technical Details', icon: Wrench },
+    { id: 3, label: 'Site Dimensions', icon: Ruler },
+    { id: 4, label: 'Technical Details', icon: Wrench },
   ];
 
   return (
@@ -318,27 +318,27 @@ export default function DesignRequirementModal({ lead, designType, onClose, onSa
 
         {/* Content */}
         <div style={{ flex: 1, overflowY: 'auto', padding: '1.5rem' }}>
-          {activeTab === 1 && <SiteDimensionsStep form={form} set={set} />}
-          {activeTab === 2 && <TechnicalDetailsStep form={form} set={set} />}
+          {activeTab === 3 && <SiteDimensionsStep form={form} set={set} />}
+          {activeTab === 4 && <TechnicalDetailsStep form={form} set={set} />}
         </div>
 
         {/* Footer */}
         <div style={{ padding: '1rem 1.5rem', backgroundColor: '#FFFFFF', borderTop: '1px solid #E2E8F0', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <button onClick={() => setActiveTab(activeTab === 1 ? 3 : 3)}
-            disabled={activeTab === 1}
-            style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.6rem 1.25rem', borderRadius: '8px', border: '1px solid #E2E8F0', background: '#FFFFFF', cursor: activeTab === 1 ? 'not-allowed' : 'pointer', color: '#64748B', fontWeight: '600', fontSize: '0.875rem', opacity: activeTab === 1 ? 0.4 : 1 }}
-            onClick={() => setActiveTab(1)}>
+          <button onClick={() => setActiveTab(3)}
+            disabled={activeTab === 3}
+            style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.6rem 1.25rem', borderRadius: '8px', border: '1px solid #E2E8F0', background: '#FFFFFF', cursor: activeTab === 3 ? 'not-allowed' : 'pointer', color: '#64748B', fontWeight: '600', fontSize: '0.875rem', opacity: activeTab === 3 ? 0.4 : 1 }}
+            >
             <ChevronLeft size={16} /> Back
           </button>
 
           <div style={{ display: 'flex', gap: '0.75rem' }}>
-            {activeTab === 1 && (
-              <button onClick={() => setActiveTab(2)}
+            {activeTab === 3 && (
+              <button onClick={() => setActiveTab(4)}
                 style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.6rem 1.5rem', borderRadius: '8px', border: 'none', backgroundColor: 'var(--primary-color)', color: '#fff', fontWeight: '700', fontSize: '0.875rem', cursor: 'pointer', boxShadow: '0 4px 12px rgba(99,102,241,0.3)' }}>
                 Next <ChevronRight size={16} />
               </button>
             )}
-            {activeTab === 2 && (
+            {activeTab === 4 && (
               <button onClick={handleSave}
                 style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.6rem 1.75rem', borderRadius: '8px', border: 'none', backgroundColor: saved ? '#10B981' : 'var(--primary-color)', color: '#fff', fontWeight: '700', fontSize: '0.875rem', cursor: 'pointer', transition: 'background-color 0.3s', boxShadow: '0 4px 12px rgba(99,102,241,0.3)' }}>
                 {saved ? <><CheckCircle2 size={16} /> Saved!</> : 'Save Details'}

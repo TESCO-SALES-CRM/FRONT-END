@@ -1318,7 +1318,7 @@ const LeadManagement = () => {
                       const val = e.target.value;
                       setLeads(leads.map(l => l.id === lead.id ? { ...l, designRequirement: val } : l));
                       if (val) {
-                        setDesignReqModal({ open: true, lead: lead, designType: val });
+                         setDesignReqModal({ open: true, lead: lead, designType: val });
                       }
                     }}
                     style={{
