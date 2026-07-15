@@ -498,7 +498,8 @@ const LeadManagement = () => {
   const [headerFilters, setHeaderFilters] = useState({
     services: 'All',
     source: 'All',
-    assignTo: 'All'
+    assignTo: 'All',
+    designReq: 'All'
   });
 
   const toggleFilter = (filterName) => {
@@ -563,6 +564,9 @@ const LeadManagement = () => {
 
     if (headerFilters.assignTo !== 'All') {
       if (l.manager !== headerFilters.assignTo) return false;
+    }
+    if (headerFilters.designReq !== 'All') {
+      if (l.designRequirement !== headerFilters.designReq) return false;
     }
 
     return true;
@@ -1172,6 +1176,35 @@ const LeadManagement = () => {
                     <option value="Order Confirmed" style={{ color: 'var(--text-main)' }}>ORDER CONFIRMED</option>
                     <option value="Junk" style={{ color: 'var(--text-main)' }}>JUNK</option>
                     <option value="Lost" style={{ color: 'var(--text-main)' }}>LOST</option>
+                  </select>
+                </th>
+                <th style={{ padding: '0.75rem 1rem', textAlign: 'center', whiteSpace: 'nowrap' }}>
+                  <select
+                    value={headerFilters.designReq}
+                    onChange={(e) => setHeaderFilters({ ...headerFilters, designReq: e.target.value })}
+                    style={{
+                      border: 'none',
+                      background: 'transparent',
+                      outline: 'none',
+                      fontSize: '0.75rem',
+                      fontWeight: '600',
+                      color: 'var(--text-muted)',
+                      cursor: 'pointer',
+                      appearance: 'none',
+                      WebkitAppearance: 'none',
+                      backgroundImage: `url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%2364748B%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E")`,
+                      backgroundRepeat: 'no-repeat',
+                      backgroundPosition: 'right 0px center',
+                      backgroundSize: '0.45rem auto',
+                      paddingRight: '0.75rem',
+                      textAlignLast: 'center',
+                      fontFamily: 'inherit'
+                    }}
+                  >
+                    <option value="All" style={{ color: 'var(--text-main)' }}>DESIGN REQ</option>
+                    <option value="2D Design" style={{ color: 'var(--text-main)' }}>2D DESIGN</option>
+                    <option value="3D Design" style={{ color: 'var(--text-main)' }}>3D DESIGN</option>
+                    <option value="Both" style={{ color: 'var(--text-main)' }}>BOTH</option>
                   </select>
                 </th>
                  
