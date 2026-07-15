@@ -202,12 +202,12 @@ export default function AddNewLeadWizard({ isOpen, onClose, onSave, initialData 
                   >
                     <option value="" disabled>Select Roofing Type</option>
                     <option value="Tensile Roofing">Tensile Roofing</option>
-                    <option value="UPVC Roofing in Chennai">UPVC Roofing in Chennai</option>
+                    <option value="UPVC Roofing">UPVC Roofing</option>
                     <option value="Polycarbonate Roofing">Polycarbonate Roofing</option>
                     <option value="Glass Roofing">Glass Roofing</option>
                     <option value="Mangalore Tile Roofing">Mangalore Tile Roofing</option>
                     <option value="Shingles Roofing">Shingles Roofing</option>
-                    <option value="GI Roofing in Chennai">GI Roofing in Chennai</option>
+                    <option value="GI Roofing">GI Roofing</option>
                     <option value="Retractable Roofing">Retractable Roofing</option>
                   </select>
                 )}
@@ -278,12 +278,12 @@ export default function AddNewLeadWizard({ isOpen, onClose, onSave, initialData 
                    >
                      <option value="" disabled>Select Roofing Type</option>
                      <option value="Tensile Roofing">Tensile Roofing</option>
-                     <option value="UPVC Roofing in Chennai">UPVC Roofing in Chennai</option>
+                     <option value="UPVC Roofing">UPVC Roofing</option>
                      <option value="Polycarbonate Roofing">Polycarbonate Roofing</option>
                      <option value="Glass Roofing">Glass Roofing</option>
                      <option value="Mangalore Tile Roofing">Mangalore Tile Roofing</option>
                      <option value="Shingles Roofing">Shingles Roofing</option>
-                     <option value="GI Roofing in Chennai">GI Roofing in Chennai</option>
+                     <option value="GI Roofing">GI Roofing</option>
                      <option value="Retractable Roofing">Retractable Roofing</option>
                    </select>
                  </div>
@@ -624,7 +624,7 @@ export default function AddNewLeadWizard({ isOpen, onClose, onSave, initialData 
                    </>
                  )}
 
-                 {formData.customProjectType === 'UPVC Roofing in Chennai' && (
+                 {formData.customProjectType === 'UPVC Roofing' && (
                    <>
                      <div style={{ marginBottom: '1.5rem' }}>
                        <label style={labelStyle}>Building Type</label>
@@ -1075,7 +1075,7 @@ export default function AddNewLeadWizard({ isOpen, onClose, onSave, initialData 
                    </>
                  )}
 
-                 {formData.customProjectType === 'GI Roofing in Chennai' && (
+                 {formData.customProjectType === 'GI Roofing' && (
                    <>
                      <div style={{ marginBottom: '1.5rem' }}>
                        <label style={labelStyle}>Building Type</label>
@@ -1554,7 +1554,7 @@ export default function AddNewLeadWizard({ isOpen, onClose, onSave, initialData 
 
              {formData.projectType === 'Other roofing' && (
                <>
-                 {formData.customProjectType === 'UPVC Roofing in Chennai' && (
+                 {formData.customProjectType === 'UPVC Roofing' && (
                    <div style={{ marginBottom: '2.5rem' }}>
                      <h4 style={{ fontSize: '0.85rem', fontWeight: '700', color: '#64748B', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>UPVC Roofing</h4>
                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
@@ -1645,7 +1645,7 @@ export default function AddNewLeadWizard({ isOpen, onClose, onSave, initialData 
                      </div>
                    </div>
                  )}
-                 {formData.customProjectType === 'GI Roofing in Chennai' && (
+                 {formData.customProjectType === 'GI Roofing' && (
                    <div style={{ marginBottom: '2.5rem' }}>
                      <h4 style={{ fontSize: '0.85rem', fontWeight: '700', color: '#64748B', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>GI Roofing</h4>
                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
@@ -2355,7 +2355,7 @@ export default function AddNewLeadWizard({ isOpen, onClose, onSave, initialData 
 
              {formData.projectType === 'Other roofing' && (
                <>
-                 {formData.customProjectType === 'UPVC Roofing in Chennai' && (
+                 {formData.customProjectType === 'UPVC Roofing' && (
                    <div style={{ marginBottom: '2.5rem' }}>
                      <h4 style={{ fontSize: '0.85rem', fontWeight: '700', color: '#64748B', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>UPVC Specific Variables</h4>
                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
@@ -2472,7 +2472,7 @@ export default function AddNewLeadWizard({ isOpen, onClose, onSave, initialData 
                      </div>
                    </div>
                  )}
-                 {formData.customProjectType === 'GI Roofing in Chennai' && (
+                 {formData.customProjectType === 'GI Roofing' && (
                    <div style={{ marginBottom: '2.5rem' }}>
                      <h4 style={{ fontSize: '0.85rem', fontWeight: '700', color: '#64748B', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>GI Roofing Specific Variables</h4>
                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
@@ -2552,12 +2552,12 @@ export default function AddNewLeadWizard({ isOpen, onClose, onSave, initialData 
                    <select style={inputStyle} value={formData.customProjectType || ''} onChange={e => handleChange('customProjectType', e.target.value)}>
                      <option value="" disabled>Select Roofing Type</option>
                      <option value="Tensile Roofing">Tensile Roofing</option>
-                     <option value="UPVC Roofing in Chennai">UPVC Roofing in Chennai</option>
+                     <option value="UPVC Roofing">UPVC Roofing</option>
                      <option value="Polycarbonate Roofing">Polycarbonate Roofing</option>
                      <option value="Glass Roofing">Glass Roofing</option>
                      <option value="Mangalore Tile Roofing">Mangalore Tile Roofing</option>
                      <option value="Shingles Roofing">Shingles Roofing</option>
-                     <option value="GI Roofing in Chennai">GI Roofing in Chennai</option>
+                     <option value="GI Roofing">GI Roofing</option>
                      <option value="Retractable Roofing">Retractable Roofing</option>
                    </select>
                  </div>
