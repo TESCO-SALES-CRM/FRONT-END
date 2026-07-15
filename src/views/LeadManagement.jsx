@@ -5,7 +5,6 @@ import { useToast } from '../components/Toast';
 import AddNewLeadWizard from '../components/AddNewLeadWizard';
 import LeadDetailsDrawer from '../components/LeadDetailsDrawer';
 import { useNavigate } from 'react-router-dom';
-import GlobalFilterBar from '../components/GlobalFilterBar';
 import DesignRequirementModal from '../components/DesignRequirementModal';
 
 const LEAD_SOURCES = [
@@ -930,14 +929,9 @@ const LeadManagement = () => {
         </div>
       </div>
 
-      {/* Global Filter Bar */}
-      <GlobalFilterBar />
-
-      {/* Overview Section */}
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', position: 'relative' }}>
-          <h3 style={{ margin: 0, fontSize: '1.125rem', fontWeight: '600', color: 'var(--text-main)' }}>Overview</h3>
-          <div style={{ position: 'relative' }}>
+            {/* Global Filter Bar */}
+      <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', marginBottom: '1.5rem', zIndex: 100 }}>
+        <div style={{ position: 'relative' }}>
             <button 
               onClick={() => setIsCalendarOpen(!isCalendarOpen)}
               style={{
@@ -1092,6 +1086,39 @@ const LeadManagement = () => {
               </div>
             )}
           </div>
+
+        <select 
+          value={headerFilters.assignTo}
+          onChange={(e) => setHeaderFilters({ ...headerFilters, assignTo: e.target.value })}
+          style={{ 
+            padding: '0.6rem 2.5rem 0.6rem 1rem', 
+            borderRadius: '8px', 
+            border: '1px solid #E2E8F0', 
+            fontSize: '0.875rem', 
+            fontWeight: '600',
+            color: 'var(--text-main)',
+            outline: 'none', 
+            backgroundColor: '#FFFFFF',
+            cursor: 'pointer',
+            boxShadow: '0 1px 2px rgba(0,0,0,0.05)',
+            appearance: 'none',
+            backgroundImage: 'url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'16\' height=\'16\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'%23475569\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'%3E%3Cpath d=\'m6 9 6 6 6-6\'/%3E%3C/svg%3E")',
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: 'right 0.75rem center',
+            backgroundSize: '16px'
+          }}>
+          <option value="All">All Managers</option>
+          <option value="Unassigned">Unassigned</option>
+          <option value="Sarah Smith">Sarah Smith</option>
+          <option value="Mike Johnson">Mike Johnson</option>
+          <option value="Alex Wong">Alex Wong</option>
+        </select>
+      </div>
+
+      {/* Overview Section */}
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', position: 'relative', marginBottom: '0.5rem' }}>
+          <h3 style={{ margin: 0, fontSize: '1.125rem', fontWeight: '600', color: 'var(--text-main)' }}>Overview</h3>
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '1rem' }}>
           {/* Row 1 */}
