@@ -63,11 +63,11 @@ export default function Pipeline() {
 
   
   const SUMMARY_CARDS = [
-    { title: 'Total Pipeline', value: opportunities.length, bg: '#EFF6FF', color: 'var(--primary-color)', icon: <Filter size={20} /> },
-    { title: 'Hot', value: opportunities.filter(o => (o.stage||'').toLowerCase() === 'hot').length, bg: '#FEF2F2', color: '#EF4444', icon: <Flame size={20} /> },
-    { title: 'Warm', value: opportunities.filter(o => (o.stage||'').toLowerCase() === 'warm').length, bg: '#FFF7ED', color: '#F97316', icon: <Activity size={20} /> },
-    { title: 'Cold', value: opportunities.filter(o => (o.stage||'').toLowerCase() === 'cold').length, bg: '#F1F5F9', color: '#64748B', icon: <Snowflake size={20} /> },
-    { title: 'Lost', value: opportunities.filter(o => (o.stage||'').toLowerCase() === 'lost').length, bg: '#FCE7F3', color: '#9D174D', icon: <XCircle size={20} /> },
+    { title: 'Total Pipeline', value: opportunities.length, bg: '#EFF6FF', border: '#C7D2FE', color: 'var(--primary-color)', sub: 'All open deals', icon: <Filter size={18} color="var(--primary-color)" /> },
+    { title: 'Hot', value: opportunities.filter(o => (o.stage||'').toLowerCase() === 'hot').length, bg: '#FEF2F2', border: '#FECACA', color: '#EF4444', sub: 'High probability', icon: <Flame size={18} color="#EF4444" /> },
+    { title: 'Warm', value: opportunities.filter(o => (o.stage||'').toLowerCase() === 'warm').length, bg: '#FFF7ED', border: '#FED7AA', color: '#F97316', sub: 'Medium probability', icon: <Activity size={18} color="#F97316" /> },
+    { title: 'Cold', value: opportunities.filter(o => (o.stage||'').toLowerCase() === 'cold').length, bg: '#F1F5F9', border: '#CBD5E1', color: '#64748B', sub: 'Low probability', icon: <Snowflake size={18} color="#64748B" /> },
+    { title: 'Lost', value: opportunities.filter(o => (o.stage||'').toLowerCase() === 'lost').length, bg: '#FCE7F3', border: '#FBCFE8', color: '#9D174D', sub: 'Closed deals', icon: <XCircle size={18} color="#9D174D" /> },
   ];
 const filteredOpportunities = opportunities.filter(opp => {
     const matchSearch = !search || 
@@ -106,18 +106,17 @@ const filteredOpportunities = opportunities.filter(opp => {
             <GlobalFilterBar />
 
 {/* Summary Cards */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '1rem', marginBottom: '2rem' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '1.25rem', marginBottom: '2rem' }}>
         {SUMMARY_CARDS.map((card, idx) => (
-          <div key={idx} style={{ backgroundColor: '#FFFFFF', padding: '1.25rem', borderRadius: '16px', border: '1px solid #E2E8F0', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.02)' }}>
-             <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-               <div style={{ width: '48px', height: '48px', borderRadius: '12px', backgroundColor: card.bg, color: card.color, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                 {card.icon}
-               </div>
-               <div>
-                 <h3 style={{ fontSize: '1.5rem', fontWeight: '800', color: '#1E293B', margin: 0 }}>{card.value}</h3>
-                 <p style={{ color: '#64748B', fontSize: '0.875rem', fontWeight: '500', margin: '0.25rem 0 0 0', whiteSpace: 'nowrap' }}>{card.title}</p>
-               </div>
-             </div>
+          <div key={idx} style={{ display: 'flex', flexDirection: 'column', padding: '1.25rem', backgroundColor: card.bg, border: `1px solid ${card.border}`, boxShadow: '0 2px 4px rgba(0,0,0,0.02)', borderRadius: 'var(--radius-lg, 12px)', gap: '1rem' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <p style={{ color: 'var(--text-muted, #64748B)', fontSize: '0.875rem', fontWeight: '500', margin: 0 }}>{card.title}</p>
+              {card.icon}
+            </div>
+            <div>
+              <h3 style={{ fontSize: '1.75rem', fontWeight: '700', color: 'var(--text-main, #1E293B)', margin: '0 0 0.5rem 0', letterSpacing: '-0.5px' }}>{card.value}</h3>
+              <span style={{ fontSize: '0.75rem', color: 'var(--text-muted, #64748B)', fontWeight: '500' }}>{card.sub}</span>
+            </div>
           </div>
         ))}
       </div>
