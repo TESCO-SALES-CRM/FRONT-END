@@ -260,6 +260,8 @@ const LeadManagement = () => {
   const navigate = useNavigate();
   const [leads, setLeads] = useState([]);
   const [leadsLoaded, setLeadsLoaded] = useState(false);
+    const [designModalLead, setDesignModalLead] = useState(null);
+  const [designModalType, setDesignModalType] = useState(null);
   const [leadToDelete, setLeadToDelete] = useState(null);
 
   // Load leads from backend API on mount (seed with initial data if DB empty)
@@ -1349,6 +1351,10 @@ const LeadManagement = () => {
                     onChange={(e) => {
                       const val = e.target.value;
                       setLeads(leads.map(l => l.id === lead.id ? { ...l, designReq: val } : l));
+                      if (val) {
+                         setDesignModalLead(lead);
+                         setDesignModalType(val);
+                      }
                     }}
                     style={{
                       padding: '0.25rem 0.5rem',
@@ -1967,6 +1973,22 @@ const LeadManagement = () => {
           onSave={(data) => {
             console.log("Design Req saved:", data);
             setDesignReqModal({ open: false, lead: null, designType: '' });
+          }}
+        />
+      )}
+
+      {designModalLead && (
+        <DesignRequirementModal 
+          lead={designModalLead}
+          designType={designModalType}
+          onClose={() => {
+            setDesignModalLead(null);
+            setDesignModalType(null);
+          }}
+          onSave={(data) => {
+             // Handle saving data if needed
+             setDesignModalLead(null);
+             setDesignModalType(null);
           }}
         />
       )}
