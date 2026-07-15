@@ -251,7 +251,6 @@ export default function AddNewLeadWizard({ isOpen, onClose, onSave, initialData 
                   <option value="Quotation Sent">QUOTATION SEND</option>
                   
                   <option value="Order Confirmed">ORDER CONFIRMED</option>
-                  <option value="Order Confirm">ORDER CONFIRM</option>
                   <option value="Junk">JUNK</option>
                   <option value="Lost">LOST</option>
                 </select>
