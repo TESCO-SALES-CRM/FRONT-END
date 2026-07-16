@@ -1,10 +1,40 @@
 import React from 'react';
 import { X, Download, Printer } from 'lucide-react';
+import html2pdf from 'html2pdf.js';
 
 const QuotationPreviewModal = ({ quotation, onClose }) => {
   if (!quotation) return null;
 
   const currentDate = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+
+  const handleDownload = () => {
+    const element = document.getElementById('quotation-pdf-content');
+    
+    // Create a clone to manipulate styles without affecting the UI
+    const clonedElement = element.cloneNode(true);
+    
+    // Remove margins from the page containers in the clone so they fit exactly into A4 pages
+    const pages = clonedElement.querySelectorAll('.pdf-page');
+    pages.forEach(page => {
+      page.style.margin = '0';
+      page.style.boxShadow = 'none';
+      page.style.borderRadius = '0';
+      page.style.minHeight = '297mm'; // exact A4 height
+    });
+
+    const opt = {
+      margin:       0,
+      filename:     `Quotation_TS_Q_${quotation.id ? quotation.id.replace('LD-', '') : '1028'}.pdf`,
+      image:        { type: 'jpeg', quality: 0.98 },
+      html2canvas:  { scale: 2, useCORS: true, letterRendering: true },
+      jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' },
+      pagebreak:    { mode: ['css', 'legacy'] }
+    };
+
+    // We can just pass the cloned element
+    html2pdf().set(opt).from(clonedElement).save();
+  };
+
 
   const sectionHeaderStyle = {
     fontSize: '13px', 
@@ -97,8 +127,9 @@ const QuotationPreviewModal = ({ quotation, onClose }) => {
         {/* Scrollable PDF Document Area */}
         <div style={{ padding: '2rem', overflowY: 'auto', flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           
+          <div id="quotation-pdf-content">
           {/* PAGE 1 */}
-          <div style={pageContainerStyle}>
+          <div className="pdf-page" style={pageContainerStyle}>
             <PageHeader />
             <div style={{ padding: '30px 40px', flex: 1 }}>
               {/* Meta Info Row */}
@@ -173,8 +204,9 @@ const QuotationPreviewModal = ({ quotation, onClose }) => {
             <PageFooter />
           </div>
 
+          <div className="html2pdf__page-break"></div>
           {/* PAGE 2 */}
-          <div style={pageContainerStyle}>
+          <div className="pdf-page" style={pageContainerStyle}>
             <PageHeader />
             <div style={{ padding: '30px 40px', flex: 1 }}>
               {/* 3. Quotations */}
@@ -272,6 +304,7 @@ const QuotationPreviewModal = ({ quotation, onClose }) => {
             </div>
             <PageFooter />
           </div>
+          </div>
 
         </div>
 
@@ -280,7 +313,7 @@ const QuotationPreviewModal = ({ quotation, onClose }) => {
           <button onClick={onClose} style={{ padding: '0.5rem 1.5rem', borderRadius: '4px', border: '1px solid #e2e8f0', background: 'white', color: '#475569', fontWeight: '600', cursor: 'pointer' }}>
             Cancel
           </button>
-          <button style={{ padding: '0.5rem 1.5rem', borderRadius: '4px', border: 'none', background: '#4f46e5', color: 'white', fontWeight: '600', cursor: 'pointer' }}>
+          <button onClick={handleDownload} style={{ padding: '0.5rem 1.5rem', borderRadius: '4px', border: 'none', background: '#4f46e5', color: 'white', fontWeight: '600', cursor: 'pointer' }}>
             Download PDF Document
           </button>
         </div>
