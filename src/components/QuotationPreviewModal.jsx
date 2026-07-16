@@ -148,36 +148,38 @@ const QuotationPreviewModal = ({ quotation, onClose }) => {
                   COMMERCIAL ESTIMATE BREAKDOWN
                 </div>
                 
-                <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '12px' }}>
-                  <thead>
-                    <tr style={{ backgroundColor: '#f8fafc', color: '#475569' }}>
-                      <th style={{ textAlign: 'left', padding: '12px', fontWeight: '600', borderBottom: '1px solid #e2e8f0' }}>Description of Work</th>
-                      <th style={{ textAlign: 'right', padding: '12px', fontWeight: '600', borderBottom: '1px solid #e2e8f0' }}>Total Price (INR)</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td style={{ padding: '20px 12px', borderBottom: '1px solid #f1f5f9' }}>
-                        <div style={{ fontWeight: '700', color: '#1e293b', marginBottom: '6px', fontSize: '13px' }}>Design, Fabrication, Supply, and Erection work charges</div>
-                        <div style={{ color: '#94a3b8', fontSize: '11px', lineHeight: '1.5' }}>
-                          Charge covers design calculation, raw material sourcing, structural framework columns, rafters,<br/>
-                          primary/secondary purlins, bracing rods, roofing sheets, fasteners, and site erection.
-                        </div>
-                      </td>
-                      <td style={{ padding: '20px 12px', textAlign: 'right', fontWeight: '700', color: '#1e293b', verticalAlign: 'top' }}>
-                        {quotation.budget || '₹10,00,000'}
-                      </td>
-                    </tr>
-                    <tr style={{ backgroundColor: '#f8fafc' }}>
-                      <td style={{ padding: '12px', textAlign: 'right', color: '#64748b' }}>Subtotal:</td>
-                      <td style={{ padding: '12px', textAlign: 'right', fontWeight: '700', color: '#1e293b' }}>{quotation.budget || '₹10,00,000'}</td>
-                    </tr>
-                    <tr>
-                      <td style={{ padding: '16px 12px', textAlign: 'right', fontWeight: '800', color: '#1e40af', fontSize: '13px' }}>Grand Total (All-Inclusive):</td>
-                      <td style={{ padding: '16px 12px', textAlign: 'right', fontWeight: '800', color: '#059669', fontSize: '14px' }}>{quotation.budget || '₹10,00,000'}</td>
-                    </tr>
-                  </tbody>
-                </table>
+                <div style={{ overflowX: 'auto', width: '100%' }}>
+                  <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '12px', minWidth: '500px' }}>
+                    <thead>
+                      <tr style={{ backgroundColor: '#f8fafc', color: '#475569' }}>
+                        <th style={{ textAlign: 'left', padding: '12px', fontWeight: '600', borderBottom: '1px solid #e2e8f0' }}>Description of Work</th>
+                        <th style={{ textAlign: 'right', padding: '12px', fontWeight: '600', borderBottom: '1px solid #e2e8f0' }}>Total Price (INR)</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td style={{ padding: '20px 12px', borderBottom: '1px solid #f1f5f9' }}>
+                          <div style={{ fontWeight: '700', color: '#1e293b', marginBottom: '6px', fontSize: '13px' }}>Design, Fabrication, Supply, and Erection work charges</div>
+                          <div style={{ color: '#94a3b8', fontSize: '11px', lineHeight: '1.5' }}>
+                            Charge covers design calculation, raw material sourcing, structural framework columns, rafters,<br/>
+                            primary/secondary purlins, bracing rods, roofing sheets, fasteners, and site erection.
+                          </div>
+                        </td>
+                        <td style={{ padding: '20px 12px', textAlign: 'right', fontWeight: '700', color: '#1e293b', verticalAlign: 'top' }}>
+                          {quotation.budget || '₹10,00,000'}
+                        </td>
+                      </tr>
+                      <tr style={{ backgroundColor: '#f8fafc' }}>
+                        <td style={{ padding: '12px', textAlign: 'right', color: '#64748b' }}>Subtotal:</td>
+                        <td style={{ padding: '12px', textAlign: 'right', fontWeight: '700', color: '#1e293b' }}>{quotation.budget || '₹10,00,000'}</td>
+                      </tr>
+                      <tr>
+                        <td style={{ padding: '16px 12px', textAlign: 'right', fontWeight: '800', color: '#1e40af', fontSize: '13px' }}>Grand Total (All-Inclusive):</td>
+                        <td style={{ padding: '16px 12px', textAlign: 'right', fontWeight: '800', color: '#059669', fontSize: '14px' }}>{quotation.budget || '₹10,00,000'}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
               </div>
 
               {/* Milestones Schedule */}
@@ -185,37 +187,39 @@ const QuotationPreviewModal = ({ quotation, onClose }) => {
                 <div style={{ fontSize: '12px', fontWeight: '800', color: '#1e40af', textTransform: 'uppercase', borderBottom: '2px solid #bfdbfe', paddingBottom: '8px', marginBottom: '16px' }}>
                   PRICING & PAYMENT MILESTONES SCHEDULE
                 </div>
-                <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '12px' }}>
-                  <thead>
-                    <tr style={{ color: '#475569' }}>
-                      <th style={{ textAlign: 'left', padding: '12px 4px', fontWeight: '600', borderBottom: '1px solid #e2e8f0' }}>Billing Milestone Event Description</th>
-                      <th style={{ textAlign: 'right', padding: '12px 4px', fontWeight: '600', borderBottom: '1px solid #e2e8f0' }}>Percentage</th>
-                      <th style={{ textAlign: 'right', padding: '12px 4px', fontWeight: '600', borderBottom: '1px solid #e2e8f0' }}>Milestone Value (INR)</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td style={{ padding: '12px 4px', color: '#1e293b', borderBottom: '1px dashed #f1f5f9' }}>1. Advance with Purchase Order (PO)</td>
-                      <td style={{ padding: '12px 4px', textAlign: 'right', color: '#1e293b', fontWeight: '600', borderBottom: '1px dashed #f1f5f9' }}>10%</td>
-                      <td style={{ padding: '12px 4px', textAlign: 'right', color: '#64748b', borderBottom: '1px dashed #f1f5f9' }}>₹1,00,000</td>
-                    </tr>
-                    <tr>
-                      <td style={{ padding: '12px 4px', color: '#1e293b', borderBottom: '1px dashed #f1f5f9' }}>2. Dispatch / after Drawing Approval</td>
-                      <td style={{ padding: '12px 4px', textAlign: 'right', color: '#1e293b', fontWeight: '600', borderBottom: '1px dashed #f1f5f9' }}>30%</td>
-                      <td style={{ padding: '12px 4px', textAlign: 'right', color: '#64748b', borderBottom: '1px dashed #f1f5f9' }}>₹3,00,000</td>
-                    </tr>
-                    <tr>
-                      <td style={{ padding: '12px 4px', color: '#1e293b', borderBottom: '1px dashed #f1f5f9' }}>3. Erection / after Structure Work Completion</td>
-                      <td style={{ padding: '12px 4px', textAlign: 'right', color: '#1e293b', fontWeight: '600', borderBottom: '1px dashed #f1f5f9' }}>40%</td>
-                      <td style={{ padding: '12px 4px', textAlign: 'right', color: '#64748b', borderBottom: '1px dashed #f1f5f9' }}>₹4,00,000</td>
-                    </tr>
-                    <tr>
-                      <td style={{ padding: '12px 4px', color: '#1e293b' }}>4. Handover / after Completion Sign-off</td>
-                      <td style={{ padding: '12px 4px', textAlign: 'right', color: '#1e293b', fontWeight: '600' }}>20%</td>
-                      <td style={{ padding: '12px 4px', textAlign: 'right', color: '#64748b' }}>₹2,00,000</td>
-                    </tr>
-                  </tbody>
-                </table>
+                <div style={{ overflowX: 'auto', width: '100%' }}>
+                  <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '12px', minWidth: '500px' }}>
+                    <thead>
+                      <tr style={{ color: '#475569' }}>
+                        <th style={{ textAlign: 'left', padding: '12px 4px', fontWeight: '600', borderBottom: '1px solid #e2e8f0' }}>Billing Milestone Event Description</th>
+                        <th style={{ textAlign: 'right', padding: '12px 4px', fontWeight: '600', borderBottom: '1px solid #e2e8f0' }}>Percentage</th>
+                        <th style={{ textAlign: 'right', padding: '12px 4px', fontWeight: '600', borderBottom: '1px solid #e2e8f0' }}>Milestone Value (INR)</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td style={{ padding: '12px 4px', color: '#1e293b', borderBottom: '1px dashed #f1f5f9' }}>1. Advance with Purchase Order (PO)</td>
+                        <td style={{ padding: '12px 4px', textAlign: 'right', color: '#1e293b', fontWeight: '600', borderBottom: '1px dashed #f1f5f9' }}>10%</td>
+                        <td style={{ padding: '12px 4px', textAlign: 'right', color: '#64748b', borderBottom: '1px dashed #f1f5f9' }}>{Math.round(parseInt((quotation.budget || '1000000').replace(/[^0-9]/g, '')) * 0.1).toLocaleString('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 })}</td>
+                      </tr>
+                      <tr>
+                        <td style={{ padding: '12px 4px', color: '#1e293b', borderBottom: '1px dashed #f1f5f9' }}>2. Dispatch / after Drawing Approval</td>
+                        <td style={{ padding: '12px 4px', textAlign: 'right', color: '#1e293b', fontWeight: '600', borderBottom: '1px dashed #f1f5f9' }}>30%</td>
+                        <td style={{ padding: '12px 4px', textAlign: 'right', color: '#64748b', borderBottom: '1px dashed #f1f5f9' }}>{Math.round(parseInt((quotation.budget || '1000000').replace(/[^0-9]/g, '')) * 0.3).toLocaleString('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 })}</td>
+                      </tr>
+                      <tr>
+                        <td style={{ padding: '12px 4px', color: '#1e293b', borderBottom: '1px dashed #f1f5f9' }}>3. Erection / after Structure Work Completion</td>
+                        <td style={{ padding: '12px 4px', textAlign: 'right', color: '#1e293b', fontWeight: '600', borderBottom: '1px dashed #f1f5f9' }}>40%</td>
+                        <td style={{ padding: '12px 4px', textAlign: 'right', color: '#64748b', borderBottom: '1px dashed #f1f5f9' }}>{Math.round(parseInt((quotation.budget || '1000000').replace(/[^0-9]/g, '')) * 0.4).toLocaleString('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 })}</td>
+                      </tr>
+                      <tr>
+                        <td style={{ padding: '12px 4px', color: '#1e293b' }}>4. Handover / after Completion Sign-off</td>
+                        <td style={{ padding: '12px 4px', textAlign: 'right', color: '#1e293b', fontWeight: '600' }}>20%</td>
+                        <td style={{ padding: '12px 4px', textAlign: 'right', color: '#64748b' }}>{Math.round(parseInt((quotation.budget || '1000000').replace(/[^0-9]/g, '')) * 0.2).toLocaleString('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 })}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
 
