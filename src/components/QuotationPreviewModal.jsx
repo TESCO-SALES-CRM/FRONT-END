@@ -29,6 +29,38 @@ const QuotationPreviewModal = ({ quotation, onClose }) => {
   const labelStyle = { color: '#64748b' };
   const valueStyle = { fontWeight: '600', color: '#1e293b' };
 
+  const PageHeader = () => (
+    <div style={{ padding: '40px 40px 20px 40px', borderBottom: '3px solid #65a30d' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: '1rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <img src="/TS_logo.png" alt="Tesco Structures" style={{ height: '50px' }} />
+        </div>
+        <div style={{ fontSize: '12px', color: '#64748b', fontWeight: '500' }}>
+          tescostructures@gmail.com
+        </div>
+      </div>
+    </div>
+  );
+
+  const PageFooter = () => (
+    <div style={{ backgroundColor: '#84cc16', color: 'white', padding: '16px', textAlign: 'center', fontSize: '10px', fontWeight: '600', letterSpacing: '0.5px', marginTop: 'auto' }}>
+      www.tescostructures.com &nbsp;|&nbsp; +91 90033 28229 &nbsp;|&nbsp; 37, 15th St, Gandhi Nagar, Ashok Nagar, Chennai, Tamil Nadu 600083
+    </div>
+  );
+
+  const pageContainerStyle = {
+    backgroundColor: 'white',
+    width: '100%',
+    maxWidth: '210mm',
+    minHeight: '297mm',
+    margin: '0 auto 2rem auto',
+    boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+    position: 'relative',
+    display: 'flex',
+    flexDirection: 'column',
+    fontFamily: 'Inter, sans-serif'
+  };
+
   return (
     <div style={{
       position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
@@ -63,36 +95,12 @@ const QuotationPreviewModal = ({ quotation, onClose }) => {
         </div>
 
         {/* Scrollable PDF Document Area */}
-        <div style={{ padding: '2rem', overflowY: 'auto', flex: 1, display: 'flex', justifyContent: 'center' }}>
+        <div style={{ padding: '2rem', overflowY: 'auto', flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           
-          {/* A4 Paper Size Container */}
-          <div style={{
-            backgroundColor: 'white',
-            width: '100%',
-            maxWidth: '210mm',
-            minHeight: '297mm',
-            margin: '0 auto',
-            boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
-            position: 'relative',
-            display: 'flex',
-            flexDirection: 'column',
-            fontFamily: 'Inter, sans-serif'
-          }}>
-            
-            {/* Header */}
-            <div style={{ padding: '40px 40px 20px 40px', borderBottom: '3px solid #65a30d' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: '1rem' }}>
-                <div style={{ display: 'flex', alignItems: 'center' }}>
-                  <img src="/TS_logo.png" alt="Tesco Structures" style={{ height: '50px' }} />
-                </div>
-                <div style={{ fontSize: '12px', color: '#64748b', fontWeight: '500' }}>
-                  tescostructures@gmail.com
-                </div>
-              </div>
-            </div>
-
+          {/* PAGE 1 */}
+          <div style={pageContainerStyle}>
+            <PageHeader />
             <div style={{ padding: '30px 40px', flex: 1 }}>
-              
               {/* Meta Info Row */}
               <div style={{ display: 'flex', justifyContent: 'space-between', backgroundColor: '#f8fafc', padding: '12px 24px', borderRadius: '6px', border: '1px solid #e2e8f0', marginBottom: '30px', fontSize: '12px', flexWrap: 'wrap', gap: '10px' }}>
                 <div><span style={{ fontWeight: '700', color: '#1e293b' }}>Quote No:</span> <span style={{ color: '#475569' }}>TS-Q-{quotation.id ? quotation.id.replace('LD-', '') : '1028'}</span></div>
@@ -161,9 +169,16 @@ const QuotationPreviewModal = ({ quotation, onClose }) => {
                   <div><div style={labelStyle}>Working Space</div><div style={valueStyle}>{quotation.workingSpace || 'Moderate'}</div></div>
                 </div>
               </div>
+            </div>
+            <PageFooter />
+          </div>
 
+          {/* PAGE 2 */}
+          <div style={pageContainerStyle}>
+            <PageHeader />
+            <div style={{ padding: '30px 40px', flex: 1 }}>
               {/* 3. Quotations */}
-              <div style={sectionHeaderStyle}>3. Quotations</div>
+              <div style={{ ...sectionHeaderStyle, marginTop: 0 }}>3. Quotations</div>
               <div style={{ marginBottom: '20px' }}>
                 <div style={gridRowStyle}>
                   <div><div style={labelStyle}>Design Services</div><div style={valueStyle}>3D: {quotation.design3D ? 'Yes' : 'No'} | 2D: {quotation.design2D ? 'Yes' : 'No'}</div></div>
@@ -254,15 +269,10 @@ const QuotationPreviewModal = ({ quotation, onClose }) => {
                   </div>
                 </div>
               </div>
-
             </div>
-
-            {/* Footer */}
-            <div style={{ backgroundColor: '#84cc16', color: 'white', padding: '16px', textAlign: 'center', fontSize: '10px', fontWeight: '600', letterSpacing: '0.5px', marginTop: 'auto' }}>
-              www.tescostructures.com &nbsp;|&nbsp; +91 90033 28229 &nbsp;|&nbsp; 37, 15th St, Gandhi Nagar, Ashok Nagar, Chennai, Tamil Nadu 600083
-            </div>
-
+            <PageFooter />
           </div>
+
         </div>
 
         {/* Footer Actions */}
