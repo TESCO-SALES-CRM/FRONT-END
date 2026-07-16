@@ -4,6 +4,8 @@ import { X, Download, Printer } from 'lucide-react';
 const QuotationPreviewModal = ({ quotation, onClose }) => {
   if (!quotation) return null;
 
+  const currentDate = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+
   return (
     <div style={{
       position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
@@ -43,8 +45,10 @@ const QuotationPreviewModal = ({ quotation, onClose }) => {
           {/* A4 Paper Size Container */}
           <div style={{
             backgroundColor: 'white',
-            width: '210mm',
+            width: '100%',
+            maxWidth: '210mm',
             minHeight: '297mm',
+            margin: '0 auto',
             boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
             position: 'relative',
             display: 'flex',
@@ -54,7 +58,7 @@ const QuotationPreviewModal = ({ quotation, onClose }) => {
             
             {/* Header */}
             <div style={{ padding: '40px 40px 20px 40px', borderBottom: '3px solid #65a30d' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: '1rem' }}>
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                   <img src="/TS_logo.png" alt="Tesco Structures" style={{ height: '50px' }} />
                 </div>
@@ -67,24 +71,24 @@ const QuotationPreviewModal = ({ quotation, onClose }) => {
             <div style={{ padding: '30px 40px', flex: 1 }}>
               
               {/* Meta Info Row */}
-              <div style={{ display: 'flex', justifyContent: 'space-between', backgroundColor: '#f8fafc', padding: '12px 24px', borderRadius: '6px', border: '1px solid #e2e8f0', marginBottom: '30px', fontSize: '12px' }}>
-                <div><span style={{ fontWeight: '700', color: '#1e293b' }}>Quote No:</span> <span style={{ color: '#475569' }}>TS-Q-{quotation.id || '1028'}</span></div>
-                <div><span style={{ fontWeight: '700', color: '#1e293b' }}>Date:</span> <span style={{ color: '#475569' }}>Jul 3, 2026</span></div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', backgroundColor: '#f8fafc', padding: '12px 24px', borderRadius: '6px', border: '1px solid #e2e8f0', marginBottom: '30px', fontSize: '12px', flexWrap: 'wrap', gap: '10px' }}>
+                <div><span style={{ fontWeight: '700', color: '#1e293b' }}>Quote No:</span> <span style={{ color: '#475569' }}>TS-Q-{quotation.id ? quotation.id.replace('LD-', '') : '1028'}</span></div>
+                <div><span style={{ fontWeight: '700', color: '#1e293b' }}>Date:</span> <span style={{ color: '#475569' }}>{currentDate}</span></div>
                 <div><span style={{ fontWeight: '700', color: '#1e293b' }}>Validity:</span> <span style={{ color: '#475569' }}>30 Days</span></div>
               </div>
 
               {/* Cards Row */}
-              <div style={{ display: 'flex', gap: '20px', marginBottom: '40px' }}>
-                <div style={{ flex: 1, padding: '20px', borderRadius: '6px', border: '1px solid #e2e8f0', backgroundColor: '#f8fafc' }}>
+              <div style={{ display: 'flex', gap: '20px', marginBottom: '40px', flexWrap: 'wrap' }}>
+                <div style={{ flex: 1, minWidth: '200px', padding: '20px', borderRadius: '6px', border: '1px solid #e2e8f0', backgroundColor: '#f8fafc' }}>
                   <div style={{ fontSize: '10px', fontWeight: '700', color: 'var(--primary-color)', textTransform: 'uppercase', marginBottom: '10px' }}>QUOTATION PREPARED FOR</div>
                   <div style={{ fontSize: '16px', fontWeight: '700', color: '#1e293b', marginBottom: '8px' }}>{quotation.name || 'Client Name'}</div>
                   <div style={{ fontSize: '11px', color: '#64748b', lineHeight: '1.6' }}>
-                    Phone: +91 87654 32109<br/>
-                    Email: client@example.com<br/>
-                    Site Location: Chennai, TN
+                    Phone: {quotation.phone || '+91 87654 32109'}<br/>
+                    Email: {quotation.email || 'client@example.com'}<br/>
+                    Site Location: {quotation.projectLocation || 'Chennai, TN'}
                   </div>
                 </div>
-                <div style={{ flex: 1, padding: '20px', borderRadius: '6px', border: '1px solid #e2e8f0', backgroundColor: '#f8fafc' }}>
+                <div style={{ flex: 1, minWidth: '200px', padding: '20px', borderRadius: '6px', border: '1px solid #e2e8f0', backgroundColor: '#f8fafc' }}>
                   <div style={{ fontSize: '10px', fontWeight: '700', color: 'var(--primary-color)', textTransform: 'uppercase', marginBottom: '10px' }}>ASSIGNED REPRESENTATIVE</div>
                   <div style={{ fontSize: '16px', fontWeight: '700', color: '#1e293b', marginBottom: '8px' }}>Alex Wong</div>
                   <div style={{ fontSize: '12px', color: '#64748b', marginBottom: '12px' }}>Tesco Structures Sales Division</div>
@@ -106,7 +110,7 @@ const QuotationPreviewModal = ({ quotation, onClose }) => {
                   </div>
                   <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px', padding: '12px 0', borderBottom: '1px solid #f1f5f9', paddingLeft: '16px' }}>
                     <div style={{ color: '#64748b' }}>Work Type / Segment Detail</div>
-                    <div style={{ fontWeight: '600', color: '#1e293b' }}>New</div>
+                    <div style={{ fontWeight: '600', color: '#1e293b' }}>{quotation.workType || 'New'}</div>
                   </div>
                   
                   <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px', padding: '12px 0', borderBottom: '1px solid #f1f5f9' }}>
