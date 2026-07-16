@@ -423,6 +423,7 @@ const LeadManagement = () => {
 
   const [editingNoteId, setEditingNoteId] = useState(null);
   const [editingNoteText, setEditingNoteText] = useState('');
+  const [selectedQuotationLead, setSelectedQuotationLead] = useState(null);
   const [newLead, setNewLead] = useState({
     date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
     name: '', workType: '', projectLocation: '', projectType: '', phone: '', budget: '', source: '', status: 'Lead Received', notes: ''
@@ -1997,21 +1998,8 @@ const LeadManagement = () => {
           }}
         />
       )}
-      {previewQuote && (
-        <QuotationPreviewModal 
-          quotation={{
-            id: 'QT-' + previewQuote.id,
-            leadId: previewQuote.id,
-            client: previewQuote.name,
-            project: previewQuote.projectType || previewQuote.service,
-            amount: previewQuote.budget || previewQuote.value
-          }} 
-          onClose={() => setPreviewQuote(null)} 
-        />
-      )}
 </div>
   );
 };
 
 export default LeadManagement;
-

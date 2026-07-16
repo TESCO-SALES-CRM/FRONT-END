@@ -26,16 +26,11 @@ const QuotationPreviewModal = ({ quotation, onClose }) => {
         {/* Modal Toolbar */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem 1.5rem', borderBottom: '1px solid #e2e8f0', backgroundColor: 'white', borderTopLeftRadius: 'var(--radius-lg)', borderTopRightRadius: 'var(--radius-lg)' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-            <h3 style={{ margin: 0, fontSize: '1.125rem', fontWeight: '600', color: '#1e293b' }}>Quotation Preview</h3>
-            <span style={{ backgroundColor: '#e0e7ff', color: '#3730a3', padding: '0.25rem 0.5rem', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 'bold' }}>{quotation.id}</span>
+            <h3 style={{ margin: 0, fontSize: '1.125rem', fontWeight: '600', color: '#1e293b' }}>Generate Structural Quotation PDF</h3>
+            <span style={{ color: '#64748b', fontSize: '0.75rem', fontWeight: '500', marginLeft: '1rem' }}>Format reference: assets/quation formate.pdf</span>
           </div>
           <div style={{ display: 'flex', gap: '0.5rem' }}>
-            <button className="btn btn-outline" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.5rem 1rem' }}>
-              <Printer size={16} /> Print
-            </button>
-            <button className="btn btn-outline" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.5rem 1rem' }}>
-              <Download size={16} /> Download PDF
-            </button>
+            
             <button onClick={onClose} style={{ background: 'none', border: 'none', padding: '0.5rem', cursor: 'pointer', color: '#64748b' }}>
               <X size={20} />
             </button>
@@ -81,7 +76,7 @@ const QuotationPreviewModal = ({ quotation, onClose }) => {
               
               {/* Meta Info Row */}
               <div style={{ display: 'flex', justifyContent: 'space-between', backgroundColor: '#f8fafc', padding: '12px 24px', borderRadius: '6px', border: '1px solid #e2e8f0', marginBottom: '30px', fontSize: '12px' }}>
-                <div><span style={{ fontWeight: '700', color: '#1e293b' }}>Quote No:</span> <span style={{ color: '#475569' }}>TS-Q-{quotation.leadId || '1028'}</span></div>
+                <div><span style={{ fontWeight: '700', color: '#1e293b' }}>Quote No:</span> <span style={{ color: '#475569' }}>TS-Q-{quotation.id || '1028'}</span></div>
                 <div><span style={{ fontWeight: '700', color: '#1e293b' }}>Date:</span> <span style={{ color: '#475569' }}>Jul 3, 2026</span></div>
                 <div><span style={{ fontWeight: '700', color: '#1e293b' }}>Validity:</span> <span style={{ color: '#475569' }}>30 Days</span></div>
               </div>
@@ -90,7 +85,7 @@ const QuotationPreviewModal = ({ quotation, onClose }) => {
               <div style={{ display: 'flex', gap: '20px', marginBottom: '40px' }}>
                 <div style={{ flex: 1, padding: '20px', borderRadius: '6px', border: '1px solid #e2e8f0', backgroundColor: '#f8fafc' }}>
                   <div style={{ fontSize: '10px', fontWeight: '700', color: 'var(--primary-color)', textTransform: 'uppercase', marginBottom: '10px' }}>QUOTATION PREPARED FOR</div>
-                  <div style={{ fontSize: '16px', fontWeight: '700', color: '#1e293b', marginBottom: '8px' }}>{quotation.client || 'Client Name'}</div>
+                  <div style={{ fontSize: '16px', fontWeight: '700', color: '#1e293b', marginBottom: '8px' }}>{quotation.name || 'Client Name'}</div>
                   <div style={{ fontSize: '11px', color: '#64748b', lineHeight: '1.6' }}>
                     Phone: +91 87654 32109<br/>
                     Email: client@example.com<br/>
@@ -102,7 +97,7 @@ const QuotationPreviewModal = ({ quotation, onClose }) => {
                   <div style={{ fontSize: '16px', fontWeight: '700', color: '#1e293b', marginBottom: '8px' }}>Alex Wong</div>
                   <div style={{ fontSize: '12px', color: '#64748b', marginBottom: '12px' }}>Tesco Structures Sales Division</div>
                   <div style={{ fontSize: '10px', color: '#64748b' }}>
-                    <span style={{ fontWeight: '600' }}>Reference Segment:</span> {quotation.project || 'PEB Building'}
+                    <span style={{ fontWeight: '600' }}>Reference Segment:</span> {quotation.projectType || 'PEB Building'}
                   </div>
                 </div>
               </div>
@@ -115,7 +110,7 @@ const QuotationPreviewModal = ({ quotation, onClose }) => {
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'x', fontSize: '12px' }}>
                   <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px', padding: '12px 0', borderBottom: '1px solid #f1f5f9' }}>
                     <div style={{ color: '#64748b' }}>Segment Category</div>
-                    <div style={{ fontWeight: '600', color: '#1e293b' }}>{quotation.project || 'PEB Building'}</div>
+                    <div style={{ fontWeight: '600', color: '#1e293b' }}>{quotation.projectType || 'PEB Building'}</div>
                   </div>
                   <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px', padding: '12px 0', borderBottom: '1px solid #f1f5f9', paddingLeft: '16px' }}>
                     <div style={{ color: '#64748b' }}>Work Type / Segment Detail</div>
@@ -174,16 +169,16 @@ const QuotationPreviewModal = ({ quotation, onClose }) => {
                         </div>
                       </td>
                       <td style={{ padding: '20px 12px', textAlign: 'right', fontWeight: '700', color: '#1e293b', verticalAlign: 'top' }}>
-                        {quotation.amount || '₹10,00,000'}
+                        {quotation.budget || '₹10,00,000'}
                       </td>
                     </tr>
                     <tr style={{ backgroundColor: '#f8fafc' }}>
                       <td style={{ padding: '12px', textAlign: 'right', color: '#64748b' }}>Subtotal:</td>
-                      <td style={{ padding: '12px', textAlign: 'right', fontWeight: '700', color: '#1e293b' }}>{quotation.amount || '₹10,00,000'}</td>
+                      <td style={{ padding: '12px', textAlign: 'right', fontWeight: '700', color: '#1e293b' }}>{quotation.budget || '₹10,00,000'}</td>
                     </tr>
                     <tr>
                       <td style={{ padding: '16px 12px', textAlign: 'right', fontWeight: '800', color: '#1e40af', fontSize: '13px' }}>Grand Total (All-Inclusive):</td>
-                      <td style={{ padding: '16px 12px', textAlign: 'right', fontWeight: '800', color: '#059669', fontSize: '14px' }}>{quotation.amount || '₹10,00,000'}</td>
+                      <td style={{ padding: '16px 12px', textAlign: 'right', fontWeight: '800', color: '#059669', fontSize: '14px' }}>{quotation.budget || '₹10,00,000'}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -234,6 +229,16 @@ const QuotationPreviewModal = ({ quotation, onClose }) => {
             </div>
 
           </div>
+        </div>
+
+        {/* Footer Actions */}
+        <div style={{ padding: '1rem 1.5rem', borderTop: '1px solid #e2e8f0', backgroundColor: 'white', display: 'flex', justifyContent: 'center', gap: '1rem', borderBottomLeftRadius: 'var(--radius-lg)', borderBottomRightRadius: 'var(--radius-lg)' }}>
+          <button onClick={onClose} style={{ padding: '0.5rem 1.5rem', borderRadius: '4px', border: '1px solid #e2e8f0', background: 'white', color: '#475569', fontWeight: '600', cursor: 'pointer' }}>
+            Cancel
+          </button>
+          <button style={{ padding: '0.5rem 1.5rem', borderRadius: '4px', border: 'none', background: '#4f46e5', color: 'white', fontWeight: '600', cursor: 'pointer' }}>
+            Download PDF Document
+          </button>
         </div>
       </div>
     </div>
