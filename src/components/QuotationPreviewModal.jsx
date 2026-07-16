@@ -56,7 +56,7 @@ const QuotationPreviewModal = ({ quotation, onClose }) => {
             <div style={{ padding: '40px 40px 20px 40px', borderBottom: '3px solid #65a30d' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
                 <div style={{ display: 'flex', alignItems: 'center' }}>
-                  <img src="/tesco_structure.png" alt="Tesco Structures" style={{ height: '60px' }} />
+                  <img src="/tesco_structure.png" alt="Tesco Structures" style={{ height: '120px' }} />
                 </div>
                 <div style={{ fontSize: '12px', color: '#64748b', fontWeight: '500' }}>
                   tescostructures@gmail.com
